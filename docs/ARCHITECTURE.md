@@ -24,7 +24,7 @@ component    ──► useSuspenseQuery(xQueryOptions())
 mutation     ──► useMutation ──► invalidateQueries(xQueryOptions().queryKey)
 ```
 
-- `queryOptions()` factories (e.g. `features/contacts/queries.ts`) are the
+- `queryOptions()` factories are the
   single source of truth for query keys and fetchers. Loaders and components
   consume the same factory, so keys can never drift apart.
 - The router receives `{ queryClient }` as context (`app/router.ts`,
@@ -45,7 +45,9 @@ Three kinds of state, three tools — never mix them:
    query data into atoms or `useState`.
 2. **Client state** (UI state that outlives a component): Jotai atoms.
    Feature-scoped atoms live in `features/<name>/atoms.ts`; only genuinely
-   global atoms (e.g. `themeAtom`) live in `src/store/`.
+   global atoms live in `src/store/` (none currently: OnForm's property
+   data is static and validated at module load in
+   `features/properties/data.ts`, so the site needs no client state).
 3. **Form state**: react-hook-form, validated by the feature's zod schema.
    Never mirror form values into atoms.
 

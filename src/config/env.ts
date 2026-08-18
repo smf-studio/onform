@@ -8,7 +8,7 @@ const envSchema = z.object({
   DEV: z.boolean(),
   MODE: z.string().min(1),
   PROD: z.boolean(),
-  VITE_APP_NAME: z.string().min(1).default('Frontend Template'),
+  VITE_APP_NAME: z.string().min(1).default('onform'),
 })
 
 export type Env = z.infer<typeof envSchema>

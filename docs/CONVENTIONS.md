@@ -22,7 +22,7 @@
   `queries.ts`, `schema.ts`, `utils.ts`) and may hold several closely related
   named exports.
 - Route files follow TanStack Router's file-routing convention
-  (`index.tsx`, `contacts.tsx`, `__root.tsx`) and export `Route`.
+  (`index.tsx`, `projects.$slug.tsx`, `__root.tsx`) and export `Route`.
 - Exceptions owned by tooling: `lib/utils.ts` (the shadcn `cn()` contract)
   and `src/routeTree.gen.ts` (generated).
 
@@ -35,7 +35,7 @@ require a default export (`vite.config.ts`, `playwright.config.ts`,
 
 ## Imports
 
-- Bare absolute imports rooted at `src/`: `features/contacts/schema`,
+- Bare absolute imports rooted at `src/`: `features/properties/schema`,
   `components/ui/button`. No `@/` prefix; relative imports only for the
   generated `routeTree.gen` sibling.
 - Ordering is enforced by `perfectionist/sort-imports` (external → internal →
@@ -54,7 +54,7 @@ goal, it's the definition. `eslint-disable` requires a justification comment.
 - **Vitest** (`*.test.ts(x)`, co-located with the code under test): utility
   functions, zod schemas, pure logic. Component tests via RTL are the
   exception, not the rule — one example lives at
-  `features/contacts/components/ContactForm.test.tsx`.
+  `features/properties/utils.test.ts`.
 - **Playwright** (`tests/e2e/*.spec.ts`): expected user flows against the
   real app. E2e is also the debugging tool: when fixing a user-facing bug,
   first write a failing e2e test reproducing it, then fix, then keep the test

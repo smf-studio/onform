@@ -34,14 +34,14 @@ Regular, Italic and Medium as WOFF2 and preload Regular. Boska and
 Melodrama were the runners-up; all Google Fonts serif candidates were
 rejected as lacking flair.
 
-| Role          | Face                        | Treatment                                                 |
-| ------------- | --------------------------- | --------------------------------------------------------- |
-| Display       | Gambetta 400                | Property names, hero lines. clamp(3rem, 7vw, 6.5rem),     |
-|               |                             | line-height 1.03. Never below 26px.                       |
-| Display em    | Gambetta 400 italic         | One or two words per line; also breaks caps lines         |
-| Body          | Instrument Sans 400         | 16px, line-height 1.6, max width 62ch                     |
-| Labels        | Instrument Sans 500         | 11 to 13px, uppercase, letter-spacing 0.14em to 0.2em     |
-| Wordmark      | Gambetta 400                | lowercase "onform" (pending confirmation)                 |
+| Role       | Face                | Treatment                                             |
+| ---------- | ------------------- | ----------------------------------------------------- |
+| Display    | Gambetta 400        | Property names, hero lines. clamp(3rem, 7vw, 6.5rem), |
+|            |                     | line-height 1.03. Never below 26px.                   |
+| Display em | Gambetta 400 italic | One or two words per line; also breaks caps lines     |
+| Body       | Instrument Sans 400 | 16px, line-height 1.6, max width 62ch                 |
+| Labels     | Instrument Sans 500 | 11 to 13px, uppercase, letter-spacing 0.14em to 0.2em |
+| Wordmark   | Gambetta 400        | lowercase "onform", locked                            |
 
 Signature device (from the reference teardown): uppercase sans lines
 carrying one or two lowercase italic serif words, and a "ghost marquee",
@@ -54,14 +54,14 @@ Black and white, single light theme, no accent color anywhere. The
 photographs are the only color on the site. Hierarchy comes from a short
 grey ramp; interaction states are black with underlines or opacity shifts.
 
-| Token     | Value   | Use                              |
-| --------- | ------- | -------------------------------- |
-| White     | #FFFFFF | page ground                      |
-| Dim white | #F4F4F2 | notch fills, quiet panels        |
-| Black     | #111110 | display, wordmark, links, focus  |
-| Grey      | #4A4A47 | body copy                        |
-| Faint     | #8F8F8A | metadata labels                  |
-| Hairline  | #E7E7E4 | rules, borders                   |
+| Token     | Value   | Use                             |
+| --------- | ------- | ------------------------------- |
+| White     | #FFFFFF | page ground                     |
+| Dim white | #F4F4F2 | notch fills, quiet panels       |
+| Black     | #111110 | display, wordmark, links, focus |
+| Grey      | #4A4A47 | body copy                       |
+| Faint     | #8F8F8A | metadata labels                 |
+| Hairline  | #E7E7E4 | rules, borders                  |
 
 Implementation maps these onto the template's semantic tokens in
 `src/styles/globals.css` (OKLCH), keeping token names. Radius: 16px on
@@ -85,10 +85,14 @@ The site is two sections: the hero and the gallery. Locked treatments:
 - The notch is the signature motif, carried by the gallery showcase rows:
   text space carved out of the image corner in page ground, 16px inverted
   rounded fillets, type always on page ground.
-- Project detail: overlay route above the gallery. Text sidebar (name,
-  location, year, one paragraph at most) with large scrolling images.
-  Featured images first, then the gallery bank. Ends with a link to the
-  next project, never a dead end.
+- Site shape, locked: a single scrolling page (hero then the six project
+  blocks), plus an overlay route per project (`/projects/$slug`) above the
+  page for seeing one property in its entirety: text sidebar (name,
+  location, year, the paragraph) with all bank images scrolling, featured
+  first, ending in a link to the next project.
+- Hero rotation, locked: the hero slowly crossfades through one featured
+  frame per property (about 6 seconds each, 900ms fade); the name and
+  metadata below the image update with it. Paused for reduced motion.
 - Motion elsewhere is fades and drift only: slow crossfades, hover scale
   1.02 inside a cropped frame at about 700ms, images arriving through a
   blurred placeholder.
@@ -145,16 +149,10 @@ Every deviation from registry output must be listed here with a reason.
 
 ## Open decisions
 
-1. Wordmark case: lowercase "onform" or "OnForm". Proposed: lowercase.
-2. Site shape: single scrolling page (hero straight into the six project
-   blocks) versus project overlay routes on top. Proposed for the
-   placeholder: single page, overlays later.
-3. Hero photograph: static single frame versus a slow crossfade rotation
-   through the six properties. Proposed: slow rotation, one name below.
-4. Nav contents: with a one-pager, Projects can scroll-anchor to the
-   gallery; Studio and Contact need a target (a footer block, or drop
-   them). Proposed: Projects anchor plus a Contact footer with email.
-5. Hero shader: confirmed in principle by the brief; final go given at
-   build time once the real page performs.
-6. Per-property display names and the one-line paragraph each block
-   carries. Drafts will be proposed for sign-off.
+All layout and identity decisions are locked (18 August 2026): lowercase
+wordmark, single page plus per-project overlay routes, hero rotation,
+Projects anchor nav with a Contact footer. Still pending:
+
+1. Contact email address for the footer.
+2. Hero shader final go once the real page performs.
+3. Sign-off on the six drafted property paragraphs.
