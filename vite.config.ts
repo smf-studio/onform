@@ -12,10 +12,10 @@ const srcDirs = [
   'app',
   'components',
   'config',
+  'data',
   'features',
   'lib',
   'routes',
-  'store',
   'styles',
 ]
 

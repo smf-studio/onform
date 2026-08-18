@@ -5,7 +5,6 @@ import queenscliff from 'data/properties/queenscliff.json'
 import radnorMews from 'data/properties/radnor-mews.json'
 import theGlebe from 'data/properties/the-glebe.json'
 import valricheVilla from 'data/properties/valriche-villa.json'
-
 import {
   derivedSchema,
   type Property,

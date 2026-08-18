@@ -5,7 +5,7 @@ import { z } from 'zod'
    happens once at module load in data.ts so a manifest that drifts from
    this shape fails the build loudly instead of rendering a broken page. */
 
-export const manifestImageSchema = z.object({
+const manifestImageSchema = z.object({
   file: z.string().min(1),
   category: z.string().min(1),
   featured: z.boolean(),
@@ -23,13 +23,13 @@ export const propertyManifestSchema = z.object({
   images: z.array(manifestImageSchema).min(1),
 })
 
-export const derivedVariantSchema = z.object({
+const derivedVariantSchema = z.object({
   ext: z.enum(['avif', 'webp']),
   name: z.string().min(1),
   w: z.number().int().positive(),
 })
 
-export const derivedImageSchema = z.object({
+const derivedImageSchema = z.object({
   blur: z.string().startsWith('data:image/'),
   variants: z.array(derivedVariantSchema).min(1),
   width: z.number().int().positive(),
@@ -50,8 +50,7 @@ export interface PropertyCopy {
   year: string
 }
 
-export type ManifestImage = z.infer<typeof manifestImageSchema>
-export type PropertyManifest = z.infer<typeof propertyManifestSchema>
+type ManifestImage = z.infer<typeof manifestImageSchema>
 export type DerivedImage = z.infer<typeof derivedImageSchema>
 
 export interface PropertyImage extends ManifestImage {

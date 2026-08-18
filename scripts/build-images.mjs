@@ -53,8 +53,10 @@ for (const file of manifests) {
     }
     const base = image.file.replace(/\.jpg$/, '')
     const meta = await sharp(src).metadata()
-    const widths = WIDTHS.filter((w) => w <= meta.width)
-    if (widths.length === 0) widths.push(meta.width)
+    /* Rungs strictly below the native width, then the native width itself
+       (capped at the largest rung) so small masters keep full quality. */
+    const widths = WIDTHS.filter((w) => w < meta.width)
+    widths.push(Math.min(meta.width, WIDTHS[WIDTHS.length - 1]))
 
     const variants = []
     for (const w of widths) {

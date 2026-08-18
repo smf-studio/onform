@@ -8,7 +8,9 @@ test.describe('home', () => {
   test('shows the wordmark, hero and all six project blocks', async ({
     page,
   }) => {
-    await expect(page.getByRole('link', { name: 'onform' })).toBeVisible()
+    await expect(
+      page.getByRole('link', { name: 'onform', exact: true }),
+    ).toBeVisible()
     await expect(
       page.getByRole('region', { name: 'Featured properties' }),
     ).toBeVisible()

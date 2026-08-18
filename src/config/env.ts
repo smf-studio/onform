@@ -11,9 +11,7 @@ const envSchema = z.object({
   VITE_APP_NAME: z.string().min(1).default('onform'),
 })
 
-export type Env = z.infer<typeof envSchema>
-
-function parseEnv(raw: unknown): Env {
+function parseEnv(raw: unknown): z.infer<typeof envSchema> {
   const result = envSchema.safeParse(raw)
   if (!result.success) {
     throw new Error(
@@ -23,4 +21,7 @@ function parseEnv(raw: unknown): Env {
   return result.data
 }
 
-export const env = parseEnv(import.meta.env)
+/* The app currently reads no variables directly; the parse runs for its
+   boot-time validation side effect (imported from main.tsx). Export a
+   binding again when a feature needs one. */
+parseEnv(import.meta.env)

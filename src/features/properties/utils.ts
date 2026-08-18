@@ -12,7 +12,7 @@ export function formatMeta(
   return `${property.location}  Completed ${property.year}`.toUpperCase()
 }
 
-export function assetUrl(slug: string, variantName: string): string {
+function assetUrl(slug: string, variantName: string): string {
   return `/assets/properties/${slug}/${variantName}`
 }
 

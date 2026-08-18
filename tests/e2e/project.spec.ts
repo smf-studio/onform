@@ -28,7 +28,7 @@ test.describe('project overlay', () => {
 
   test('close returns to the home page', async ({ page }) => {
     await page.goto('/projects/radnor-mews')
-    await page.getByRole('link', { name: 'CLOSE' }).click()
+    await page.getByRole('link', { name: 'Back to all projects' }).click()
     await expect(page).toHaveURL(/\/(#radnor-mews)?$/)
     await expect(
       page.getByRole('region', { name: 'Featured properties' }),
