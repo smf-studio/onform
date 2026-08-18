@@ -24,22 +24,32 @@ Hard rules from the client:
 
 ## Typography
 
-Pairing (direction one, recommended): **Instrument Serif** display over
-**Instrument Sans** for everything else. Self-hosted WOFF2 (four files:
-serif regular + italic, sans regular + medium), preload the serif.
+Pairing: display serif over **Instrument Sans** for everything
+functional. Two serif finalists, pending the client's pick on the tokens
+board:
+
+- **Fraunces** (lead): tuned to "opsz" 144, "SOFT" 0, weight 340 to 460.
+  Closest free face to the flared, characterful register of the client's
+  interior design references (Canora, Silvana Display). Italic is the
+  signature move.
+- **Bodoni Moda** (alternative): variable Didone, the glamour register.
+
+Self-hosted WOFF2, preload the display serif. Instrument Serif was
+rejected as not visually engaging enough.
 
 | Role          | Face                        | Treatment                                                 |
 | ------------- | --------------------------- | --------------------------------------------------------- |
-| Display       | Instrument Serif 400        | Property names, hero lines. clamp(3rem, 7vw, 6.5rem),     |
-|               |                             | line-height 1.02. Never below 24px.                       |
-| Display em    | Instrument Serif 400 italic | One word per line at most, used sparingly                 |
+| Display       | Display serif 400           | Property names, hero lines. clamp(3rem, 7vw, 6.5rem),     |
+|               |                             | line-height 1.03. Never below 26px.                       |
+| Display em    | Display serif 400 italic    | One word per line at most; also breaks caps lines         |
 | Body          | Instrument Sans 400         | 16px, line-height 1.6, max width 62ch                     |
 | Labels        | Instrument Sans 500         | 11 to 13px, uppercase, letter-spacing 0.14em to 0.2em     |
-| Wordmark      | Instrument Serif 400        | lowercase "onform" (pending confirmation)                 |
+| Wordmark      | Display serif 400           | lowercase "onform" (pending confirmation)                 |
 
-Alternates held in reserve (see moodboard): Fraunces + Hanken Grotesk
-("The Quiet Editorial"), Cormorant Garamond + Hanken Grotesk on dark
-("The Grand Estate").
+Signature device (from the reference teardown): uppercase sans lines
+carrying one or two lowercase italic serif words, and a "ghost marquee",
+an enormous italic serif word behind a section at about six percent
+opacity.
 
 ## Palette
 
@@ -52,7 +62,7 @@ for links and active states.
 | -------------- | ------- | -------------------------------- |
 | Limestone      | #F7F6F3 | page ground                      |
 | Raised         | #FFFFFF | cards, overlay panel             |
-| Shadow ink     | #1A1916 | headings, wordmark               |
+| Shadow ink     | #242422 | headings, wordmark               |
 | Warm grey      | #56534B | body copy                        |
 | Faint          | #8B867B | metadata labels                  |
 | Hairline       | #E2DFD8 | rules, borders                   |
@@ -68,9 +78,14 @@ Implementation maps these onto the template's semantic tokens in
   Studio, Contact), floating over the hero with no bar behind it.
 - One photograph owns the first viewport, full bleed, with the property name
   in display serif bottom-left and a metadata line beneath it.
-- Project grid: 2 to 3 columns, generous gutters, images at their shot
-  aspect ratios. Category filters as quiet text buttons, data-driven from
-  the manifests in `src/data/properties/`.
+- Project grid, two candidate geometries pending the client's pick:
+  the asymmetric two lane stream (images in narrow lanes at the edges of
+  a twelve column grid, mixed ratios, staggered, a quiet project index
+  holding the center) or a calmer 2 to 3 column grid with generous
+  gutters. Filters as quiet text buttons, data-driven from the manifests
+  in `src/data/properties/`. Asymmetry over symmetry throughout; type may
+  touch the imagery (scrimmed names, ghost marquees, captions hugging
+  tiles).
 - Project detail: overlay route above the grid. Text sidebar (name,
   location, year, one paragraph at most) with large scrolling images.
   Featured images first, then the gallery bank. Ends with a link to the
