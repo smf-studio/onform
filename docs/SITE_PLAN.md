@@ -1,7 +1,8 @@
 # OnForm site plan
 
-Status: DRAFT, pending direction sign-off (see docs/DESIGN.md). Phases are
-ordered so the site is deployable placeholder-first at every step.
+Status: phases 1 to 3 are BUILT and verified (18 August 2026); the hero
+shader (phase 4) awaits its final go, and deployment (phase 5) needs the
+one-time Workers Builds connection in the Cloudflare dashboard.
 
 ## Phase 1, foundation
 

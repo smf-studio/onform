@@ -135,9 +135,11 @@ light theme, see Palette).
 ## shadcn/ui usage (template)
 
 - Style `new-york`, base color `neutral`, CSS variables on, lucide icons.
-- Installed primitives: `button`, `card`, `form`, `input`, `label`,
-  `textarea`. Primitives stay byte-identical to the registry and exempt
-  from lint/format/knip.
+- Installed primitives: `button` only (used by the router fallbacks).
+  The template's `card`, `form`, `input`, `label` and `textarea` were
+  removed with the example contacts feature; reinstall via the shadcn
+  CLI when a feature needs them. Primitives stay byte-identical to the
+  registry and exempt from lint/format/knip.
 
 ## Modification log for `components/ui/`
 
