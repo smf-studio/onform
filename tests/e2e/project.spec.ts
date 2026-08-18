@@ -31,7 +31,7 @@ test.describe('project overlay', () => {
     await page.getByRole('link', { name: 'Back to all projects' }).click()
     await expect(page).toHaveURL(/\/(#radnor-mews)?$/)
     await expect(
-      page.getByRole('region', { name: 'Featured properties' }),
+      page.getByRole('region', { name: 'Featured property' }),
     ).toBeVisible()
   })
 

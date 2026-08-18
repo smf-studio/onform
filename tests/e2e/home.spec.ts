@@ -12,10 +12,10 @@ test.describe('home', () => {
       page.getByRole('link', { name: 'onform', exact: true }),
     ).toBeVisible()
     await expect(
-      page.getByRole('region', { name: 'Featured properties' }),
+      page.getByRole('region', { name: 'Featured property' }),
     ).toBeVisible()
 
-    const projects = page.getByRole('region', { name: 'Projects' })
+    const projects = page.getByRole('main', { name: 'Projects' })
     for (const name of [
       'Queenscliff',
       'Radnor Mews',

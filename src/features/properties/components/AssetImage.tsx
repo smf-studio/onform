@@ -7,6 +7,8 @@ import { cn } from 'lib/utils'
 
 interface AssetImageProps {
   className?: string
+  /* Fill the parent instead of reserving the image's aspect ratio. */
+  fill?: boolean
   image: PropertyImage
   imgClassName?: string
   priority?: boolean
@@ -22,6 +24,7 @@ export function AssetImage({
   image,
   sizes,
   priority = false,
+  fill = false,
   className,
   imgClassName,
 }: AssetImageProps) {
@@ -29,9 +32,11 @@ export function AssetImage({
   return (
     <div
       className={cn('relative overflow-hidden bg-secondary', className)}
-      style={{
-        aspectRatio: `${String(image.width)} / ${String(image.height)}`,
-      }}
+      style={
+        fill
+          ? undefined
+          : { aspectRatio: `${String(image.width)} / ${String(image.height)}` }
+      }
     >
       <img
         alt=""
