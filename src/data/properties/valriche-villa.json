@@ -1,0 +1,207 @@
+{
+  "slug": "valriche-villa",
+  "name": "Valriche Villa",
+  "hero": "valriche-villa-hero.jpg",
+  "images": [
+    {
+      "file": "valriche-villa-hero.jpg",
+      "category": "hero-exterior",
+      "featured": true,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 hero exterior",
+      "note": "Full villa facade framed by pool",
+      "source": "Valriche Villa 79 - 26.jpg"
+    },
+    {
+      "file": "valriche-villa-pool.jpg",
+      "category": "outdoor-pool",
+      "featured": true,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 outdoor pool",
+      "note": "Infinity pool with ocean horizon",
+      "source": "Valriche Villa 79 - 02.jpg"
+    },
+    {
+      "file": "valriche-villa-exterior-1.jpg",
+      "category": "exterior",
+      "featured": true,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 exterior",
+      "note": "Villa across pond, lush grounds",
+      "source": "Valriche Villa 79 - 01.jpg"
+    },
+    {
+      "file": "valriche-villa-exterior-2.jpg",
+      "category": "exterior",
+      "featured": true,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 exterior",
+      "note": "Pavilion angle over pool and villa",
+      "source": "Valriche Villa 79 - 24.jpg"
+    },
+    {
+      "file": "valriche-villa-living-1.jpg",
+      "category": "living",
+      "featured": true,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 living",
+      "note": "Main lounge opening to sea view",
+      "source": "Valriche Villa 79 - 03.jpg"
+    },
+    {
+      "file": "valriche-villa-dining-1.jpg",
+      "category": "dining",
+      "featured": true,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 dining",
+      "note": "Bright dining flowing to terrace",
+      "source": "Valriche Villa 79 - 05.jpg"
+    },
+    {
+      "file": "valriche-villa-kitchen.jpg",
+      "category": "kitchen",
+      "featured": true,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 kitchen",
+      "note": "Kitchen island with dining beyond",
+      "source": "Valriche Villa 79 - 12.jpg"
+    },
+    {
+      "file": "valriche-villa-dining-2.jpg",
+      "category": "dining",
+      "featured": true,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 dining",
+      "note": "Alfresco table, pool and coastline",
+      "source": "Valriche Villa 79 - 21.jpg"
+    },
+    {
+      "file": "valriche-villa-bedroom-1.jpg",
+      "category": "bedroom",
+      "featured": true,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 bedroom",
+      "note": "Master opens to lawn and sea",
+      "source": "Valriche Villa 79 - 07.jpg"
+    },
+    {
+      "file": "valriche-villa-bedroom-2.jpg",
+      "category": "bedroom",
+      "featured": true,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 bedroom",
+      "note": "Vaulted dark-timber master suite",
+      "source": "Valriche Villa 79 - 08.jpg"
+    },
+    {
+      "file": "valriche-villa-bathroom.jpg",
+      "category": "bathroom",
+      "featured": true,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 bathroom",
+      "note": "Double vanity with garden access",
+      "source": "Valriche Villa 79 - 22.jpg"
+    },
+    {
+      "file": "valriche-villa-garden.jpg",
+      "category": "garden",
+      "featured": true,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 garden",
+      "note": "Gazebo lounge amid tropical palms",
+      "source": "Valriche Villa 79 - 27.jpg"
+    },
+    {
+      "file": "valriche-villa-exterior-3.jpg",
+      "category": "exterior",
+      "featured": false,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 exterior",
+      "note": "Palm-flanked entrance courtyard path",
+      "source": "Valriche Villa 79 - 25.jpg"
+    },
+    {
+      "file": "valriche-villa-bedroom-3.jpg",
+      "category": "bedroom",
+      "featured": false,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 bedroom",
+      "note": "Cane king bed, garden outlook",
+      "source": "Valriche Villa 79 - 17.jpg"
+    },
+    {
+      "file": "valriche-villa-detail.jpg",
+      "category": "detail",
+      "featured": false,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 detail",
+      "note": "Terrace seating through frangipani branches",
+      "source": "Valriche Villa 79 - 16.jpg"
+    },
+    {
+      "file": "valriche-villa-living-2.jpg",
+      "category": "living",
+      "featured": false,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 living",
+      "note": "Family lounge with pool glimpse",
+      "source": "Valriche Villa 79 - 14.jpg"
+    },
+    {
+      "file": "valriche-villa-bedroom-4.jpg",
+      "category": "bedroom",
+      "featured": false,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 bedroom",
+      "note": "Canopy guest room, terrace view",
+      "source": "Valriche Villa 79 - 06.jpg"
+    },
+    {
+      "file": "valriche-villa-living-3.jpg",
+      "category": "living",
+      "featured": false,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 living",
+      "note": "Second lounge, wicker and palms",
+      "source": "Valriche Villa 79 - 04.jpg"
+    },
+    {
+      "file": "valriche-villa-bedroom-5.jpg",
+      "category": "bedroom",
+      "featured": false,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 bedroom",
+      "note": "Kids bunk room, cheerful accents",
+      "source": "Valriche Villa 79 - 09.jpg"
+    },
+    {
+      "file": "valriche-villa-feature.jpg",
+      "category": "other",
+      "featured": false,
+      "width": 1920,
+      "height": 1080,
+      "alt": "Valriche Villa \u2014 other",
+      "note": "Garden-facing study with desk",
+      "source": "Valriche Villa 79 - 20.jpg"
+    }
+  ]
+}

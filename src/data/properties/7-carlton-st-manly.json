@@ -1,0 +1,207 @@
+{
+  "slug": "7-carlton-st-manly",
+  "name": "7 Carlton St, Manly",
+  "hero": "7-carlton-st-manly-hero.jpg",
+  "images": [
+    {
+      "file": "7-carlton-st-manly-hero.jpg",
+      "category": "hero-exterior",
+      "featured": true,
+      "width": 4000,
+      "height": 6000,
+      "alt": "7 Carlton St, Manly \u2014 hero exterior",
+      "note": "Crisp white facade, deep blue sky",
+      "source": "SGP200031_034.jpg"
+    },
+    {
+      "file": "7-carlton-st-manly-living-1.jpg",
+      "category": "living",
+      "featured": true,
+      "width": 6000,
+      "height": 4000,
+      "alt": "7 Carlton St, Manly \u2014 living",
+      "note": "Warm lounge opening to garden",
+      "source": "SGP200031_023.jpg"
+    },
+    {
+      "file": "7-carlton-st-manly-living-2.jpg",
+      "category": "living",
+      "featured": true,
+      "width": 5845,
+      "height": 3897,
+      "alt": "7 Carlton St, Manly \u2014 living",
+      "note": "Seamless indoor-outdoor flow, very sharp",
+      "source": "SGP200031_026.jpg"
+    },
+    {
+      "file": "7-carlton-st-manly-kitchen-1.jpg",
+      "category": "kitchen",
+      "featured": true,
+      "width": 5715,
+      "height": 3810,
+      "alt": "7 Carlton St, Manly \u2014 kitchen",
+      "note": "Island, pendant light, long sightline",
+      "source": "SGP200031_021.jpg"
+    },
+    {
+      "file": "7-carlton-st-manly-dining.jpg",
+      "category": "dining",
+      "featured": true,
+      "width": 5524,
+      "height": 3683,
+      "alt": "7 Carlton St, Manly \u2014 dining",
+      "note": "Styled dining anchoring open plan",
+      "source": "SGP200031_019.jpg"
+    },
+    {
+      "file": "7-carlton-st-manly-bedroom-1.jpg",
+      "category": "bedroom",
+      "featured": true,
+      "width": 5368,
+      "height": 3579,
+      "alt": "7 Carlton St, Manly \u2014 bedroom",
+      "note": "Sunlit main bedroom, leafy outlook",
+      "source": "SGP200031_002.jpg"
+    },
+    {
+      "file": "7-carlton-st-manly-bedroom-2.jpg",
+      "category": "bedroom",
+      "featured": true,
+      "width": 5433,
+      "height": 3622,
+      "alt": "7 Carlton St, Manly \u2014 bedroom",
+      "note": "Period fireplace, layered textures",
+      "source": "SGP200031_013.jpg"
+    },
+    {
+      "file": "7-carlton-st-manly-bedroom-3.jpg",
+      "category": "bedroom",
+      "featured": true,
+      "width": 6000,
+      "height": 4000,
+      "alt": "7 Carlton St, Manly \u2014 bedroom",
+      "note": "Sharp twin room, hotel styling",
+      "source": "SGP200031_012.jpg"
+    },
+    {
+      "file": "7-carlton-st-manly-bathroom-1.jpg",
+      "category": "bathroom",
+      "featured": true,
+      "width": 6000,
+      "height": 4000,
+      "alt": "7 Carlton St, Manly \u2014 bathroom",
+      "note": "Double vanity, moody stone glow",
+      "source": "SGP200031_003.jpg"
+    },
+    {
+      "file": "7-carlton-st-manly-bathroom-2.jpg",
+      "category": "bathroom",
+      "featured": true,
+      "width": 6000,
+      "height": 4000,
+      "alt": "7 Carlton St, Manly \u2014 bathroom",
+      "note": "Walk-in shower, garden window light",
+      "source": "SGP200031_005.jpg"
+    },
+    {
+      "file": "7-carlton-st-manly-exterior-1.jpg",
+      "category": "exterior",
+      "featured": true,
+      "width": 5738,
+      "height": 3825,
+      "alt": "7 Carlton St, Manly \u2014 exterior",
+      "note": "Pergola patio framing glazed rear",
+      "source": "SGP200031_024.jpg"
+    },
+    {
+      "file": "7-carlton-st-manly-exterior-2.jpg",
+      "category": "exterior",
+      "featured": true,
+      "width": 6000,
+      "height": 4000,
+      "alt": "7 Carlton St, Manly \u2014 exterior",
+      "note": "Sunny lawn courtyard, sharpest frame",
+      "source": "SGP200031_025.jpg"
+    },
+    {
+      "file": "7-carlton-st-manly-living-3.jpg",
+      "category": "living",
+      "featured": false,
+      "width": 5800,
+      "height": 3867,
+      "alt": "7 Carlton St, Manly \u2014 living",
+      "note": "Widest open-plan overview shot",
+      "source": "SGP200031_020.jpg"
+    },
+    {
+      "file": "7-carlton-st-manly-kitchen-2.jpg",
+      "category": "kitchen",
+      "featured": false,
+      "width": 6000,
+      "height": 4000,
+      "alt": "7 Carlton St, Manly \u2014 kitchen",
+      "note": "Bright galley, marble floor detail",
+      "source": "SGP200031_027.jpg"
+    },
+    {
+      "file": "7-carlton-st-manly-bedroom-4.jpg",
+      "category": "bedroom",
+      "featured": false,
+      "width": 6000,
+      "height": 4000,
+      "alt": "7 Carlton St, Manly \u2014 bedroom",
+      "note": "Attic bedroom, full-wall wardrobes",
+      "source": "SGP200031_010.jpg"
+    },
+    {
+      "file": "7-carlton-st-manly-bedroom-5.jpg",
+      "category": "bedroom",
+      "featured": false,
+      "width": 5254,
+      "height": 3503,
+      "alt": "7 Carlton St, Manly \u2014 bedroom",
+      "note": "Fourth bedroom, sun-splashed bed",
+      "source": "SGP200031_001.jpg"
+    },
+    {
+      "file": "7-carlton-st-manly-exterior-3.jpg",
+      "category": "exterior",
+      "featured": false,
+      "width": 4000,
+      "height": 6000,
+      "alt": "7 Carlton St, Manly \u2014 exterior",
+      "note": "Front porch, coastal cushion styling",
+      "source": "SGP200031_028.jpg"
+    },
+    {
+      "file": "7-carlton-st-manly-bathroom-3.jpg",
+      "category": "bathroom",
+      "featured": false,
+      "width": 3866,
+      "height": 5799,
+      "alt": "7 Carlton St, Manly \u2014 bathroom",
+      "note": "Powder room, dramatic dark tiling",
+      "source": "SGP200031_016.jpg"
+    },
+    {
+      "file": "7-carlton-st-manly-feature-1.jpg",
+      "category": "other",
+      "featured": false,
+      "width": 4000,
+      "height": 6000,
+      "alt": "7 Carlton St, Manly \u2014 other",
+      "note": "Classic terrace entry hallway",
+      "source": "SGP200031_011.jpg"
+    },
+    {
+      "file": "7-carlton-st-manly-feature-2.jpg",
+      "category": "other",
+      "featured": false,
+      "width": 5383,
+      "height": 3589,
+      "alt": "7 Carlton St, Manly \u2014 other",
+      "note": "Study nook and stair sightline",
+      "source": "SGP200031_006.jpg"
+    }
+  ]
+}

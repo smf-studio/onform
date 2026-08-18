@@ -1,0 +1,38 @@
+[
+  {
+    "slug": "queenscliff",
+    "name": "Queenscliff",
+    "images": 20,
+    "featured": 12
+  },
+  {
+    "slug": "radnor-mews",
+    "name": "Radnor Mews",
+    "images": 20,
+    "featured": 12
+  },
+  {
+    "slug": "7-carlton-st-manly",
+    "name": "7 Carlton St, Manly",
+    "images": 20,
+    "featured": 12
+  },
+  {
+    "slug": "the-glebe",
+    "name": "The Glebe",
+    "images": 20,
+    "featured": 12
+  },
+  {
+    "slug": "valriche-villa",
+    "name": "Valriche Villa",
+    "images": 20,
+    "featured": 12
+  },
+  {
+    "slug": "26-carlton-st-freshwater",
+    "name": "26 Carlton St, Freshwater",
+    "images": 14,
+    "featured": 10
+  }
+]

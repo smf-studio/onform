@@ -1,0 +1,147 @@
+{
+  "slug": "26-carlton-st-freshwater",
+  "name": "26 Carlton St, Freshwater",
+  "hero": "26-carlton-st-freshwater-hero.jpg",
+  "images": [
+    {
+      "file": "26-carlton-st-freshwater-hero.jpg",
+      "category": "hero-exterior",
+      "featured": true,
+      "width": 1400,
+      "height": 934,
+      "alt": "26 Carlton St, Freshwater \u2014 hero exterior",
+      "note": "Crisp street facade, blue sky",
+      "source": "CarltonSt2096 (4).jpg"
+    },
+    {
+      "file": "26-carlton-st-freshwater-aerial-1.jpg",
+      "category": "aerial",
+      "featured": true,
+      "width": 1400,
+      "height": 933,
+      "alt": "26 Carlton St, Freshwater \u2014 aerial",
+      "note": "Home pinpointed near Freshwater Beach",
+      "source": "CarltonSt2096 (7).jpg"
+    },
+    {
+      "file": "26-carlton-st-freshwater-exterior.jpg",
+      "category": "exterior",
+      "featured": true,
+      "width": 1400,
+      "height": 1031,
+      "alt": "26 Carlton St, Freshwater \u2014 exterior",
+      "note": "Rear elevation over pool terrace",
+      "source": "CarltonSt2096 (9).jpg"
+    },
+    {
+      "file": "26-carlton-st-freshwater-pool.jpg",
+      "category": "outdoor-pool",
+      "featured": true,
+      "width": 1400,
+      "height": 934,
+      "alt": "26 Carlton St, Freshwater \u2014 outdoor pool",
+      "note": "Palm-lined pool, sparkling water",
+      "source": "CarltonSt2096 (3).jpg"
+    },
+    {
+      "file": "26-carlton-st-freshwater-living-1.jpg",
+      "category": "living",
+      "featured": true,
+      "width": 1400,
+      "height": 934,
+      "alt": "26 Carlton St, Freshwater \u2014 living",
+      "note": "Lounge and balcony, ocean glimpse",
+      "source": "CarltonSt2096 (5).jpg"
+    },
+    {
+      "file": "26-carlton-st-freshwater-dining-1.jpg",
+      "category": "dining",
+      "featured": true,
+      "width": 1400,
+      "height": 934,
+      "alt": "26 Carlton St, Freshwater \u2014 dining",
+      "note": "Sunlit bay-window dining space",
+      "source": "CarltonSt2096 (8).jpg"
+    },
+    {
+      "file": "26-carlton-st-freshwater-kitchen.jpg",
+      "category": "kitchen",
+      "featured": true,
+      "width": 1400,
+      "height": 934,
+      "alt": "26 Carlton St, Freshwater \u2014 kitchen",
+      "note": "Full white kitchen, timber floor",
+      "source": "CarltonSt2096 (10).jpg"
+    },
+    {
+      "file": "26-carlton-st-freshwater-bedroom-1.jpg",
+      "category": "bedroom",
+      "featured": true,
+      "width": 1400,
+      "height": 934,
+      "alt": "26 Carlton St, Freshwater \u2014 bedroom",
+      "note": "Bay windows, treetop district outlook",
+      "source": "CarltonSt2096 (2).jpg"
+    },
+    {
+      "file": "26-carlton-st-freshwater-view.jpg",
+      "category": "view",
+      "featured": true,
+      "width": 1400,
+      "height": 934,
+      "alt": "26 Carlton St, Freshwater \u2014 view",
+      "note": "Balcony lifestyle over pool below",
+      "source": "CarltonSt2096 (15).jpg"
+    },
+    {
+      "file": "26-carlton-st-freshwater-bathroom.jpg",
+      "category": "bathroom",
+      "featured": true,
+      "width": 1400,
+      "height": 934,
+      "alt": "26 Carlton St, Freshwater \u2014 bathroom",
+      "note": "Patterned tiles, oak vanity, skylight",
+      "source": "CarltonSt2096 (1).jpg"
+    },
+    {
+      "file": "26-carlton-st-freshwater-dining-2.jpg",
+      "category": "dining",
+      "featured": false,
+      "width": 1400,
+      "height": 934,
+      "alt": "26 Carlton St, Freshwater \u2014 dining",
+      "note": "Twilight alfresco beside lit pool",
+      "source": "CarltonSt2096 (14).jpg"
+    },
+    {
+      "file": "26-carlton-st-freshwater-aerial-2.jpg",
+      "category": "aerial",
+      "featured": false,
+      "width": 1400,
+      "height": 933,
+      "alt": "26 Carlton St, Freshwater \u2014 aerial",
+      "note": "Wide coastline sweep toward Manly",
+      "source": "CarltonSt2096 (11).jpg"
+    },
+    {
+      "file": "26-carlton-st-freshwater-bedroom-2.jpg",
+      "category": "bedroom",
+      "featured": false,
+      "width": 1400,
+      "height": 934,
+      "alt": "26 Carlton St, Freshwater \u2014 bedroom",
+      "note": "Master with shuttered balcony access",
+      "source": "CarltonSt2096 (16).jpg"
+    },
+    {
+      "file": "26-carlton-st-freshwater-living-2.jpg",
+      "category": "living",
+      "featured": false,
+      "width": 1400,
+      "height": 934,
+      "alt": "26 Carlton St, Freshwater \u2014 living",
+      "note": "Second sitting room, bay window",
+      "source": "CarltonSt2096 (13).jpg"
+    }
+  ]
+}
