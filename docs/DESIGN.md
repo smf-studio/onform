@@ -1,10 +1,12 @@
 # Design
 
-Status: DRAFT direction for the OnForm placeholder portfolio, pending sign-off
-on the recommended direction ("The Contemporary Studio") from the design
-exploration. The moodboard with all three candidate directions lives in the
-project's Claude artifact "OnForm Directions". Sections marked "template" are
-inherited from the frontend template and still apply.
+Status: DIRECTION LOCKED by the client on 18 August 2026: Gambetta display
+serif, black and white palette, MAD-style inset hero with a clean
+photograph, gallery as per-project showcase row plus editorial grid.
+Boards live in the Claude artifacts "OnForm Composition" and "OnForm
+Tokens". Remaining open items are listed at the bottom of this file.
+Sections marked "template" are inherited from the frontend template and
+still apply.
 
 ## Identity
 
@@ -24,28 +26,22 @@ Hard rules from the client:
 
 ## Typography
 
-Pairing: display serif over **Instrument Sans** for everything
-functional. Serif candidates come from Fontshare (Indian Type Foundry
-Free Font License, free for commercial web use, self-hosted), pending the
-client's pick on the tokens board:
-
-- **Boska** (lead): sharp flared serifs, fashion edge, weights light to
-  black plus a variable axis, and a showpiece italic. The signature move.
-- **Melodrama** (alternative): high contrast, liquid curves, no italic.
-- **Gambetta** (alternative): softest flare, closest to Canora, true italic.
-
-Google Fonts candidates (Instrument Serif, Bodoni Moda, Prata, Gloock,
-Fraunces, Cormorant) were all rejected as lacking flair for this brief.
-Self-hosted WOFF2, preload the display serif.
+Pairing, locked: **Gambetta** display over **Instrument Sans** for
+everything functional. Gambetta ships from Fontshare under the Indian
+Type Foundry Free Font License (free for commercial web use); soft flared
+serifs, closest free face to Canora, with a true italic. Self-host
+Regular, Italic and Medium as WOFF2 and preload Regular. Boska and
+Melodrama were the runners-up; all Google Fonts serif candidates were
+rejected as lacking flair.
 
 | Role          | Face                        | Treatment                                                 |
 | ------------- | --------------------------- | --------------------------------------------------------- |
-| Display       | Boska 400                   | Property names, hero lines. clamp(3rem, 7vw, 6.5rem),     |
-|               |                             | line-height 1.02. Never below 26px.                       |
-| Display em    | Boska 300 italic            | One or two words per line; also breaks caps lines         |
+| Display       | Gambetta 400                | Property names, hero lines. clamp(3rem, 7vw, 6.5rem),     |
+|               |                             | line-height 1.03. Never below 26px.                       |
+| Display em    | Gambetta 400 italic         | One or two words per line; also breaks caps lines         |
 | Body          | Instrument Sans 400         | 16px, line-height 1.6, max width 62ch                     |
 | Labels        | Instrument Sans 500         | 11 to 13px, uppercase, letter-spacing 0.14em to 0.2em     |
-| Wordmark      | Boska 400                   | lowercase "onform" (pending confirmation)                 |
+| Wordmark      | Gambetta 400                | lowercase "onform" (pending confirmation)                 |
 
 Signature device (from the reference teardown): uppercase sans lines
 carrying one or two lowercase italic serif words, and a "ghost marquee",
@@ -73,21 +69,22 @@ images and the notch (one shared value, `--nr`), 4px on small elements.
 
 ## Layout principles
 
-The site is two sections: the hero and the gallery.
+The site is two sections: the hero and the gallery. Locked treatments:
 
 - Hero: MAD-style inset, never full bleed. Chrome on white above (wordmark
-  left, Projects Studio Contact right), photograph inset with a white
-  gutter and 16px rounded corners.
-- The notch is the signature motif: text space carved out of the image
-  corner in page ground, with 16px inverted rounded fillets. The hero
-  carries the property name and metadata in a bottom-left notch; the same
-  geometry can badge gallery images and carry the nav (top-right notch).
-  Candidate hero treatments A (caption card), B (name notch, recommended)
-  and C (double notch) are mocked on the composition board.
-- Gallery: four candidate treatments on the composition board — asymmetric
-  two lane stream, showcase rows with name notches (recommended),
-  editorial three column grid, and a names-first index with hover
-  preview. Data-driven from the manifests in `src/data/properties/`.
+  left, nav right), photograph inset with a white gutter and 16px rounded
+  corners. The photograph stays CLEAN, no overlay of any kind; the
+  property name and metadata sit below the image on white.
+- Gallery: one block per property, combining the two chosen treatments.
+  Each block opens with a showcase row (large frame with the property
+  name carved into a bottom-left notch, metadata and one short paragraph
+  beside it, alternating left and right per block) followed by an
+  editorial three column grid of supporting frames at honest ratios with
+  small caps captions. Data-driven from the manifests in
+  `src/data/properties/`.
+- The notch is the signature motif, carried by the gallery showcase rows:
+  text space carved out of the image corner in page ground, 16px inverted
+  rounded fillets, type always on page ground.
 - Project detail: overlay route above the gallery. Text sidebar (name,
   location, year, one paragraph at most) with large scrolling images.
   Featured images first, then the gallery bank. Ends with a link to the
@@ -145,3 +142,19 @@ Every deviation from registry output must be listed here with a reason.
 | Date | Component | Change | Reason                                             |
 | ---- | --------- | ------ | -------------------------------------------------- |
 | —    | —         | none   | All primitives are as generated by the shadcn CLI. |
+
+## Open decisions
+
+1. Wordmark case: lowercase "onform" or "OnForm". Proposed: lowercase.
+2. Site shape: single scrolling page (hero straight into the six project
+   blocks) versus project overlay routes on top. Proposed for the
+   placeholder: single page, overlays later.
+3. Hero photograph: static single frame versus a slow crossfade rotation
+   through the six properties. Proposed: slow rotation, one name below.
+4. Nav contents: with a one-pager, Projects can scroll-anchor to the
+   gallery; Studio and Contact need a target (a footer block, or drop
+   them). Proposed: Projects anchor plus a Contact footer with email.
+5. Hero shader: confirmed in principle by the brief; final go given at
+   build time once the real page performs.
+6. Per-property display names and the one-line paragraph each block
+   carries. Drafts will be proposed for sign-off.
