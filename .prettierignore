@@ -1,0 +1,10 @@
+# Generated
+src/routeTree.gen.ts
+pnpm-lock.yaml
+dist
+coverage
+playwright-report
+test-results
+
+# shadcn primitives stay byte-identical to the registry output
+src/components/ui

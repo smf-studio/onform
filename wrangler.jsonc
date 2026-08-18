@@ -1,0 +1,13 @@
+// Cloudflare Workers static-assets config (assets-only: no Worker script).
+// `pnpm run deploy` builds and publishes ./dist. Rename `name` per project —
+// it becomes the <name>.<account>.workers.dev subdomain.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "frontend-template",
+  "compatibility_date": "2026-08-09",
+  "assets": {
+    "directory": "./dist",
+    // Client-side routing: serve index.html for any path that isn't a file
+    "not_found_handling": "single-page-application",
+  },
+}

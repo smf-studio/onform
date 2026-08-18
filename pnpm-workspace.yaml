@@ -1,0 +1,21 @@
+# pnpm settings (pnpm reads these from here, not package.json).
+#
+# This is NOT a monorepo. `packages` lists only the root because pnpm 10.5 and
+# older refuse to parse this file without it ("packages field missing or
+# empty") — and CI images that pin an older pnpm than yours then fail to
+# install at all. Keep it.
+#
+# esbuild and workerd are wrangler dependencies whose postinstall scripts
+# fetch their platform binaries — approved so `wrangler` works after install.
+# Both spellings are needed: pnpm 10 reads `onlyBuiltDependencies` and ignores
+# `allowBuilds`, pnpm 11 does the reverse. Keep the two lists in sync.
+packages:
+  - .
+
+onlyBuiltDependencies:
+  - esbuild
+  - workerd
+
+allowBuilds:
+  esbuild: true
+  workerd: true

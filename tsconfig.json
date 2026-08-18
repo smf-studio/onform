@@ -1,0 +1,18 @@
+{
+  /* compilerOptions here are NOT used by tsc (solution-style config).
+     They exist for tools that only read the root tsconfig — notably the
+     shadcn CLI, which resolves the bare import aliases in components.json
+     through this mapping. See docs/GOTCHAS.md. */
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "*": ["./*"]
+    }
+  },
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" },
+    { "path": "./tests/tsconfig.json" }
+  ]
+}

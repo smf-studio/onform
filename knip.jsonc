@@ -1,0 +1,20 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    // Route files are consumed via the generated route tree, so they
+    // must be entries themselves.
+    "src/routes/**/*.tsx",
+  ],
+  "project": ["src/**/*.{ts,tsx}", "tests/**/*.ts"],
+  "ignore": [
+    // shadcn primitives are exempt from dead-code checks — they ship
+    // more exports than the app uses, by design. Everything else in the
+    // repo is zero-tolerance.
+    "src/components/ui/**",
+  ],
+  "ignoreDependencies": [
+    // Used via @import in src/styles/globals.css, invisible to knip.
+    "tailwindcss",
+    "tw-animate-css",
+  ],
+}
