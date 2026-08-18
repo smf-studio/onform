@@ -1,6 +1,6 @@
 import { SiteFooter } from 'components/shared/SiteFooter'
 import { Hero } from 'features/properties/components/Hero'
-import { ProjectBlock } from 'features/properties/components/ProjectBlock'
+import { ProjectShowcase } from 'features/properties/components/ProjectShowcase'
 import { properties } from 'features/properties/data'
 
 export function HomePage() {
@@ -34,18 +34,8 @@ export function HomePage() {
           {featured ? <Hero property={featured} /> : null}
         </div>
 
-        <main
-          aria-label="Projects"
-          className="mx-auto flex w-full max-w-screen-2xl flex-col gap-16 px-5 py-14 sm:gap-24 sm:px-7 sm:py-20"
-          id="projects"
-        >
-          {properties.map((property, index) => (
-            <ProjectBlock
-              flip={index % 2 === 1}
-              key={property.slug}
-              property={property}
-            />
-          ))}
+        <main aria-label="Projects">
+          <ProjectShowcase />
         </main>
       </div>
       <SiteFooter />

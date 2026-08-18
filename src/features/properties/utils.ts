@@ -46,12 +46,3 @@ export function heroImage(property: Property): PropertyImage {
   }
   return hero
 }
-
-/* The showcase row uses the hero frame; the block grid takes the next
-   featured frames after it, at most `count`. */
-export function gridImages(property: Property, count: number): PropertyImage[] {
-  const hero = heroImage(property)
-  return property.images
-    .filter((image) => image.featured && image.file !== hero.file)
-    .slice(0, count)
-}

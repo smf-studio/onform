@@ -15,7 +15,6 @@ test.describe('home', () => {
       page.getByRole('region', { name: 'Featured property' }),
     ).toBeVisible()
 
-    const projects = page.getByRole('main', { name: 'Projects' })
     for (const name of [
       'Queenscliff',
       'Radnor Mews',
@@ -24,8 +23,20 @@ test.describe('home', () => {
       'Villa Valriche',
       'Freshwater',
     ]) {
-      await expect(projects.getByText(name, { exact: true })).toBeVisible()
+      await expect(
+        page.getByRole('link', { name: `${name} project` }),
+      ).toBeVisible()
     }
+  })
+
+  test('showcase shell shows the counter and active project facts', async ({
+    page,
+  }) => {
+    await page
+      .getByRole('link', { name: 'Queenscliff project' })
+      .scrollIntoViewIfNeeded()
+    await expect(page.getByText('OF 06 PROJECTS')).toBeVisible()
+    await expect(page.getByRole('link', { name: 'VIEW PROJECT' })).toBeVisible()
   })
 
   test('metadata lines carry no ornament characters', async ({ page }) => {

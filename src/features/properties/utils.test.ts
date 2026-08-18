@@ -3,7 +3,6 @@ import { describe, expect, it } from 'vitest'
 import { properties } from 'features/properties/data'
 import {
   formatMeta,
-  gridImages,
   heroImage,
   largestVariantUrl,
   srcSetFor,
@@ -31,16 +30,6 @@ describe('property data', () => {
   it('finds a hero frame for every property', () => {
     for (const property of properties) {
       expect(heroImage(property).file).toBeTruthy()
-    }
-  })
-
-  it('grid images exclude the hero and respect the count', () => {
-    for (const property of properties) {
-      const hero = heroImage(property)
-      const grid = gridImages(property, 3)
-      expect(grid.length).toBeLessThanOrEqual(3)
-      expect(grid.map((image) => image.file)).not.toContain(hero.file)
-      expect(grid.every((image) => image.featured)).toBe(true)
     }
   })
 })

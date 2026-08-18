@@ -36,7 +36,7 @@ export function SiteFooter() {
     >
       <div
         className={cn(
-          'footer-reveal mx-auto flex max-w-screen-2xl flex-col gap-10 px-5 pb-8 pt-14 sm:px-7 sm:pb-10 sm:pt-20',
+          'footer-reveal mx-auto flex max-w-screen-2xl flex-col gap-10 px-5 pt-14 pb-8 sm:px-7 sm:pt-20 sm:pb-10',
           revealed && 'is-revealed',
         )}
       >

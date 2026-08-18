@@ -82,9 +82,11 @@ The site is two sections: the hero and the gallery. Locked treatments:
   editorial three column grid of supporting frames at honest ratios with
   small caps captions. Data-driven from the manifests in
   `src/data/properties/`.
-- The notch is the signature motif, carried by the gallery showcase rows:
-  text space carved out of the image corner in page ground, 16px inverted
-  rounded fillets, type always on page ground.
+- The notch motif is PARKED: the Prototype Studio style showcase and
+  detail layouts that replaced the gallery rows carry no text on images,
+  so the cutout currently has no home. Its geometry survives as the
+  shared 16px radius; the component lives in git history if a future
+  surface wants it back.
 - Site shape, locked: a single scrolling page (hero then the six project
   blocks), plus an overlay route per project (`/projects/$slug`) above the
   page for seeing one property in its entirety: text sidebar (name,
