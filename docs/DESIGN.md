@@ -25,26 +25,27 @@ Hard rules from the client:
 ## Typography
 
 Pairing: display serif over **Instrument Sans** for everything
-functional. Two serif finalists, pending the client's pick on the tokens
-board:
+functional. Serif candidates come from Fontshare (Indian Type Foundry
+Free Font License, free for commercial web use, self-hosted), pending the
+client's pick on the tokens board:
 
-- **Fraunces** (lead): tuned to "opsz" 144, "SOFT" 0, weight 340 to 460.
-  Closest free face to the flared, characterful register of the client's
-  interior design references (Canora, Silvana Display). Italic is the
-  signature move.
-- **Bodoni Moda** (alternative): variable Didone, the glamour register.
+- **Boska** (lead): sharp flared serifs, fashion edge, weights light to
+  black plus a variable axis, and a showpiece italic. The signature move.
+- **Melodrama** (alternative): high contrast, liquid curves, no italic.
+- **Gambetta** (alternative): softest flare, closest to Canora, true italic.
 
-Self-hosted WOFF2, preload the display serif. Instrument Serif was
-rejected as not visually engaging enough.
+Google Fonts candidates (Instrument Serif, Bodoni Moda, Prata, Gloock,
+Fraunces, Cormorant) were all rejected as lacking flair for this brief.
+Self-hosted WOFF2, preload the display serif.
 
 | Role          | Face                        | Treatment                                                 |
 | ------------- | --------------------------- | --------------------------------------------------------- |
-| Display       | Display serif 400           | Property names, hero lines. clamp(3rem, 7vw, 6.5rem),     |
-|               |                             | line-height 1.03. Never below 26px.                       |
-| Display em    | Display serif 400 italic    | One word per line at most; also breaks caps lines         |
+| Display       | Boska 400                   | Property names, hero lines. clamp(3rem, 7vw, 6.5rem),     |
+|               |                             | line-height 1.02. Never below 26px.                       |
+| Display em    | Boska 300 italic            | One or two words per line; also breaks caps lines         |
 | Body          | Instrument Sans 400         | 16px, line-height 1.6, max width 62ch                     |
 | Labels        | Instrument Sans 500         | 11 to 13px, uppercase, letter-spacing 0.14em to 0.2em     |
-| Wordmark      | Display serif 400           | lowercase "onform" (pending confirmation)                 |
+| Wordmark      | Boska 400                   | lowercase "onform" (pending confirmation)                 |
 
 Signature device (from the reference teardown): uppercase sans lines
 carrying one or two lowercase italic serif words, and a "ghost marquee",
@@ -53,40 +54,41 @@ opacity.
 
 ## Palette
 
-Single light theme. The placeholder does not ship a dark mode or a theme
-toggle; every reference site in the research commits to one ground. Color
-belongs to the photography; the UI stays neutral with one accent used only
-for links and active states.
+Black and white, single light theme, no accent color anywhere. The
+photographs are the only color on the site. Hierarchy comes from a short
+grey ramp; interaction states are black with underlines or opacity shifts.
 
-| Token          | Value   | Use                              |
-| -------------- | ------- | -------------------------------- |
-| Limestone      | #F7F6F3 | page ground                      |
-| Raised         | #FFFFFF | cards, overlay panel             |
-| Shadow ink     | #242422 | headings, wordmark               |
-| Warm grey      | #56534B | body copy                        |
-| Faint          | #8B867B | metadata labels                  |
-| Hairline       | #E2DFD8 | rules, borders                   |
-| Coastal slate  | #37464A | links, active filter, focus ring |
+| Token     | Value   | Use                              |
+| --------- | ------- | -------------------------------- |
+| White     | #FFFFFF | page ground                      |
+| Dim white | #F4F4F2 | notch fills, quiet panels        |
+| Black     | #111110 | display, wordmark, links, focus  |
+| Grey      | #4A4A47 | body copy                        |
+| Faint     | #8F8F8A | metadata labels                  |
+| Hairline  | #E7E7E4 | rules, borders                   |
 
 Implementation maps these onto the template's semantic tokens in
-`src/styles/globals.css` (OKLCH), keeping token names. `--radius` drops to
-0.25rem: large rounded corners read consumer-app, not editorial.
+`src/styles/globals.css` (OKLCH), keeping token names. Radius: 16px on
+images and the notch (one shared value, `--nr`), 4px on small elements.
 
 ## Layout principles
 
-- Navigation is a whisper: wordmark left, three items right (Projects,
-  Studio, Contact), floating over the hero with no bar behind it.
-- One photograph owns the first viewport, full bleed, with the property name
-  in display serif bottom-left and a metadata line beneath it.
-- Project grid, two candidate geometries pending the client's pick:
-  the asymmetric two lane stream (images in narrow lanes at the edges of
-  a twelve column grid, mixed ratios, staggered, a quiet project index
-  holding the center) or a calmer 2 to 3 column grid with generous
-  gutters. Filters as quiet text buttons, data-driven from the manifests
-  in `src/data/properties/`. Asymmetry over symmetry throughout; type may
-  touch the imagery (scrimmed names, ghost marquees, captions hugging
-  tiles).
-- Project detail: overlay route above the grid. Text sidebar (name,
+The site is two sections: the hero and the gallery.
+
+- Hero: MAD-style inset, never full bleed. Chrome on white above (wordmark
+  left, Projects Studio Contact right), photograph inset with a white
+  gutter and 16px rounded corners.
+- The notch is the signature motif: text space carved out of the image
+  corner in page ground, with 16px inverted rounded fillets. The hero
+  carries the property name and metadata in a bottom-left notch; the same
+  geometry can badge gallery images and carry the nav (top-right notch).
+  Candidate hero treatments A (caption card), B (name notch, recommended)
+  and C (double notch) are mocked on the composition board.
+- Gallery: four candidate treatments on the composition board — asymmetric
+  two lane stream, showcase rows with name notches (recommended),
+  editorial three column grid, and a names-first index with hover
+  preview. Data-driven from the manifests in `src/data/properties/`.
+- Project detail: overlay route above the gallery. Text sidebar (name,
   location, year, one paragraph at most) with large scrolling images.
   Featured images first, then the gallery bank. Ends with a link to the
   next project, never a dead end.
