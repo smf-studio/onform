@@ -7,11 +7,12 @@ import { formatMeta, heroImage } from 'features/properties/utils'
 import { cn } from 'lib/utils'
 
 /* The projects showcase, after the Prototype Studio mechanic: one sticky
-   full-viewport shell carries the oversized counter and the active
-   property's name and facts, while a narrow centre column of cards
-   scrolls through in normal flow. A card becomes active when it crosses
-   the viewport centre; state changes are instant for the counter and a
-   short fade for the text. Card images parallax inside their masks.
+   full-viewport shell wraps the scrolling centre column of cards. The
+   shell carries the oversized counter, the metadata for the active
+   property on the left, and the full list of project names on the right;
+   the active name reads at full ink while the rest sit faint, and the
+   stack crawls so the active name holds the middle. Cards enter with the
+   long expo-out rise and parallax inside their masks while scrolling.
    Below lg the shell is hidden and cards carry their own captions. */
 export function ProjectShowcase() {
   const [active, setActive] = useState(0)
@@ -21,7 +22,7 @@ export function ProjectShowcase() {
     const list = listRef.current
     if (!list) return
     const cards = Array.from(list.querySelectorAll<HTMLElement>('[data-index]'))
-    const observer = new IntersectionObserver(
+    const activeObserver = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
@@ -31,17 +32,29 @@ export function ProjectShowcase() {
       },
       { rootMargin: '-50% 0px -50% 0px' },
     )
+    const enterObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in')
+            enterObserver.unobserve(entry.target)
+          }
+        }
+      },
+      { rootMargin: '0px 0px -12% 0px' },
+    )
     cards.forEach((card) => {
-      observer.observe(card)
+      activeObserver.observe(card)
+      enterObserver.observe(card)
     })
     return () => {
-      observer.disconnect()
+      activeObserver.disconnect()
+      enterObserver.disconnect()
     }
   }, [])
 
-  /* Scroll-linked parallax: each card's inner image is oversized and
-     slides within the mask as the card traverses the viewport. Direct
-     style writes from a rAF-throttled scroll handler; no React state. */
+  /* Scroll-linked parallax inside each card mask; direct style writes
+     from a rAF-throttled scroll handler, no React state. */
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const list = listRef.current
@@ -84,36 +97,53 @@ export function ProjectShowcase() {
   return (
     <section className="relative" id="projects">
       <div className="pointer-events-none sticky top-0 hidden h-svh lg:block">
-        <div className="mx-auto grid h-full max-w-screen-2xl grid-cols-12 items-end gap-6 px-7 pb-10">
-          <div className="col-span-3 self-end" key={`count-${current.slug}`}>
-            <div className="font-display text-[clamp(6rem,13vw,11.5rem)] leading-[0.85]">
-              {String(active + 1).padStart(2, '0')}
-            </div>
-            <div className="mt-3 text-[11px] font-medium tracking-[0.2em] text-muted-foreground">
-              {`OF ${String(properties.length).padStart(2, '0')} PROJECTS`}
-            </div>
-          </div>
-          <div className="col-span-3 col-start-10 flex flex-col items-end gap-3 text-right">
-            <div
-              className="swap-in flex flex-col items-end gap-3"
-              key={current.slug}
-            >
-              <h2 className="font-display text-4xl leading-none xl:text-5xl">
-                {current.displayName}
-              </h2>
-              <p className="text-[11px] font-medium tracking-[0.2em] text-muted-foreground">
-                {formatMeta(current)}
-              </p>
-              <p className="max-w-2xs text-sm text-body-copy">
+        <div className="mx-auto grid h-full max-w-screen-2xl grid-cols-12 gap-6 px-7 pt-20 pb-10">
+          <div className="col-span-3 flex h-full flex-col justify-between">
+            <div className="swap-in flex flex-col gap-2" key={current.slug}>
+              <span className="text-[11px] font-medium tracking-[0.2em] text-muted-foreground">
+                {current.location.toUpperCase()}
+              </span>
+              <span className="text-[11px] font-medium tracking-[0.2em] text-muted-foreground">
+                {`COMPLETED ${current.year}`}
+              </span>
+              <p className="mt-2 max-w-3xs text-sm text-body-copy">
                 {current.paragraph}
               </p>
-              <Link
-                className="pointer-events-auto text-[11px] font-medium tracking-[0.16em] underline decoration-1 underline-offset-4 transition-opacity hover:opacity-60"
-                params={{ slug: current.slug }}
-                to="/projects/$slug"
+            </div>
+            <div>
+              <div
+                className="font-display text-[clamp(6rem,13vw,11.5rem)] leading-[0.85]"
+                key={`count-${current.slug}`}
               >
-                VIEW PROJECT
-              </Link>
+                {String(active + 1).padStart(2, '0')}
+              </div>
+              <div className="mt-3 text-[11px] font-medium tracking-[0.2em] text-muted-foreground">
+                {`OF ${String(properties.length).padStart(2, '0')} PROJECTS`}
+              </div>
+            </div>
+          </div>
+          <div className="col-span-3 col-start-10 flex h-full items-center justify-end overflow-hidden">
+            <div
+              className="flex flex-col items-end transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]"
+              style={{
+                transform: `translateY(${(((properties.length - 1) / 2 - active) * 3.25).toFixed(3)}rem)`,
+              }}
+            >
+              {properties.map((property, index) => (
+                <Link
+                  className={cn(
+                    'pointer-events-auto flex h-[3.25rem] items-center font-display text-3xl leading-none transition-all duration-700 xl:text-4xl',
+                    index === active
+                      ? 'opacity-100'
+                      : 'opacity-25 hover:opacity-60',
+                  )}
+                  key={property.slug}
+                  params={{ slug: property.slug }}
+                  to="/projects/$slug"
+                >
+                  {property.displayName}
+                </Link>
+              ))}
             </div>
           </div>
         </div>
@@ -130,7 +160,7 @@ export function ProjectShowcase() {
           >
             <Link
               aria-label={`${property.displayName} project`}
-              className="group block"
+              className="enter-media group block"
               data-index={index}
               params={{ slug: property.slug }}
               to="/projects/$slug"

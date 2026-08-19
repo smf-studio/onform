@@ -36,7 +36,9 @@ test.describe('home', () => {
       .getByRole('link', { name: 'Queenscliff project' })
       .scrollIntoViewIfNeeded()
     await expect(page.getByText('OF 06 PROJECTS')).toBeVisible()
-    await expect(page.getByRole('link', { name: 'VIEW PROJECT' })).toBeVisible()
+    await expect(
+      page.getByRole('link', { name: 'Radnor Mews', exact: true }),
+    ).toBeVisible()
   })
 
   test('metadata lines carry no ornament characters', async ({ page }) => {

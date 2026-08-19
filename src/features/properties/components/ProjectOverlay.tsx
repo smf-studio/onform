@@ -4,16 +4,18 @@ import { useEffect, useRef } from 'react'
 import type { Property } from 'features/properties/schema'
 
 import { Reveal } from 'components/shared/Reveal'
+import { SiteHeader } from 'components/shared/SiteHeader'
 import { AssetImage } from 'features/properties/components/AssetImage'
 import { properties } from 'features/properties/data'
 import { heroImage } from 'features/properties/utils'
 
 const MEDIA_COUNT = 8
 
-/* Project detail, after the Prototype Studio work page: a single column
-   of large frames on the left, a sticky sidebar with the title and the
-   facts on the right, and at the end the next project revealed by
-   continuing to scroll. */
+/* Project page, after the Prototype Studio work detail: the sticky site
+   header, a Back link, then a media column on the left and a sticky
+   right column where the title reveals character by character over an
+   italic location line and quiet label and value rows. The page ends
+   with the next project revealed by continuing to scroll. */
 export function ProjectOverlay({ property }: { property: Property }) {
   const index = properties.findIndex((p) => p.slug === property.slug)
   const next = properties.at((index + 1) % properties.length) ?? property
@@ -28,62 +30,92 @@ export function ProjectOverlay({ property }: { property: Property }) {
   return (
     <div className="bg-background">
       <div className="relative z-10 bg-background">
-        <div className="mx-auto grid max-w-screen-2xl gap-x-10 px-5 sm:px-7 lg:grid-cols-12">
-          <aside className="pt-5 lg:sticky lg:top-0 lg:order-2 lg:col-span-4 lg:col-start-9 lg:flex lg:h-svh lg:flex-col lg:pt-6">
+        <SiteHeader />
+        <div className="mx-auto max-w-screen-2xl px-5 sm:px-7">
+          <div className="py-4">
             <Link
               aria-label="Back to all projects"
-              className="w-fit text-[11px] font-medium tracking-[0.16em] underline decoration-1 underline-offset-4 transition-opacity hover:opacity-60"
+              className="font-display text-lg italic underline decoration-1 underline-offset-4 transition-opacity hover:opacity-60"
               hash={property.slug}
               to="/"
             >
-              CLOSE
+              Back
             </Link>
-            <Reveal className="mt-6 lg:mt-10" delayMs={80}>
-              <h1 className="font-display text-5xl leading-[0.95] lg:text-6xl">
-                {property.displayName}
-              </h1>
-              <p className="mt-3 font-display text-xl text-body-copy italic">
-                {property.location}
-              </p>
-            </Reveal>
-            <Reveal className="mt-8 flex flex-col gap-3" delayMs={180}>
-              <div className="flex justify-between gap-6 border-t pt-3">
-                <span className="text-[11px] font-medium tracking-[0.18em] text-muted-foreground">
-                  COMPLETED
-                </span>
-                <span className="text-sm">{property.year}</span>
+          </div>
+          <div className="grid gap-x-10 lg:grid-cols-12">
+            <div className="flex flex-col gap-6 pb-10 lg:order-1 lg:col-span-7 lg:gap-8">
+              {media.map((image, imageIndex) => (
+                <Reveal
+                  delayMs={imageIndex === 0 ? 0 : 60}
+                  key={image.file}
+                  variant="media"
+                >
+                  <AssetImage
+                    className="rounded-notch"
+                    image={image}
+                    priority={imageIndex === 0}
+                    sizes="(min-width: 1024px) 56vw, 100vw"
+                    slug={property.slug}
+                  />
+                </Reveal>
+              ))}
+            </div>
+            <aside className="order-first pb-8 lg:sticky lg:top-14 lg:order-2 lg:col-span-4 lg:col-start-9 lg:flex lg:h-[calc(100svh-3.5rem)] lg:flex-col lg:pb-0">
+              <div className="lg:pt-6">
+                <CharTitle text={property.displayName} />
+                <p className="mt-2 font-display text-lg text-body-copy italic">
+                  ({property.location})
+                </p>
               </div>
-              <div className="flex justify-between gap-6 border-t pt-3">
-                <span className="text-[11px] font-medium tracking-[0.18em] text-muted-foreground">
-                  FRAMES
-                </span>
-                <span className="text-sm">
-                  {String(property.images.length)}
-                </span>
+              <div className="mt-10 flex flex-col gap-4 lg:mt-24">
+                <div className="grid grid-cols-2 gap-6">
+                  <span className="font-display text-lg text-body-copy italic">
+                    Completed
+                  </span>
+                  <span className="text-sm">{property.year}</span>
+                </div>
+                <div className="grid grid-cols-2 gap-6">
+                  <span className="font-display text-lg text-body-copy italic">
+                    Frames
+                  </span>
+                  <span className="text-sm">
+                    {String(property.images.length)}
+                  </span>
+                </div>
+                <p className="mt-4 max-w-xs text-sm text-body-copy">
+                  {property.paragraph}
+                </p>
               </div>
-              <p className="mt-3 max-w-xs text-sm text-body-copy">
-                {property.paragraph}
-              </p>
-            </Reveal>
-          </aside>
-
-          <div className="flex flex-col gap-6 py-6 lg:order-1 lg:col-span-8 lg:gap-8">
-            {media.map((image, imageIndex) => (
-              <Reveal delayMs={(imageIndex % 2) * 60} key={image.file}>
-                <AssetImage
-                  className="rounded-notch"
-                  image={image}
-                  priority={imageIndex === 0}
-                  sizes="(min-width: 1024px) 60vw, 100vw"
-                  slug={property.slug}
-                />
-              </Reveal>
-            ))}
+            </aside>
           </div>
         </div>
       </div>
       <NextProjectHandoff next={next} />
     </div>
+  )
+}
+
+/* The title arrives one character at a time, unskewing from a slight
+   page-turn, per the reference. The full name stays intact for
+   assistive tech via the aria-label. */
+function CharTitle({ text }: { text: string }) {
+  return (
+    <h1
+      aria-label={text}
+      className="font-display text-[clamp(3rem,5.5vw,5.5rem)] leading-[0.95]"
+      style={{ perspective: '600px' }}
+    >
+      {text.split('').map((char, index) => (
+        <span
+          aria-hidden
+          className="char-in"
+          key={`${String(index)}-${char}`}
+          style={{ animationDelay: `${String(index * 30)}ms` }}
+        >
+          {char === ' ' ? ' ' : char}
+        </span>
+      ))}
+    </h1>
   )
 }
 

@@ -9,10 +9,14 @@ export function Reveal({
   children,
   className,
   delayMs = 0,
+  variant = 'rise',
 }: {
   children: ReactNode
   className?: string
   delayMs?: number
+  /* 'rise' is the quiet default; 'media' is the long expo-out travel
+     used for photographs, per the reference site. */
+  variant?: 'media' | 'rise'
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const [shown, setShown] = useState(false)
@@ -37,7 +41,11 @@ export function Reveal({
 
   return (
     <div
-      className={cn('rise', shown && 'is-in', className)}
+      className={cn(
+        variant === 'media' ? 'enter-media' : 'rise',
+        shown && 'is-in',
+        className,
+      )}
       ref={ref}
       style={delayMs ? { transitionDelay: `${String(delayMs)}ms` } : undefined}
     >
