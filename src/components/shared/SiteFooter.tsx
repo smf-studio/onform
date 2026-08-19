@@ -51,7 +51,7 @@ export function SiteFooter() {
             {CONTACT_EMAIL}
           </a>
         </div>
-        <div className="flex flex-wrap items-baseline justify-between gap-4 border-t border-background/20 pt-6">
+        <div className="flex flex-wrap items-baseline justify-between gap-4 pt-6">
           <span className="text-[11px] font-medium tracking-[0.2em] opacity-70">
             COMPLETED HOMES IN LONDON SYDNEY AND MAURITIUS
           </span>

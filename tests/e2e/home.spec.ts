@@ -35,17 +35,20 @@ test.describe('home', () => {
     await page
       .getByRole('link', { name: 'Queenscliff project' })
       .scrollIntoViewIfNeeded()
-    await expect(page.getByText('OF 06 PROJECTS')).toBeVisible()
+    await expect(page.getByText('of 06')).toBeVisible()
     await expect(
       page.getByRole('link', { name: 'Radnor Mews', exact: true }),
     ).toBeVisible()
   })
 
   test('metadata lines carry no ornament characters', async ({ page }) => {
-    const meta = page.getByText(/COMPLETED \d{4}/).first()
+    await page
+      .getByRole('link', { name: 'Queenscliff project' })
+      .scrollIntoViewIfNeeded()
+    const meta = page.getByText(/Completed \d{4}/).first()
     await expect(meta).toBeVisible()
     const text = await meta.textContent()
-    expect(text).toMatch(/^[A-Z0-9 ]+$/)
+    expect(text).toMatch(/^[A-Za-z0-9 ]+$/)
   })
 
   test('nav anchors scroll to projects and contact', async ({ page }) => {

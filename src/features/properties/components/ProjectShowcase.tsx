@@ -97,54 +97,59 @@ export function ProjectShowcase() {
   return (
     <section className="relative" id="projects">
       <div className="pointer-events-none sticky top-0 hidden h-svh lg:block">
-        <div className="mx-auto grid h-full max-w-screen-2xl grid-cols-12 gap-6 px-7 pt-20 pb-10">
-          <div className="col-span-3 flex h-full flex-col justify-between">
-            <div className="swap-in flex flex-col gap-2" key={current.slug}>
-              <span className="text-[11px] font-medium tracking-[0.2em] text-muted-foreground">
-                {current.location.toUpperCase()}
-              </span>
-              <span className="text-[11px] font-medium tracking-[0.2em] text-muted-foreground">
-                {`COMPLETED ${current.year}`}
-              </span>
-              <p className="mt-2 max-w-3xs text-sm text-body-copy">
-                {current.paragraph}
-              </p>
-            </div>
-            <div>
-              <div
-                className="font-display text-[clamp(6rem,13vw,11.5rem)] leading-[0.85]"
-                key={`count-${current.slug}`}
+        {/* Counter, top left: big numeral, quiet italic denominator. */}
+        <div className="absolute top-16 left-7 flex items-baseline gap-4">
+          <span className="font-display text-[clamp(6rem,12vw,10.5rem)] leading-[0.85]">
+            {String(active + 1).padStart(2, '0')}
+          </span>
+          <span className="font-display text-2xl text-muted-foreground italic">
+            {`of ${String(properties.length).padStart(2, '0')}`}
+          </span>
+        </div>
+        {/* Annotations flanking the card column at its centre line. */}
+        <div className="absolute inset-y-0 left-0 flex w-[calc(50%-17vw-2.5rem)] items-center justify-end">
+          <span
+            className="swap-in font-display text-xl italic"
+            key={`loc-${current.slug}`}
+          >
+            {current.location}
+          </span>
+        </div>
+        <div
+          className="absolute inset-y-0 flex w-[calc(50%-17vw-2.5rem)] items-center justify-start"
+          style={{ left: 'calc(50% + 17vw + 2.5rem)' }}
+        >
+          <span
+            className="swap-in font-display text-xl italic"
+            key={`year-${current.slug}`}
+          >
+            {`Completed ${current.year}`}
+          </span>
+        </div>
+        {/* Project names hugging the right margin; the stack crawls so the
+            active name holds its band. */}
+        <div className="absolute right-7" style={{ top: '38%' }}>
+          <div
+            className="flex flex-col items-end transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]"
+            style={{
+              transform: `translateY(${(-active * 3.25).toFixed(2)}rem)`,
+            }}
+          >
+            {properties.map((property, index) => (
+              <Link
+                className={cn(
+                  'pointer-events-auto flex h-[3.25rem] items-center font-display text-3xl leading-none transition-opacity duration-700 xl:text-4xl',
+                  index === active
+                    ? 'opacity-100'
+                    : 'opacity-25 hover:opacity-60',
+                )}
+                key={property.slug}
+                params={{ slug: property.slug }}
+                to="/projects/$slug"
               >
-                {String(active + 1).padStart(2, '0')}
-              </div>
-              <div className="mt-3 text-[11px] font-medium tracking-[0.2em] text-muted-foreground">
-                {`OF ${String(properties.length).padStart(2, '0')} PROJECTS`}
-              </div>
-            </div>
-          </div>
-          <div className="col-span-3 col-start-10 flex h-full items-center justify-end overflow-hidden">
-            <div
-              className="flex flex-col items-end transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]"
-              style={{
-                transform: `translateY(${(((properties.length - 1) / 2 - active) * 3.25).toFixed(3)}rem)`,
-              }}
-            >
-              {properties.map((property, index) => (
-                <Link
-                  className={cn(
-                    'pointer-events-auto flex h-[3.25rem] items-center font-display text-3xl leading-none transition-all duration-700 xl:text-4xl',
-                    index === active
-                      ? 'opacity-100'
-                      : 'opacity-25 hover:opacity-60',
-                  )}
-                  key={property.slug}
-                  params={{ slug: property.slug }}
-                  to="/projects/$slug"
-                >
-                  {property.displayName}
-                </Link>
-              ))}
-            </div>
+                {property.displayName}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
@@ -155,7 +160,7 @@ export function ProjectShowcase() {
       >
         {properties.map((property, index) => (
           <div
-            className="flex flex-col gap-3 lg:mx-auto lg:w-[42vw]"
+            className="flex flex-col gap-3 lg:mx-auto lg:w-[34vw]"
             key={property.slug}
           >
             <Link
@@ -166,14 +171,14 @@ export function ProjectShowcase() {
               to="/projects/$slug"
             >
               <div
-                className="relative aspect-[16/10] overflow-hidden rounded-notch"
+                className="relative aspect-video overflow-hidden rounded-notch"
                 data-parallax
               >
                 <AssetImage
                   className="absolute inset-x-0 -inset-y-[12%] h-[124%] w-full will-change-transform"
                   fill
                   image={heroImage(property)}
-                  sizes="(min-width: 1024px) 42vw, 100vw"
+                  sizes="(min-width: 1024px) 34vw, 100vw"
                   slug={property.slug}
                 />
                 <div
