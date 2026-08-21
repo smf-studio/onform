@@ -7,6 +7,7 @@ import { SiteHeader } from 'components/shared/SiteHeader'
 import { AssetImage } from 'features/properties/components/AssetImage'
 import { properties } from 'features/properties/data'
 import { heroImage } from 'features/properties/utils'
+import { scrollToTop } from 'lib/scroll'
 
 const MEDIA_COUNT = 8
 
@@ -29,11 +30,14 @@ export function ProjectOverlay({ property }: { property: Property }) {
     ),
   ].slice(0, MEDIA_COUNT)
 
-  /* Entry, after the Prototype work page: every frame that would be on
-     screen starts just below the viewport's bottom edge, then the group
+  /* Entry, after the Prototype work page: the page always starts at the
+     very top, whether reached by a click or by scrolling through the
+     previous project's handoff, then every frame that would be on
+     screen starts just below the viewport's bottom edge and the group
      rises with a long expo-out settle and a short stagger. Frames below
      the fold arrive unanimated, the same as the reference. */
   useLayoutEffect(() => {
+    scrollToTop()
     const col = mediaColRef.current
     if (!col) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return

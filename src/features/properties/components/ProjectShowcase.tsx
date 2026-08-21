@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
 
 import { AssetImage } from 'features/properties/components/AssetImage'
@@ -186,7 +187,7 @@ export function ProjectShowcase() {
             at the bottom of its rail. Each name rides up the rail while
             its card holds the centre, then parks tightly beneath the
             names that went before it. */}
-        <div className="absolute top-[16svh] right-7 bottom-[10svh] flex items-end">
+        <div className="absolute top-[5svh] right-7 bottom-[5svh] flex items-end">
           <div className="flex flex-col items-end gap-1.5" ref={nameTrackRef}>
             {properties.map((property, index) => (
               <Link
@@ -259,11 +260,10 @@ export function ProjectShowcase() {
   )
 }
 
-/* One line of italic annotation per project, stacked in the same slot:
-   the active entry sits in place, spent entries have rolled up and out,
-   waiting entries hold below. Nothing clips: the travel is short and
-   opacity resolves before the move finishes, so lines fade in and out
-   whole rather than sliding past an edge. */
+/* One line of italic annotation in a fixed slot, driven by Motion: on
+   every change the outgoing line rises and fades to nothing while the
+   incoming line rises in from below, both at once, and interrupted
+   swaps resolve smoothly instead of snapping. */
 function RollingAnnotation({
   active,
   align,
@@ -273,24 +273,32 @@ function RollingAnnotation({
   align: 'left' | 'right'
   items: string[]
 }) {
+  const reduced = useReducedMotion()
   return (
     <div className="relative h-[1.8em] w-full font-display text-xl italic">
-      {items.map((item, index) => (
-        <span
+      <AnimatePresence initial={false}>
+        <motion.span
+          animate={{ opacity: 1, y: 0 }}
           className={cn(
-            'roll-line absolute inset-0 flex items-center',
+            'absolute inset-0 flex items-center',
             align === 'right' ? 'justify-end' : 'justify-start',
-            index === active
-              ? 'translate-y-0 opacity-100'
-              : index < active
-                ? '-translate-y-[0.8em] opacity-0'
-                : 'translate-y-[0.8em] opacity-0',
           )}
-          key={item + String(index)}
+          exit={{ opacity: 0, y: reduced ? 0 : '-0.9em' }}
+          initial={{ opacity: 0, y: reduced ? 0 : '0.9em' }}
+          key={String(active)}
+          transition={
+            reduced
+              ? { duration: 0 }
+              : {
+                  duration: 0.7,
+                  ease: [0.23, 1, 0.32, 1],
+                  opacity: { duration: 0.45, ease: 'easeOut' },
+                }
+          }
         >
-          {item}
-        </span>
-      ))}
+          {items.at(active) ?? ''}
+        </motion.span>
+      </AnimatePresence>
     </div>
   )
 }
