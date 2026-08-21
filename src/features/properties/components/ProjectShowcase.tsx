@@ -172,7 +172,7 @@ export function ProjectShowcase() {
       </div>
 
       <div
-        className="relative flex flex-col gap-10 px-5 py-16 sm:px-7 lg:-mt-[100svh] lg:gap-8 lg:py-[30svh]"
+        className="relative flex flex-col gap-10 px-5 py-16 sm:px-7 lg:-mt-[100svh] lg:gap-4 lg:py-[30svh]"
         ref={listRef}
       >
         {properties.map((property, index) => (
