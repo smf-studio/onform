@@ -1,9 +1,8 @@
 import { Link, useNavigate } from '@tanstack/react-router'
-import { useEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 
 import type { Property } from 'features/properties/schema'
 
-import { Reveal } from 'components/shared/Reveal'
 import { SiteHeader } from 'components/shared/SiteHeader'
 import { AssetImage } from 'features/properties/components/AssetImage'
 import { properties } from 'features/properties/data'
@@ -12,14 +11,17 @@ import { heroImage } from 'features/properties/utils'
 const MEDIA_COUNT = 8
 
 /* Project page, after the Prototype Studio work detail: the sticky site
-   header, a Back link, then a media column on the left and a sticky
-   right column where the title reveals character by character over an
-   italic location line and quiet label and value rows. The page ends
-   with the next project revealed by continuing to scroll. */
+   header, a media column on the left with the Back link floating just
+   above it, and a sticky right column where the title reveals character
+   by character with the italic location inline after it, then quiet
+   label and value rows. On arrival the visible frames rise together
+   from the bottom edge of the viewport. The page ends with the next
+   project revealed by continuing to scroll. */
 export function ProjectOverlay({ property }: { property: Property }) {
   const index = properties.findIndex((p) => p.slug === property.slug)
   const next = properties.at((index + 1) % properties.length) ?? property
   const hero = heroImage(property)
+  const mediaColRef = useRef<HTMLDivElement>(null)
   const media = [
     hero,
     ...property.images.filter(
@@ -27,12 +29,48 @@ export function ProjectOverlay({ property }: { property: Property }) {
     ),
   ].slice(0, MEDIA_COUNT)
 
+  /* Entry, after the Prototype work page: every frame that would be on
+     screen starts just below the viewport's bottom edge, then the group
+     rises with a long expo-out settle and a short stagger. Frames below
+     the fold arrive unanimated, the same as the reference. */
+  useLayoutEffect(() => {
+    const col = mediaColRef.current
+    if (!col) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const nodes = Array.from(col.querySelectorAll<HTMLElement>('[data-media]'))
+    const first = nodes.at(0)
+    if (!first) return
+    const vh = window.innerHeight
+    const offset = Math.round(vh - first.getBoundingClientRect().top + 80)
+    if (offset <= 0) return
+    const risers = nodes.filter((n) => n.getBoundingClientRect().top < vh)
+    risers.forEach((node) => {
+      node.style.transition = 'none'
+      node.style.transform = `translateY(${String(offset)}px)`
+    })
+    const raf = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        risers.forEach((node, riseIndex) => {
+          node.style.transition = `transform 1.1s cubic-bezier(0.16, 1, 0.3, 1) ${(0.1 + riseIndex * 0.05).toFixed(2)}s`
+          node.style.transform = 'translateY(0)'
+        })
+      })
+    })
+    return () => {
+      cancelAnimationFrame(raf)
+      nodes.forEach((node) => {
+        node.style.transition = ''
+        node.style.transform = ''
+      })
+    }
+  }, [property.slug])
+
   return (
     <div className="bg-background">
       <div className="relative z-10 bg-background">
         <SiteHeader />
         <div className="mx-auto max-w-screen-2xl px-5 sm:px-7">
-          <div className="py-4">
+          <div className="py-4 lg:hidden">
             <Link
               aria-label="Back to all projects"
               className="font-display text-lg italic underline decoration-1 underline-offset-4 transition-opacity hover:opacity-60"
@@ -43,46 +81,71 @@ export function ProjectOverlay({ property }: { property: Property }) {
             </Link>
           </div>
           <div className="grid gap-x-10 lg:grid-cols-12">
-            <div className="flex flex-col gap-6 pb-10 lg:order-1 lg:col-span-7 lg:gap-8">
-              {media.map((image, imageIndex) => (
-                <Reveal
-                  delayMs={imageIndex === 0 ? 0 : 60}
-                  key={image.file}
-                  variant="media"
+            <div className="lg:order-1 lg:col-span-7 lg:pt-[10svh]">
+              <div
+                className="relative flex flex-col gap-6 pb-10 lg:gap-8"
+                ref={mediaColRef}
+              >
+                <div
+                  className="el-fade absolute bottom-full left-0 mb-8 hidden lg:block"
+                  style={{ animationDelay: '0.6s' }}
                 >
-                  <AssetImage
-                    className="rounded-notch"
-                    image={image}
-                    priority={imageIndex === 0}
-                    sizes="(min-width: 1024px) 56vw, 100vw"
-                    slug={property.slug}
-                  />
-                </Reveal>
-              ))}
+                  <Link
+                    aria-label="Back to all projects"
+                    className="font-display text-lg italic underline decoration-1 underline-offset-4 transition-opacity hover:opacity-60"
+                    hash={property.slug}
+                    to="/"
+                  >
+                    Back
+                  </Link>
+                </div>
+                {media.map((image, imageIndex) => (
+                  <div
+                    className="will-change-transform"
+                    data-media
+                    key={image.file}
+                  >
+                    <AssetImage
+                      className="rounded-notch"
+                      image={image}
+                      priority={imageIndex === 0}
+                      sizes="(min-width: 1024px) 56vw, 100vw"
+                      slug={property.slug}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
             <aside className="order-first pb-8 lg:sticky lg:top-14 lg:order-2 lg:col-span-4 lg:col-start-9 lg:flex lg:h-[calc(100svh-3.5rem)] lg:flex-col lg:pb-0">
-              <div className="lg:pt-6">
-                <CharTitle text={property.displayName} />
-                <p className="mt-2 font-display text-lg text-body-copy italic">
-                  ({property.location})
-                </p>
+              <div className="lg:pt-[10svh]">
+                <CharTitle text={property.displayName} />{' '}
+                <TermReveal text={`(${property.location})`} />
               </div>
-              <div className="mt-10 flex flex-col gap-4 lg:mt-24">
-                <div className="grid grid-cols-2 gap-6">
-                  <span className="font-display text-lg text-body-copy italic">
+              <div className="mt-10 flex flex-col gap-5 lg:mt-20">
+                <div
+                  className="el-fade grid grid-cols-4 items-baseline gap-6"
+                  style={{ animationDelay: '0.5s' }}
+                >
+                  <span className="font-display text-base text-body-copy italic">
                     Completed
                   </span>
-                  <span className="text-sm">{property.year}</span>
+                  <span className="col-span-3 text-lg">{property.year}</span>
                 </div>
-                <div className="grid grid-cols-2 gap-6">
-                  <span className="font-display text-lg text-body-copy italic">
+                <div
+                  className="el-fade grid grid-cols-4 items-baseline gap-6"
+                  style={{ animationDelay: '0.56s' }}
+                >
+                  <span className="font-display text-base text-body-copy italic">
                     Frames
                   </span>
-                  <span className="text-sm">
+                  <span className="col-span-3 text-lg">
                     {String(property.images.length)}
                   </span>
                 </div>
-                <p className="mt-4 max-w-xs text-sm text-body-copy">
+                <p
+                  className="el-fade mt-4 max-w-xs text-sm leading-relaxed text-body-copy"
+                  style={{ animationDelay: '0.62s' }}
+                >
                   {property.paragraph}
                 </p>
               </div>
@@ -95,6 +158,31 @@ export function ProjectOverlay({ property }: { property: Property }) {
   )
 }
 
+/* The italic location arrives one character at a time as a quiet fade,
+   inline after the title, per the reference. */
+function TermReveal({ text }: { text: string }) {
+  return (
+    <span
+      aria-label={text}
+      className="inline-block align-top font-display text-lg text-body-copy italic lg:mt-3"
+    >
+      {text.split('').map((char, charIndex) => (
+        <span
+          aria-hidden
+          className="el-fade inline-block"
+          key={`${String(charIndex)}-${char}`}
+          style={{
+            animationDelay: `${String(500 + charIndex * 40)}ms`,
+            animationDuration: '0.4s',
+          }}
+        >
+          {char === ' ' ? ' ' : char}
+        </span>
+      ))}
+    </span>
+  )
+}
+
 /* The title arrives one character at a time, unskewing from a slight
    page-turn, per the reference. The full name stays intact for
    assistive tech via the aria-label. */
@@ -102,7 +190,7 @@ function CharTitle({ text }: { text: string }) {
   return (
     <h1
       aria-label={text}
-      className="font-display text-[clamp(3rem,5.5vw,5.5rem)] leading-[0.95]"
+      className="mr-3 inline font-display text-[clamp(3rem,5.5vw,5.5rem)] leading-[0.95]"
       style={{ perspective: '600px' }}
     >
       {text.split('').map((char, index) => (
