@@ -17,6 +17,7 @@ import { cn } from 'lib/utils'
 export function ProjectShowcase() {
   const [active, setActive] = useState(0)
   const listRef = useRef<HTMLDivElement>(null)
+  const nameTrackRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const list = listRef.current
@@ -62,6 +63,7 @@ export function ProjectShowcase() {
     const masks = Array.from(
       list.querySelectorAll<HTMLElement>('[data-parallax]'),
     )
+    const cards = Array.from(list.querySelectorAll<HTMLElement>('[data-index]'))
     let ticking = false
     const update = () => {
       ticking = false
@@ -73,6 +75,26 @@ export function ProjectShowcase() {
         const img = mask.firstElementChild as HTMLElement | null
         if (img) {
           img.style.transform = `translateY(${(progress * -8).toFixed(2)}%) scale(1.18)`
+        }
+      }
+      /* Continuous name crawl: a fractional card index derived from the
+         first two card positions drives the stack linearly, one 16vh
+         name slot per card. */
+      const track = nameTrackRef.current
+      const first = cards.at(0)
+      const second = cards.at(1)
+      if (track && first && second) {
+        const firstRect = first.getBoundingClientRect()
+        const step = second.getBoundingClientRect().top - firstRect.top
+        if (step > 0) {
+          const fractional = Math.min(
+            cards.length - 1,
+            Math.max(
+              0,
+              (vh / 2 - (firstRect.top + firstRect.height / 2)) / step,
+            ),
+          )
+          track.style.transform = `translateY(${(-fractional * 16).toFixed(2)}vh)`
         }
       }
     }
@@ -106,39 +128,34 @@ export function ProjectShowcase() {
             {`of ${String(properties.length).padStart(2, '0')}`}
           </span>
         </div>
-        {/* Annotations flanking the card column at its centre line. */}
-        <div className="absolute inset-y-0 left-0 flex w-[calc(50%-17vw-2.5rem)] items-center justify-end">
-          <span
-            className="swap-in font-display text-xl italic"
-            key={`loc-${current.slug}`}
-          >
-            {current.location}
-          </span>
+        {/* Annotations flanking the card column at its centre line; each
+            entry rolls in from below and departs upward. */}
+        <div className="absolute inset-y-0 left-0 flex w-[calc(50%-17vw-2.5rem)] items-center">
+          <RollingAnnotation
+            active={active}
+            align="right"
+            items={properties.map((property) => property.location)}
+          />
         </div>
         <div
-          className="absolute inset-y-0 flex w-[calc(50%-17vw-2.5rem)] items-center justify-start"
+          className="absolute inset-y-0 flex w-[calc(50%-17vw-2.5rem)] items-center"
           style={{ left: 'calc(50% + 17vw + 2.5rem)' }}
         >
-          <span
-            className="swap-in font-display text-xl italic"
-            key={`year-${current.slug}`}
-          >
-            {`Completed ${current.year}`}
-          </span>
+          <RollingAnnotation
+            active={active}
+            align="left"
+            items={properties.map((property) => `Completed ${property.year}`)}
+          />
         </div>
-        {/* Project names hugging the right margin; the stack crawls so the
-            active name holds its band. */}
+        {/* Project names hugging the right margin, spaced widely; the
+            stack translates continuously with scroll so the active name
+            rides its band while neighbours drift off screen. */}
         <div className="absolute right-7" style={{ top: '38%' }}>
-          <div
-            className="flex flex-col items-end transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]"
-            style={{
-              transform: `translateY(${(-active * 3.25).toFixed(2)}rem)`,
-            }}
-          >
+          <div className="flex flex-col items-end" ref={nameTrackRef}>
             {properties.map((property, index) => (
               <Link
                 className={cn(
-                  'pointer-events-auto flex h-[3.25rem] items-center font-display text-3xl leading-none transition-opacity duration-700 xl:text-4xl',
+                  'pointer-events-auto flex h-[16vh] items-start font-display text-3xl leading-none transition-opacity duration-700 xl:text-4xl',
                   index === active
                     ? 'opacity-100'
                     : 'opacity-25 hover:opacity-60',
@@ -155,7 +172,7 @@ export function ProjectShowcase() {
       </div>
 
       <div
-        className="relative flex flex-col gap-14 px-5 py-16 sm:px-7 lg:-mt-[100svh] lg:gap-[16vh] lg:py-[30svh]"
+        className="relative flex flex-col gap-10 px-5 py-16 sm:px-7 lg:-mt-[100svh] lg:gap-8 lg:py-[30svh]"
         ref={listRef}
       >
         {properties.map((property, index) => (
@@ -203,5 +220,39 @@ export function ProjectShowcase() {
         ))}
       </div>
     </section>
+  )
+}
+
+/* One line of italic annotation per project, stacked in the same slot:
+   the active entry sits in place, spent entries have rolled up and out,
+   waiting entries hold below, all fading through the move. */
+function RollingAnnotation({
+  active,
+  align,
+  items,
+}: {
+  active: number
+  align: 'left' | 'right'
+  items: string[]
+}) {
+  return (
+    <div className="relative h-[1.8em] w-full overflow-hidden font-display text-xl italic">
+      {items.map((item, index) => (
+        <span
+          className={cn(
+            'absolute inset-0 flex items-center transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:transition-none',
+            align === 'right' ? 'justify-end' : 'justify-start',
+            index === active
+              ? 'translate-y-0 opacity-100'
+              : index < active
+                ? '-translate-y-full opacity-0'
+                : 'translate-y-full opacity-0',
+          )}
+          key={item + String(index)}
+        >
+          {item}
+        </span>
+      ))}
+    </div>
   )
 }
