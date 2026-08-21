@@ -268,19 +268,14 @@ export function ProjectShowcase() {
                 />
               </div>
             </Link>
-            {/* Mobile caption, after the reference card: name and
-                location on the first row, the completion line beneath. */}
-            <div className="flex flex-col gap-1.5 lg:hidden">
-              <div className="flex items-start justify-between gap-6">
-                <span className="font-display text-2xl leading-none">
-                  {property.displayName}
-                </span>
-                <span className="mt-0.5 font-display text-base text-body-copy italic">
-                  {property.location}
-                </span>
-              </div>
-              <span className="font-display text-base text-body-copy italic">
-                {`Completed ${property.year}`}
+            {/* Mobile caption, after the reference card: the name with
+                the italic location beside it. */}
+            <div className="flex items-start justify-between gap-6 lg:hidden">
+              <span className="font-display text-2xl leading-none">
+                {property.displayName}
+              </span>
+              <span className="mt-0.5 font-display text-base text-body-copy italic">
+                {property.location}
               </span>
             </div>
           </div>
