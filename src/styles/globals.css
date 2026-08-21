@@ -166,6 +166,13 @@
     opacity: 0;
     animation: el-fade 0.9s ease-out forwards;
   }
+  /* The showcase annotations roll: outgoing and incoming lines move up
+     together, with opacity resolving faster than the travel. */
+  .roll-line {
+    transition:
+      transform 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+      opacity 0.45s ease-out;
+  }
   .hero-unveil {
     animation: hero-unveil 1.1s cubic-bezier(0.65, 0, 0.35, 1) both;
   }
@@ -214,6 +221,9 @@
   .el-fade {
     animation: none;
     opacity: 1;
+  }
+  .roll-line {
+    transition: none;
   }
   .footer-reveal > *,
   .rise,

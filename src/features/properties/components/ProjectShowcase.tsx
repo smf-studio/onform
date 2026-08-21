@@ -78,19 +78,17 @@ export function ProjectShowcase() {
           img.style.transform = `translateY(${(progress * -8).toFixed(2)}%) scale(1.18)`
         }
       }
-      /* The counter drifts down the shell across the whole section's
-         scroll, from its resting spot to just above the bottom edge. */
+      /* The counter drifts down the shell while the shell is pinned:
+         nothing moves until the section top reaches the viewport top, so
+         the approach is perfectly still, and the drift completes exactly
+         as the shell releases. */
       const counter = counterRef.current
       const section = list.parentElement
       if (counter && section) {
         const sectionRect = section.getBoundingClientRect()
-        const startTop = vh * 0.35
-        const total = sectionRect.height - vh * 0.65
+        const total = sectionRect.height - vh
         if (total > 0) {
-          const progress = Math.min(
-            1,
-            Math.max(0, (startTop - sectionRect.top) / total),
-          )
+          const progress = Math.min(1, Math.max(0, -sectionRect.top / total))
           const maxY = vh - counter.offsetHeight - 96
           counter.style.transform = `translateY(${(progress * maxY).toFixed(1)}px)`
         }
@@ -109,10 +107,15 @@ export function ProjectShowcase() {
         if (travel > 0 && names.length === cards.length) {
           cards.forEach((card, index) => {
             const rect = card.getBoundingClientRect()
-            const startTop = vh / 2 + half
+            /* The first card sits at 30svh when the shell pins, so its
+               window opens exactly at the pin rather than earlier; the
+               last card's window closes as its travel would otherwise be
+               cut off by the shell releasing (the column's 42svh tail
+               puts its bottom at 58svh at release). */
+            const startTop = index === 0 ? vh * 0.3 : vh / 2 + half
             const endTop =
               index === cards.length - 1
-                ? vh * 0.3 - rect.height / 2
+                ? vh * 0.6 - rect.height
                 : vh * 0.25 - rect.height
             const progress = Math.min(
               1,
@@ -275,7 +278,7 @@ function RollingAnnotation({
       {items.map((item, index) => (
         <span
           className={cn(
-            'absolute inset-0 flex items-center [transition:transform_700ms_cubic-bezier(0.23,1,0.32,1),opacity_450ms_ease-out] motion-reduce:transition-none',
+            'roll-line absolute inset-0 flex items-center',
             align === 'right' ? 'justify-end' : 'justify-start',
             index === active
               ? 'translate-y-0 opacity-100'

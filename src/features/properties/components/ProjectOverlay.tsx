@@ -12,11 +12,11 @@ const MEDIA_COUNT = 8
 
 /* Project page, after the Prototype Studio work detail: the sticky site
    header, a media column on the left with the Back link floating just
-   above it, and a sticky right column where the title reveals character
-   by character with the italic location inline after it, then quiet
-   label and value rows. On arrival the visible frames rise together
-   from the bottom edge of the viewport. The page ends with the next
-   project revealed by continuing to scroll. */
+   above it, and a sticky right column holding only the title, revealed
+   character by character, with the italic location inline after it. On
+   arrival the visible frames rise together from the bottom edge of the
+   viewport. The page ends with the next project revealed by continuing
+   to scroll. */
 export function ProjectOverlay({ property }: { property: Property }) {
   const index = properties.findIndex((p) => p.slug === property.slug)
   const next = properties.at((index + 1) % properties.length) ?? property
@@ -81,7 +81,7 @@ export function ProjectOverlay({ property }: { property: Property }) {
             </Link>
           </div>
           <div className="grid gap-x-10 lg:grid-cols-12">
-            <div className="lg:order-1 lg:col-span-7 lg:pt-[10svh]">
+            <div className="lg:order-1 lg:col-span-7 lg:pt-[18svh]">
               <div
                 className="relative flex flex-col gap-6 pb-10 lg:gap-8"
                 ref={mediaColRef}
@@ -117,37 +117,9 @@ export function ProjectOverlay({ property }: { property: Property }) {
               </div>
             </div>
             <aside className="order-first pb-8 lg:sticky lg:top-14 lg:order-2 lg:col-span-4 lg:col-start-9 lg:flex lg:h-[calc(100svh-3.5rem)] lg:flex-col lg:pb-0">
-              <div className="lg:pt-[10svh]">
+              <div className="lg:pt-[18svh]">
                 <CharTitle text={property.displayName} />{' '}
                 <TermReveal text={`(${property.location})`} />
-              </div>
-              <div className="mt-10 flex flex-col gap-5 lg:mt-20">
-                <div
-                  className="el-fade grid grid-cols-4 items-baseline gap-6"
-                  style={{ animationDelay: '0.5s' }}
-                >
-                  <span className="font-display text-base text-body-copy italic">
-                    Completed
-                  </span>
-                  <span className="col-span-3 text-lg">{property.year}</span>
-                </div>
-                <div
-                  className="el-fade grid grid-cols-4 items-baseline gap-6"
-                  style={{ animationDelay: '0.56s' }}
-                >
-                  <span className="font-display text-base text-body-copy italic">
-                    Frames
-                  </span>
-                  <span className="col-span-3 text-lg">
-                    {String(property.images.length)}
-                  </span>
-                </div>
-                <p
-                  className="el-fade mt-4 max-w-xs text-sm leading-relaxed text-body-copy"
-                  style={{ animationDelay: '0.62s' }}
-                >
-                  {property.paragraph}
-                </p>
               </div>
             </aside>
           </div>

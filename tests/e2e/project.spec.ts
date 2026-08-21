@@ -9,7 +9,7 @@ test.describe('project overlay', () => {
     await expect(
       page.getByRole('heading', { name: 'Queenscliff' }),
     ).toBeVisible()
-    await expect(page.getByText('FRAMES')).toBeVisible()
+    await expect(page.getByLabel('(Sydney NSW)')).toBeVisible()
   })
 
   test('is deep linkable and chains to the next project', async ({ page }) => {
