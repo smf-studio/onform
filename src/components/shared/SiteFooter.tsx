@@ -55,8 +55,16 @@ export function SiteFooter() {
           <span className="text-[11px] font-medium tracking-[0.2em] opacity-70">
             COMPLETED HOMES IN LONDON SYDNEY AND MAURITIUS
           </span>
-          <span className="text-[11px] font-medium tracking-[0.2em] opacity-70">
-            SMF STUDIO 2026
+          <span className="text-[11px] opacity-40">
+            Made by{' '}
+            <a
+              className="underline decoration-1 underline-offset-4 transition-opacity hover:opacity-70"
+              href="https://smfstudio.io"
+              rel="noreferrer"
+              target="_blank"
+            >
+              SMF Studio
+            </a>
           </span>
         </div>
       </div>

@@ -14,17 +14,20 @@ export function Intro() {
 
   return (
     <section className="overflow-hidden">
-      <div className="mx-auto grid max-w-screen-2xl grid-cols-1 gap-y-12 px-5 pt-20 pb-24 sm:grid-cols-12 sm:px-7 sm:pt-28 sm:pb-32">
+      <div className="mx-auto grid max-w-screen-2xl grid-cols-1 gap-y-8 px-5 pt-20 pb-24 sm:grid-cols-12 sm:gap-x-8 sm:px-7 sm:pt-28 sm:pb-32">
         <div className="sm:col-span-7 sm:col-start-6">
           <Reveal>
-            <p className="max-w-[26ch] font-display text-[clamp(1.9rem,3.6vw,3.4rem)] leading-[1.15] italic">
+            <p className="font-display text-[clamp(1.5rem,2.7vw,2.6rem)] leading-[1.25] italic">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore.
             </p>
           </Reveal>
         </div>
         {property && image ? (
-          <div className="sm:col-span-5 sm:-mt-8">
+          <div className="sm:col-span-5">
             <Reveal variant="media">
               <div className="relative aspect-video overflow-hidden rounded-lg">
                 <AssetImage

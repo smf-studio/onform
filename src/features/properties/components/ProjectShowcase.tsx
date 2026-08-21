@@ -18,6 +18,7 @@ export function ProjectShowcase() {
   const [active, setActive] = useState(0)
   const listRef = useRef<HTMLDivElement>(null)
   const nameTrackRef = useRef<HTMLDivElement>(null)
+  const counterRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const list = listRef.current
@@ -77,6 +78,23 @@ export function ProjectShowcase() {
           img.style.transform = `translateY(${(progress * -8).toFixed(2)}%) scale(1.18)`
         }
       }
+      /* The counter drifts down the shell across the whole section's
+         scroll, from its resting spot to just above the bottom edge. */
+      const counter = counterRef.current
+      const section = list.parentElement
+      if (counter && section) {
+        const sectionRect = section.getBoundingClientRect()
+        const startTop = vh * 0.35
+        const total = sectionRect.height - vh * 0.65
+        if (total > 0) {
+          const progress = Math.min(
+            1,
+            Math.max(0, (startTop - sectionRect.top) / total),
+          )
+          const maxY = vh - counter.offsetHeight - 96
+          counter.style.transform = `translateY(${(progress * maxY).toFixed(1)}px)`
+        }
+      }
       /* Name crawl, after the Prototype mechanic: the tight stack rests
          at the bottom of its full-height rail, and each name is driven
          individually across the free height of the rail while its own
@@ -129,8 +147,12 @@ export function ProjectShowcase() {
   return (
     <section className="relative" id="projects">
       <div className="pointer-events-none sticky top-0 hidden h-svh lg:block">
-        {/* Counter, top left: big numeral, quiet italic denominator. */}
-        <div className="absolute top-16 left-7 flex items-baseline gap-4">
+        {/* Counter, top left: big numeral, quiet italic denominator. It
+            drifts down the shell as the section scrolls. */}
+        <div
+          className="absolute top-16 left-7 flex items-baseline gap-4"
+          ref={counterRef}
+        >
           <span className="font-display text-[clamp(6rem,12vw,10.5rem)] leading-[0.85]">
             {String(active + 1).padStart(2, '0')}
           </span>
@@ -183,7 +205,7 @@ export function ProjectShowcase() {
       </div>
 
       <div
-        className="relative flex flex-col gap-10 px-5 py-16 sm:px-7 lg:-mt-[100svh] lg:gap-4 lg:py-[30svh]"
+        className="relative flex flex-col gap-10 px-5 py-16 sm:px-7 lg:-mt-[100svh] lg:gap-4 lg:pt-[30svh] lg:pb-[42svh]"
         ref={listRef}
       >
         {properties.map((property, index) => (
@@ -236,8 +258,9 @@ export function ProjectShowcase() {
 
 /* One line of italic annotation per project, stacked in the same slot:
    the active entry sits in place, spent entries have rolled up and out,
-   waiting entries hold below. Opacity resolves faster than the travel,
-   so entries are invisible before they reach the clipped edges. */
+   waiting entries hold below. Nothing clips: the travel is short and
+   opacity resolves before the move finishes, so lines fade in and out
+   whole rather than sliding past an edge. */
 function RollingAnnotation({
   active,
   align,
@@ -248,17 +271,17 @@ function RollingAnnotation({
   items: string[]
 }) {
   return (
-    <div className="relative h-[1.8em] w-full overflow-hidden font-display text-xl italic">
+    <div className="relative h-[1.8em] w-full font-display text-xl italic">
       {items.map((item, index) => (
         <span
           className={cn(
-            'absolute inset-0 flex items-center [transition:transform_700ms_cubic-bezier(0.23,1,0.32,1),opacity_400ms_ease-out] motion-reduce:transition-none',
+            'absolute inset-0 flex items-center [transition:transform_700ms_cubic-bezier(0.23,1,0.32,1),opacity_450ms_ease-out] motion-reduce:transition-none',
             align === 'right' ? 'justify-end' : 'justify-start',
             index === active
               ? 'translate-y-0 opacity-100'
               : index < active
-                ? '-translate-y-[65%] opacity-0'
-                : 'translate-y-[65%] opacity-0',
+                ? '-translate-y-[0.8em] opacity-0'
+                : 'translate-y-[0.8em] opacity-0',
           )}
           key={item + String(index)}
         >
