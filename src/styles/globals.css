@@ -143,17 +143,21 @@
   }
 }
 @layer components {
-  /* Prototype-style media entrance: long travel, expo-out settle. */
-  .enter-media {
-    opacity: 0;
-    transform: translateY(16vh);
-    transition:
-      opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-      transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .enter-media.is-in {
-    opacity: 1;
-    transform: none;
+  /* Prototype-style media entrance: long travel, expo-out settle. A
+     desktop mechanic only; on mobile the reference lets cards simply
+     be there. */
+  @media (min-width: 1024px) {
+    .enter-media {
+      opacity: 0;
+      transform: translateY(16vh);
+      transition:
+        opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .enter-media.is-in {
+      opacity: 1;
+      transform: none;
+    }
   }
   /* Per-character title reveal for the project pages. */
   .char-in {

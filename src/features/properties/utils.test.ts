@@ -2,19 +2,10 @@ import { describe, expect, it } from 'vitest'
 
 import { properties } from 'features/properties/data'
 import {
-  formatMeta,
   heroImage,
   largestVariantUrl,
   srcSetFor,
 } from 'features/properties/utils'
-
-describe('formatMeta', () => {
-  it('uppercases and separates with plain spaces only', () => {
-    const meta = formatMeta({ location: 'Sydney NSW', year: '2025' })
-    expect(meta).toBe('SYDNEY NSW  COMPLETED 2025')
-    expect(meta).toMatch(/^[A-Z0-9 ]+$/)
-  })
-})
 
 describe('property data', () => {
   it('loads all six properties with derivatives attached', () => {

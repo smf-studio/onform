@@ -35,7 +35,9 @@ test.describe('home', () => {
     await page
       .getByRole('link', { name: 'Queenscliff project' })
       .scrollIntoViewIfNeeded()
-    await expect(page.getByText('of 06')).toBeVisible()
+    await expect(
+      page.getByText('of 06').filter({ visible: true }),
+    ).toBeVisible()
     await expect(
       page.getByRole('link', { name: 'Radnor Mews', exact: true }),
     ).toBeVisible()

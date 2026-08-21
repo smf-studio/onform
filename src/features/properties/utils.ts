@@ -4,14 +4,6 @@ import type {
   PropertyImage,
 } from 'features/properties/schema'
 
-/* Metadata lines are uppercase labels separated by two spaces; the site
-   never uses ornament characters (see docs/DESIGN.md). */
-export function formatMeta(
-  property: Pick<Property, 'location' | 'year'>,
-): string {
-  return `${property.location}  Completed ${property.year}`.toUpperCase()
-}
-
 function assetUrl(slug: string, variantName: string): string {
   return `/assets/properties/${slug}/${variantName}`
 }

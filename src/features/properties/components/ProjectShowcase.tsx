@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import { AssetImage } from 'features/properties/components/AssetImage'
 import { properties } from 'features/properties/data'
-import { formatMeta, heroImage } from 'features/properties/utils'
+import { heroImage } from 'features/properties/utils'
 import { cn } from 'lib/utils'
 
 /* The projects showcase, after the Prototype Studio mechanic: one sticky
@@ -69,6 +69,16 @@ export function ProjectShowcase() {
     let ticking = false
     const update = () => {
       ticking = false
+      /* The whole scroll-linked layer is a desktop mechanic; on mobile
+         the reference drops parallax, counter drift and the name rail
+         and keeps only the sticky counter strip. */
+      if (window.innerWidth < 1024) {
+        for (const mask of masks) {
+          const img = mask.firstElementChild as HTMLElement | null
+          if (img) img.style.transform = ''
+        }
+        return
+      }
       const vh = window.innerHeight
       for (const mask of masks) {
         const rect = mask.getBoundingClientRect()
@@ -150,6 +160,19 @@ export function ProjectShowcase() {
 
   return (
     <section className="relative" id="projects">
+      {/* Mobile shell, after the reference: a compact counter strip that
+          stays pinned beneath the header while the cards scroll under
+          it, counting up as each project passes the centre. */}
+      <div className="sticky top-0 z-20 bg-background px-5 pt-3 pb-3 sm:px-7 lg:hidden">
+        <div className="flex items-baseline gap-3">
+          <span className="font-display text-6xl leading-[0.85]">
+            {String(active + 1).padStart(2, '0')}
+          </span>
+          <span className="font-display text-lg text-muted-foreground italic">
+            {`of ${String(properties.length).padStart(2, '0')}`}
+          </span>
+        </div>
+      </div>
       <div className="pointer-events-none sticky top-0 hidden h-svh lg:block">
         {/* Counter, top left: big numeral, quiet italic denominator. It
             drifts down the shell as the section scrolls. */}
@@ -237,7 +260,7 @@ export function ProjectShowcase() {
                 />
                 <div
                   className={cn(
-                    'pointer-events-none absolute inset-0 bg-background transition-opacity duration-700',
+                    'pointer-events-none absolute inset-0 hidden bg-background transition-opacity duration-700 lg:block',
                     index === active
                       ? 'opacity-0'
                       : 'opacity-40 group-hover:opacity-0',
@@ -245,12 +268,19 @@ export function ProjectShowcase() {
                 />
               </div>
             </Link>
-            <div className="flex items-baseline justify-between gap-4 lg:hidden">
-              <span className="font-display text-2xl leading-none">
-                {property.displayName}
-              </span>
-              <span className="text-[10px] font-medium tracking-[0.18em] text-muted-foreground">
-                {formatMeta(property)}
+            {/* Mobile caption, after the reference card: name and
+                location on the first row, the completion line beneath. */}
+            <div className="flex flex-col gap-1.5 lg:hidden">
+              <div className="flex items-start justify-between gap-6">
+                <span className="font-display text-2xl leading-none">
+                  {property.displayName}
+                </span>
+                <span className="mt-0.5 font-display text-base text-body-copy italic">
+                  {property.location}
+                </span>
+              </div>
+              <span className="font-display text-base text-body-copy italic">
+                {`Completed ${property.year}`}
               </span>
             </div>
           </div>
