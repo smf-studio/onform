@@ -77,24 +77,34 @@ export function ProjectShowcase() {
           img.style.transform = `translateY(${(progress * -8).toFixed(2)}%) scale(1.18)`
         }
       }
-      /* Continuous name crawl: a fractional card index derived from the
-         first two card positions drives the stack linearly, one 16vh
-         name slot per card. */
+      /* Name crawl, after the Prototype mechanic: the tight stack rests
+         at the bottom of its full-height rail, and each name is driven
+         individually across the free height of the rail while its own
+         card crosses the viewport band, parking tightly beneath the
+         names that have already travelled. */
       const track = nameTrackRef.current
-      const first = cards.at(0)
-      const second = cards.at(1)
-      if (track && first && second) {
-        const firstRect = first.getBoundingClientRect()
-        const step = second.getBoundingClientRect().top - firstRect.top
-        if (step > 0) {
-          const fractional = Math.min(
-            cards.length - 1,
-            Math.max(
-              0,
-              (vh / 2 - (firstRect.top + firstRect.height / 2)) / step,
-            ),
-          )
-          track.style.transform = `translateY(${(-fractional * 16).toFixed(2)}vh)`
+      const rail = track?.parentElement
+      if (track && rail) {
+        const names = Array.from(track.children) as HTMLElement[]
+        const travel = rail.clientHeight - track.clientHeight
+        const half = (names.at(0)?.clientHeight ?? 0) / 2
+        if (travel > 0 && names.length === cards.length) {
+          cards.forEach((card, index) => {
+            const rect = card.getBoundingClientRect()
+            const startTop = vh / 2 + half
+            const endTop =
+              index === cards.length - 1
+                ? vh * 0.3 - rect.height / 2
+                : vh * 0.25 - rect.height
+            const progress = Math.min(
+              1,
+              Math.max(0, (startTop - rect.top) / (startTop - endTop)),
+            )
+            const name = names.at(index)
+            if (name) {
+              name.style.transform = `translateY(${(-travel * progress).toFixed(1)}px)`
+            }
+          })
         }
       }
     }
@@ -147,15 +157,16 @@ export function ProjectShowcase() {
             items={properties.map((property) => `Completed ${property.year}`)}
           />
         </div>
-        {/* Project names hugging the right margin, spaced widely; the
-            stack translates continuously with scroll so the active name
-            rides its band while neighbours drift off screen. */}
-        <div className="absolute right-7" style={{ top: '38%' }}>
-          <div className="flex flex-col items-end" ref={nameTrackRef}>
+        {/* Project names hugging the right margin: a tight stack resting
+            at the bottom of its rail. Each name rides up the rail while
+            its card holds the centre, then parks tightly beneath the
+            names that went before it. */}
+        <div className="absolute top-[16svh] right-7 bottom-[10svh] flex items-end">
+          <div className="flex flex-col items-end gap-1.5" ref={nameTrackRef}>
             {properties.map((property, index) => (
               <Link
                 className={cn(
-                  'pointer-events-auto flex h-[16vh] items-start font-display text-3xl leading-none transition-opacity duration-700 xl:text-4xl',
+                  'pointer-events-auto font-display text-3xl leading-none transition-opacity duration-700 will-change-transform xl:text-4xl',
                   index === active
                     ? 'opacity-100'
                     : 'opacity-25 hover:opacity-60',
@@ -225,7 +236,8 @@ export function ProjectShowcase() {
 
 /* One line of italic annotation per project, stacked in the same slot:
    the active entry sits in place, spent entries have rolled up and out,
-   waiting entries hold below, all fading through the move. */
+   waiting entries hold below. Opacity resolves faster than the travel,
+   so entries are invisible before they reach the clipped edges. */
 function RollingAnnotation({
   active,
   align,
@@ -240,13 +252,13 @@ function RollingAnnotation({
       {items.map((item, index) => (
         <span
           className={cn(
-            'absolute inset-0 flex items-center transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:transition-none',
+            'absolute inset-0 flex items-center [transition:transform_700ms_cubic-bezier(0.23,1,0.32,1),opacity_400ms_ease-out] motion-reduce:transition-none',
             align === 'right' ? 'justify-end' : 'justify-start',
             index === active
               ? 'translate-y-0 opacity-100'
               : index < active
-                ? '-translate-y-full opacity-0'
-                : 'translate-y-full opacity-0',
+                ? '-translate-y-[65%] opacity-0'
+                : 'translate-y-[65%] opacity-0',
           )}
           key={item + String(index)}
         >
