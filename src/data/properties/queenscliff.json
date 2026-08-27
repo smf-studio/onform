@@ -1,55 +1,15 @@
 {
   "slug": "queenscliff",
   "name": "Queenscliff",
-  "hero": "queenscliff-hero.jpg",
+  "hero": "queenscliff-kitchen.jpg",
   "images": [
-    {
-      "file": "queenscliff-hero.jpg",
-      "category": "hero-exterior",
-      "featured": true,
-      "width": 5464,
-      "height": 3640,
-      "alt": "Queenscliff \u2014 hero exterior",
-      "note": "Tiered facade, pool and coastal cliff setting in one frame \u2014 the definitive hero",
-      "source": "DJI_0206.jpg"
-    },
-    {
-      "file": "queenscliff-view.jpg",
-      "category": "view",
-      "featured": true,
-      "width": 3500,
-      "height": 2333,
-      "alt": "Queenscliff \u2014 view",
-      "note": "Pool edge plunging over the sweeping Freshwater Beach panorama, unmatched wow shot",
-      "source": "md_CrownRd-2.jpg"
-    },
-    {
-      "file": "queenscliff-pool-1.jpg",
-      "category": "outdoor-pool",
-      "featured": true,
-      "width": 4164,
-      "height": 2832,
-      "alt": "Queenscliff \u2014 outdoor pool",
-      "note": "Infinity pool at deck level framing the ocean headland, high-res master",
-      "source": "DSC00310.jpg"
-    },
-    {
-      "file": "queenscliff-exterior-1.jpg",
-      "category": "exterior",
-      "featured": true,
-      "width": 2832,
-      "height": 4240,
-      "alt": "Queenscliff \u2014 exterior",
-      "note": "White facade sweeping over the turquoise lagoon, clean second exterior",
-      "source": "DSC01028.jpg"
-    },
     {
       "file": "queenscliff-kitchen.jpg",
       "category": "kitchen",
       "featured": true,
       "width": 4240,
       "height": 2832,
-      "alt": "Queenscliff \u2014 kitchen",
+      "alt": "Queenscliff — kitchen",
       "note": "Full oak-and-marble kitchen with dining table in frame, sharpest wide",
       "source": "DSC00599.jpg"
     },
@@ -59,8 +19,8 @@
       "featured": true,
       "width": 3500,
       "height": 2333,
-      "alt": "Queenscliff \u2014 living",
-      "note": "Fireplace lounge with palm outlook \u2014 only frame showing the full living space",
+      "alt": "Queenscliff — living",
+      "note": "Fireplace lounge with palm outlook — only frame showing the full living space",
       "source": "md_CrownRd-71.jpg"
     },
     {
@@ -69,7 +29,7 @@
       "featured": true,
       "width": 3500,
       "height": 2333,
-      "alt": "Queenscliff \u2014 dining",
+      "alt": "Queenscliff — dining",
       "note": "Alfresco dining framing lagoon and headland, best dedicated dining frame",
       "source": "md_CrownRd-5.jpg"
     },
@@ -79,7 +39,7 @@
       "featured": true,
       "width": 4240,
       "height": 2832,
-      "alt": "Queenscliff \u2014 detail",
+      "alt": "Queenscliff — detail",
       "note": "Sculptural spiral staircase from above, the home's signature architectural flourish",
       "source": "Queenscliff Extra'sDSC00671.jpg"
     },
@@ -89,8 +49,8 @@
       "featured": true,
       "width": 3500,
       "height": 2333,
-      "alt": "Queenscliff \u2014 bedroom",
-      "note": "Bedroom through the open corner glass \u2014 striking architecture no interior frame shows",
+      "alt": "Queenscliff — bedroom",
+      "note": "Bedroom through the open corner glass — striking architecture no interior frame shows",
       "source": "md_CrownRd-26.jpg"
     },
     {
@@ -99,9 +59,49 @@
       "featured": true,
       "width": 2497,
       "height": 2832,
-      "alt": "Queenscliff \u2014 bathroom",
+      "alt": "Queenscliff — bathroom",
       "note": "Ensuite freestanding bath framed by palms and ocean view",
       "source": "DSC00798.jpg"
+    },
+    {
+      "file": "queenscliff-wardrobe-1.jpg",
+      "category": "wardrobe",
+      "featured": true,
+      "width": 4240,
+      "height": 2832,
+      "alt": "Queenscliff — wardrobe",
+      "note": "Master wardrobe wall in linen and oak with bamboo brass pulls",
+      "source": "DSC00752.jpg"
+    },
+    {
+      "file": "queenscliff-wc.jpg",
+      "category": "wc",
+      "featured": true,
+      "width": 2832,
+      "height": 4240,
+      "alt": "Queenscliff — wc",
+      "note": "Brass basin and marble vanity in the powder room",
+      "source": "DSC00472.jpg"
+    },
+    {
+      "file": "queenscliff-wardrobe-2.jpg",
+      "category": "wardrobe",
+      "featured": true,
+      "width": 2832,
+      "height": 4240,
+      "alt": "Queenscliff — wardrobe",
+      "note": "Lit shoe shelves inside the walk-in wardrobe",
+      "source": "DSC00822.jpg"
+    },
+    {
+      "file": "queenscliff-bathroom-4.jpg",
+      "category": "bathroom",
+      "featured": true,
+      "width": 2832,
+      "height": 4240,
+      "alt": "Queenscliff — bathroom",
+      "note": "Walk-in shower in handmade beige tile with backlit arch mirror",
+      "source": "DSC00398.jpg"
     },
     {
       "file": "queenscliff-bathroom-2.jpg",
@@ -109,7 +109,7 @@
       "featured": true,
       "width": 2736,
       "height": 4097,
-      "alt": "Queenscliff \u2014 bathroom",
+      "alt": "Queenscliff — bathroom",
       "note": "Brass basin and marble powder-room vanity, second distinct bathroom",
       "source": "DSC00470.jpg"
     },
@@ -119,7 +119,7 @@
       "featured": true,
       "width": 2333,
       "height": 3500,
-      "alt": "Queenscliff \u2014 other",
+      "alt": "Queenscliff — other",
       "note": "Backlit walk-in wine cellar with champagne bar, clearly the best cellar frame",
       "source": "md_CrownRd-19.jpg"
     },
@@ -129,7 +129,7 @@
       "featured": false,
       "width": 4240,
       "height": 2832,
-      "alt": "Queenscliff \u2014 other",
+      "alt": "Queenscliff — other",
       "note": "Pool table on the ocean-view deck, high-res master preferred over md_ duplicate",
       "source": "DSC00187.jpg"
     },
@@ -139,7 +139,7 @@
       "featured": false,
       "width": 5464,
       "height": 3640,
-      "alt": "Queenscliff \u2014 aerial",
+      "alt": "Queenscliff — aerial",
       "note": "Turquoise surf and beach from above, dramatic location context for the gallery",
       "source": "DJI_0186.jpg"
     },
@@ -149,8 +149,8 @@
       "featured": false,
       "width": 2832,
       "height": 4240,
-      "alt": "Queenscliff \u2014 exterior",
-      "note": "Timber entry with number seven and ocean glimpse \u2014 arrival moment",
+      "alt": "Queenscliff — exterior",
+      "note": "Timber entry with number seven and ocean glimpse — arrival moment",
       "source": "DSC01079.jpg"
     },
     {
@@ -159,7 +159,7 @@
       "featured": false,
       "width": 4240,
       "height": 2832,
-      "alt": "Queenscliff \u2014 exterior",
+      "alt": "Queenscliff — exterior",
       "note": "Sunlit terrace lounge with leafy headland backdrop, distinct outdoor living zone",
       "source": "DSC00643.jpg"
     },
@@ -169,7 +169,7 @@
       "featured": false,
       "width": 4240,
       "height": 2832,
-      "alt": "Queenscliff \u2014 outdoor pool",
+      "alt": "Queenscliff — outdoor pool",
       "note": "Second plunge pool with palms and white pavilion, a different pool area entirely",
       "source": "DSC00330.jpg"
     },
@@ -179,7 +179,7 @@
       "featured": false,
       "width": 2832,
       "height": 4240,
-      "alt": "Queenscliff \u2014 bathroom",
+      "alt": "Queenscliff — bathroom",
       "note": "Ensuite double vanity with beach panorama, high-res over md_ equivalent",
       "source": "DSC00801.jpg"
     },
@@ -189,7 +189,7 @@
       "featured": false,
       "width": 4240,
       "height": 2832,
-      "alt": "Queenscliff \u2014 bedroom",
+      "alt": "Queenscliff — bedroom",
       "note": "Master bedroom interior with chevron floor, complements the corner-glass exterior view",
       "source": "DSC00751.jpg"
     },
@@ -199,7 +199,7 @@
       "featured": false,
       "width": 4176,
       "height": 2832,
-      "alt": "Queenscliff \u2014 other",
+      "alt": "Queenscliff — other",
       "note": "Home gym with staircase and lift, rounds out the amenity story",
       "source": "DSC00862.jpg"
     }

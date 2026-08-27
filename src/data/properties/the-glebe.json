@@ -1,25 +1,15 @@
 {
   "slug": "the-glebe",
   "name": "The Glebe",
-  "hero": "the-glebe-hero.jpg",
+  "hero": "the-glebe-living-1.jpg",
   "images": [
-    {
-      "file": "the-glebe-hero.jpg",
-      "category": "hero-exterior",
-      "featured": true,
-      "width": 1200,
-      "height": 797,
-      "alt": "The Glebe \u2014 hero exterior",
-      "note": "Wisteria-clad facade, vivid sky, razor sharp",
-      "source": "747530 (1)c.jpg"
-    },
     {
       "file": "the-glebe-living-1.jpg",
       "category": "living",
       "featured": true,
       "width": 1200,
       "height": 797,
-      "alt": "The Glebe \u2014 living",
+      "alt": "The Glebe — living",
       "note": "Grand reception: piano, fireplace, elegant staging",
       "source": "747530 (3).jpg"
     },
@@ -29,7 +19,7 @@
       "featured": true,
       "width": 1200,
       "height": 797,
-      "alt": "The Glebe \u2014 dining",
+      "alt": "The Glebe — dining",
       "note": "Bright dining, oak stair, garden light",
       "source": "747530 (21).jpg"
     },
@@ -39,7 +29,7 @@
       "featured": true,
       "width": 1200,
       "height": 797,
-      "alt": "The Glebe \u2014 kitchen",
+      "alt": "The Glebe — kitchen",
       "note": "Island, range and dining in one frame",
       "source": "747530 (36).jpg"
     },
@@ -49,7 +39,7 @@
       "featured": true,
       "width": 1200,
       "height": 797,
-      "alt": "The Glebe \u2014 other",
+      "alt": "The Glebe — other",
       "note": "Games room character: pool table, pinball",
       "source": "747530 (23).jpg"
     },
@@ -59,7 +49,7 @@
       "featured": true,
       "width": 1200,
       "height": 797,
-      "alt": "The Glebe \u2014 bedroom",
+      "alt": "The Glebe — bedroom",
       "note": "Principal suite, floral wall, leafy outlook",
       "source": "747530 (8).jpg"
     },
@@ -69,7 +59,7 @@
       "featured": true,
       "width": 1200,
       "height": 797,
-      "alt": "The Glebe \u2014 bedroom",
+      "alt": "The Glebe — bedroom",
       "note": "Calm second bedroom, fitted wardrobes",
       "source": "747530 (7).jpg"
     },
@@ -79,7 +69,7 @@
       "featured": true,
       "width": 1200,
       "height": 797,
-      "alt": "The Glebe \u2014 bathroom",
+      "alt": "The Glebe — bathroom",
       "note": "Marble ensuite, freestanding bath, big window",
       "source": "747530 (52).jpg"
     },
@@ -89,7 +79,7 @@
       "featured": true,
       "width": 1200,
       "height": 797,
-      "alt": "The Glebe \u2014 bathroom",
+      "alt": "The Glebe — bathroom",
       "note": "Clawfoot bath, botanical wallpaper charm",
       "source": "747530 (58).jpg"
     },
@@ -99,7 +89,7 @@
       "featured": true,
       "width": 1200,
       "height": 797,
-      "alt": "The Glebe \u2014 garden",
+      "alt": "The Glebe — garden",
       "note": "Aerial shows terraces, dining, full plot",
       "source": "747530 (82).jpg"
     },
@@ -109,7 +99,7 @@
       "featured": true,
       "width": 1200,
       "height": 797,
-      "alt": "The Glebe \u2014 garden",
+      "alt": "The Glebe — garden",
       "note": "Sweeping 110ft lawn, terrace steps beyond",
       "source": "747530 (75).jpg"
     },
@@ -119,7 +109,7 @@
       "featured": true,
       "width": 1200,
       "height": 797,
-      "alt": "The Glebe \u2014 exterior",
+      "alt": "The Glebe — exterior",
       "note": "Rear elevation with balcony closes story",
       "source": "747530 (4) .jpg"
     },
@@ -129,7 +119,7 @@
       "featured": false,
       "width": 1200,
       "height": 797,
-      "alt": "The Glebe \u2014 exterior",
+      "alt": "The Glebe — exterior",
       "note": "Angled facade behind white hydrangea border",
       "source": "747530 (83).jpg"
     },
@@ -139,7 +129,7 @@
       "featured": false,
       "width": 1200,
       "height": 797,
-      "alt": "The Glebe \u2014 living",
+      "alt": "The Glebe — living",
       "note": "Reception toward balcony doors, twin sofas",
       "source": "747530 (66).jpg"
     },
@@ -149,7 +139,7 @@
       "featured": false,
       "width": 1200,
       "height": 797,
-      "alt": "The Glebe \u2014 garden",
+      "alt": "The Glebe — garden",
       "note": "Second aerial: lawn, borders, dining terrace",
       "source": "747530 (3) .jpg"
     },
@@ -159,7 +149,7 @@
       "featured": false,
       "width": 1200,
       "height": 797,
-      "alt": "The Glebe \u2014 other",
+      "alt": "The Glebe — other",
       "note": "Herringbone hallway links games and reception",
       "source": "747530 (57).jpg"
     },
@@ -169,7 +159,7 @@
       "featured": false,
       "width": 1200,
       "height": 797,
-      "alt": "The Glebe \u2014 exterior",
+      "alt": "The Glebe — exterior",
       "note": "Garden-level bifolds beneath ironwork balcony",
       "source": "747530 (69).jpg"
     },
@@ -179,7 +169,7 @@
       "featured": false,
       "width": 1200,
       "height": 797,
-      "alt": "The Glebe \u2014 garden",
+      "alt": "The Glebe — garden",
       "note": "Lawn variant with summerhouse and greenhouse",
       "source": "747530 (76).jpg"
     },
@@ -189,7 +179,7 @@
       "featured": false,
       "width": 1200,
       "height": 797,
-      "alt": "The Glebe \u2014 bathroom",
+      "alt": "The Glebe — bathroom",
       "note": "Marble ensuite alternate: mirror and shower",
       "source": "747530 (18).jpg"
     },
@@ -199,7 +189,7 @@
       "featured": false,
       "width": 1200,
       "height": 797,
-      "alt": "The Glebe \u2014 bedroom",
+      "alt": "The Glebe — bedroom",
       "note": "Attic double adds top-floor coverage",
       "source": "747530 (24).jpg"
     }

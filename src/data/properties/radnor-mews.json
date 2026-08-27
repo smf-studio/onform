@@ -1,25 +1,15 @@
 {
   "slug": "radnor-mews",
   "name": "Radnor Mews",
-  "hero": "radnor-mews-hero.jpg",
+  "hero": "radnor-mews-living-1.jpg",
   "images": [
-    {
-      "file": "radnor-mews-hero.jpg",
-      "category": "hero-exterior",
-      "featured": true,
-      "width": 4500,
-      "height": 3000,
-      "alt": "Radnor Mews \u2014 hero exterior",
-      "note": "Wisteria-clad facade on cobbled mews street",
-      "source": "MIKA - 40 Radnor Mews W2 2SA-35.JPG"
-    },
     {
       "file": "radnor-mews-living-1.jpg",
       "category": "living",
       "featured": true,
       "width": 4500,
       "height": 3000,
-      "alt": "Radnor Mews \u2014 living",
+      "alt": "Radnor Mews — living",
       "note": "Green sofa, double French windows, great light",
       "source": "MIKA - 40 Radnor Mews W2 2SA-16.JPG"
     },
@@ -29,7 +19,7 @@
       "featured": true,
       "width": 4500,
       "height": 3000,
-      "alt": "Radnor Mews \u2014 living",
+      "alt": "Radnor Mews — living",
       "note": "Open-plan flow: fireplace, dining, kitchen, stairs",
       "source": "MIKA - 40 Radnor Mews W2 2SA-17.JPG"
     },
@@ -39,7 +29,7 @@
       "featured": true,
       "width": 4500,
       "height": 3000,
-      "alt": "Radnor Mews \u2014 kitchen",
+      "alt": "Radnor Mews — kitchen",
       "note": "Crisp shaker kitchen, range cooker centered",
       "source": "MIKA - 40 Radnor Mews W2 2SA-22.JPG"
     },
@@ -49,7 +39,7 @@
       "featured": true,
       "width": 4500,
       "height": 3000,
-      "alt": "Radnor Mews \u2014 dining",
+      "alt": "Radnor Mews — dining",
       "note": "Dining table with living room beyond",
       "source": "MIKA - 40 Radnor Mews W2 2SA-21.JPG"
     },
@@ -59,7 +49,7 @@
       "featured": true,
       "width": 4500,
       "height": 3000,
-      "alt": "Radnor Mews \u2014 other",
+      "alt": "Radnor Mews — other",
       "note": "Home office with original timber mews doors",
       "source": "MIKA - 40 Radnor Mews W2 2SA-26.JPG"
     },
@@ -69,7 +59,7 @@
       "featured": true,
       "width": 4500,
       "height": 3006,
-      "alt": "Radnor Mews \u2014 bedroom",
+      "alt": "Radnor Mews — bedroom",
       "note": "Master suite, trellis paper, coral headboard",
       "source": "MIKA - 40 Radnor Mews W2 2SA-1.JPG"
     },
@@ -79,19 +69,9 @@
       "featured": true,
       "width": 4500,
       "height": 3000,
-      "alt": "Radnor Mews \u2014 bedroom",
+      "alt": "Radnor Mews — bedroom",
       "note": "Second bedroom, window seat, corner light",
       "source": "MIKA - 40 Radnor Mews W2 2SA-27.JPG"
-    },
-    {
-      "file": "radnor-mews-bathroom-1.jpg",
-      "category": "bathroom",
-      "featured": true,
-      "width": 4500,
-      "height": 3000,
-      "alt": "Radnor Mews \u2014 bathroom",
-      "note": "Twin basins, playful palm wallpaper",
-      "source": "MIKA - 40 Radnor Mews W2 2SA-6.JPG"
     },
     {
       "file": "radnor-mews-bathroom-2.jpg",
@@ -99,9 +79,19 @@
       "featured": true,
       "width": 4500,
       "height": 3000,
-      "alt": "Radnor Mews \u2014 bathroom",
-      "note": "Navy vanity family bath, full tub",
+      "alt": "Radnor Mews — bathroom",
+      "note": "Blue swimmer wallpaper over the navy family bath, straight from the extras folder",
       "source": "MIKA - 40 Radnor Mews W2 2SA-32.JPG"
+    },
+    {
+      "file": "radnor-mews-bathroom-1.jpg",
+      "category": "bathroom",
+      "featured": true,
+      "width": 4500,
+      "height": 3000,
+      "alt": "Radnor Mews — bathroom",
+      "note": "Twin basins, playful palm wallpaper",
+      "source": "MIKA - 40 Radnor Mews W2 2SA-6.JPG"
     },
     {
       "file": "radnor-mews-outdoor-1.jpg",
@@ -109,7 +99,7 @@
       "featured": true,
       "width": 4500,
       "height": 3000,
-      "alt": "Radnor Mews \u2014 outdoor",
+      "alt": "Radnor Mews — outdoor",
       "note": "Roof terrace bistro set, rooftop backdrop",
       "source": "MIKA - 40 Radnor Mews W2 2SA-9.JPG"
     },
@@ -119,7 +109,7 @@
       "featured": true,
       "width": 4500,
       "height": 3000,
-      "alt": "Radnor Mews \u2014 exterior",
+      "alt": "Radnor Mews — exterior",
       "note": "Wisteria-framed sage front door closer",
       "source": "MIKA - 40 Radnor Mews W2 2SA-34.JPG"
     },
@@ -129,7 +119,7 @@
       "featured": false,
       "width": 4500,
       "height": 3000,
-      "alt": "Radnor Mews \u2014 living",
+      "alt": "Radnor Mews — living",
       "note": "Marbled fireplace wall, reverse living angle",
       "source": "MIKA - 40 Radnor Mews W2 2SA-13.JPG"
     },
@@ -139,7 +129,7 @@
       "featured": false,
       "width": 4500,
       "height": 3000,
-      "alt": "Radnor Mews \u2014 dining",
+      "alt": "Radnor Mews — dining",
       "note": "Pendants, ironwork staircase, kitchen beyond",
       "source": "MIKA - 40 Radnor Mews W2 2SA-19.JPG"
     },
@@ -149,7 +139,7 @@
       "featured": false,
       "width": 4500,
       "height": 3000,
-      "alt": "Radnor Mews \u2014 kitchen",
+      "alt": "Radnor Mews — kitchen",
       "note": "Butler sink window, range cooker angle",
       "source": "MIKA - 40 Radnor Mews W2 2SA-23.JPG"
     },
@@ -159,7 +149,7 @@
       "featured": false,
       "width": 4500,
       "height": 3000,
-      "alt": "Radnor Mews \u2014 other",
+      "alt": "Radnor Mews — other",
       "note": "Entrance hall, oak stairs, fresh flowers",
       "source": "MIKA - 40 Radnor Mews W2 2SA-33.JPG"
     },
@@ -169,7 +159,7 @@
       "featured": false,
       "width": 4500,
       "height": 3000,
-      "alt": "Radnor Mews \u2014 bedroom",
+      "alt": "Radnor Mews — bedroom",
       "note": "Master dormers, dressing chest, floral blinds",
       "source": "MIKA - 40 Radnor Mews W2 2SA-3.JPG"
     },
@@ -179,7 +169,7 @@
       "featured": false,
       "width": 4500,
       "height": 3000,
-      "alt": "Radnor Mews \u2014 bedroom",
+      "alt": "Radnor Mews — bedroom",
       "note": "Guest bed straight-on, scalloped headboard",
       "source": "MIKA - 40 Radnor Mews W2 2SA-29.JPG"
     },
@@ -189,7 +179,7 @@
       "featured": false,
       "width": 4500,
       "height": 3000,
-      "alt": "Radnor Mews \u2014 bathroom",
+      "alt": "Radnor Mews — bathroom",
       "note": "Third shower room, walk-in glass screen",
       "source": "MIKA - 40 Radnor Mews W2 2SA-8.JPG"
     },
@@ -199,7 +189,7 @@
       "featured": false,
       "width": 4500,
       "height": 3000,
-      "alt": "Radnor Mews \u2014 outdoor",
+      "alt": "Radnor Mews — outdoor",
       "note": "Terrace door, mews rooftops vista",
       "source": "MIKA - 40 Radnor Mews W2 2SA-11.JPG"
     }
