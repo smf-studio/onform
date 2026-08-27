@@ -56,7 +56,7 @@ test.describe('home', () => {
   test('hero blur strip appears on scroll and leaves with the hero', async ({
     page,
   }) => {
-    const strip = page.locator('.hero-scroll-blur')
+    const strip = page.locator('[data-fade]')
     await expect(strip).toHaveCSS('opacity', '0')
 
     await page.mouse.wheel(0, 200)
