@@ -9,7 +9,7 @@ import { Fade } from 'components/shared/Fade'
    chrome rather than a hard line. Invisible at rest so the photograph
    starts clean; scrolling fades it in, and it fades back out as the
    hero's bottom edge arrives. */
-const FADE_DISTANCE = 48
+const FADE_DISTANCE = 24
 
 export function HeroScrollBlur({
   heroRef,
@@ -54,7 +54,7 @@ export function HeroScrollBlur({
     <Fade
       background="var(--color-background)"
       blur="6px"
-      className="inset-x-0 top-full h-16 opacity-0"
+      className="inset-x-0 top-full h-10 opacity-0"
       ref={fadeRef}
       side="top"
       stop="25%"
