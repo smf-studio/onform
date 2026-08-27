@@ -10,7 +10,7 @@ import { properties } from 'features/properties/data'
    The statement is placeholder lorem until the studio's words are ready. */
 export function Intro() {
   const property = properties.find((p) => p.slug === 'queenscliff')
-  const image = property?.images.find((i) => i.category === 'view')
+  const image = property?.images.find((i) => i.category === 'aerial')
 
   return (
     <section className="overflow-hidden">

@@ -8,31 +8,31 @@
   {
     "slug": "radnor-mews",
     "name": "Radnor Mews",
-    "images": 20,
-    "featured": 12
+    "images": 19,
+    "featured": 11
   },
   {
     "slug": "7-carlton-st-manly",
     "name": "7 Carlton St, Manly",
-    "images": 20,
-    "featured": 12
+    "images": 17,
+    "featured": 9
   },
   {
     "slug": "the-glebe",
     "name": "The Glebe",
-    "images": 20,
-    "featured": 12
+    "images": 19,
+    "featured": 11
   },
   {
     "slug": "valriche-villa",
     "name": "Valriche Villa",
-    "images": 20,
-    "featured": 12
+    "images": 16,
+    "featured": 8
   },
   {
     "slug": "26-carlton-st-freshwater",
     "name": "26 Carlton St, Freshwater",
-    "images": 14,
-    "featured": 10
+    "images": 10,
+    "featured": 8
   }
 ]
