@@ -170,6 +170,14 @@
     opacity: 0;
     animation: el-fade 0.9s ease-out forwards;
   }
+  /* The strip HeroScrollBlur pins under the sticky header: full blur at
+     the header's edge dissolving to nothing a few pixels later, so the
+     photograph softens as it slides underneath instead of hitting a hard
+     cut. Opacity is driven from scroll position in the component. */
+  .hero-scroll-blur {
+    backdrop-filter: blur(6px);
+    mask-image: linear-gradient(to bottom, black, transparent);
+  }
   .hero-unveil {
     animation: hero-unveil 1.1s cubic-bezier(0.65, 0, 0.35, 1) both;
   }

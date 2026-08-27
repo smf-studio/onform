@@ -74,7 +74,11 @@ The site is two sections: the hero and the gallery. Locked treatments:
 - Hero: MAD-style inset, never full bleed. Chrome on white above (wordmark
   left, nav right), photograph inset with a white gutter and 16px rounded
   corners. The photograph stays CLEAN, no overlay of any kind; the
-  property name and metadata sit below the image on white.
+  property name and metadata sit below the image on white. One scroll-time
+  exception to "clean": a short backdrop-blur strip (`HeroScrollBlur`)
+  under the sticky header, invisible at rest, that fades in with scroll so
+  the photograph softens as it slides beneath the header rather than
+  hitting a hard cut, and fades out once the hero has passed.
 - Gallery: one block per property, combining the two chosen treatments.
   Each block opens with a showcase row (large frame with the property
   name carved into a bottom-left notch, metadata and one short paragraph

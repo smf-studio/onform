@@ -53,6 +53,19 @@ test.describe('home', () => {
     expect(text).toMatch(/^[A-Za-z0-9 ]+$/)
   })
 
+  test('hero blur strip appears on scroll and leaves with the hero', async ({
+    page,
+  }) => {
+    const strip = page.locator('.hero-scroll-blur')
+    await expect(strip).toHaveCSS('opacity', '0')
+
+    await page.mouse.wheel(0, 200)
+    await expect(strip).not.toHaveCSS('opacity', '0')
+
+    await page.mouse.wheel(0, 5000)
+    await expect(strip).toHaveCSS('opacity', '0')
+  })
+
   test('nav anchors scroll to projects and contact', async ({ page }) => {
     await page.getByRole('link', { name: 'CONTACT' }).click()
     await expect(page.locator('#contact')).toBeInViewport()
