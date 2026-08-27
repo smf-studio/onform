@@ -170,6 +170,34 @@
     opacity: 0;
     animation: el-fade 0.9s ease-out forwards;
   }
+  /* The Fade component: a gradient from --background with a backdrop
+     blur, masked so both dissolve toward the far side. Solid up to
+     --stop, gone at the far edge — content underneath melts into the
+     background instead of hitting a hard line. The home page pins one
+     under the sticky header so the hero photograph's cut-off boundary
+     reads as a blur, not a cut. */
+  .fade {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    backdrop-filter: blur(var(--blur, 0px));
+  }
+  .fade[data-side='top'] {
+    background: linear-gradient(to bottom, var(--background), transparent);
+    mask-image: linear-gradient(to bottom, black var(--stop, 25%), transparent);
+  }
+  .fade[data-side='bottom'] {
+    background: linear-gradient(to top, var(--background), transparent);
+    mask-image: linear-gradient(to top, black var(--stop, 25%), transparent);
+  }
+  .fade[data-side='left'] {
+    background: linear-gradient(to right, var(--background), transparent);
+    mask-image: linear-gradient(to right, black var(--stop, 25%), transparent);
+  }
+  .fade[data-side='right'] {
+    background: linear-gradient(to left, var(--background), transparent);
+    mask-image: linear-gradient(to left, black var(--stop, 25%), transparent);
+  }
   .hero-unveil {
     animation: hero-unveil 1.1s cubic-bezier(0.65, 0, 0.35, 1) both;
   }
