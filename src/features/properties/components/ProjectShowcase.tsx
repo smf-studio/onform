@@ -3,13 +3,15 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
 
 import { AssetImage } from 'features/properties/components/AssetImage'
+import { RollingDigits } from 'features/properties/components/RollingDigits'
 import { properties } from 'features/properties/data'
 import { heroImage } from 'features/properties/utils'
 import { cn } from 'lib/utils'
 
 /* The projects showcase, after the Prototype Studio mechanic: one sticky
    full-viewport shell wraps the scrolling centre column of cards. The
-   shell carries the oversized counter, the metadata for the active
+   shell carries the oversized counter (digits roll as the active card
+   changes, on every viewport), the metadata for the active
    property on the left, and the full list of project names on the right;
    the active name reads at full ink while the rest sit faint, and the
    stack crawls so the active name holds the middle. Cards enter with the
@@ -165,10 +167,11 @@ export function ProjectShowcase() {
           it, counting up as each project passes the centre. */}
       <div className="sticky top-0 z-20 bg-background px-5 pt-3 pb-3 sm:px-7 lg:hidden">
         <div className="flex items-baseline gap-3">
-          <span className="font-display text-6xl leading-[0.85] tracking-tight">
-            {String(active + 1).padStart(2, '0')}
-          </span>
-          <span className="font-display text-lg text-terracotta italic">
+          <RollingDigits
+            className="font-display text-6xl leading-[0.85] tracking-tight"
+            value={String(active + 1).padStart(2, '0')}
+          />
+          <span className="font-display text-lg text-terracotta italic tabular-nums">
             {`of ${String(properties.length).padStart(2, '0')}`}
           </span>
         </div>
@@ -180,10 +183,11 @@ export function ProjectShowcase() {
           className="absolute top-16 left-7 flex items-baseline gap-4"
           ref={counterRef}
         >
-          <span className="font-display text-[clamp(6rem,12vw,10.5rem)] leading-[0.85] tracking-tight">
-            {String(active + 1).padStart(2, '0')}
-          </span>
-          <span className="font-display text-2xl text-terracotta italic">
+          <RollingDigits
+            className="font-display text-[clamp(6rem,12vw,10.5rem)] leading-[0.85] tracking-tight"
+            value={String(active + 1).padStart(2, '0')}
+          />
+          <span className="font-display text-2xl text-terracotta italic tabular-nums">
             {`of ${String(properties.length).padStart(2, '0')}`}
           </span>
         </div>

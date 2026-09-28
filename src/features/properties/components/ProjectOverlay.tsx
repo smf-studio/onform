@@ -1,5 +1,13 @@
 import { Link, useNavigate } from '@tanstack/react-router'
-import { useEffect, useLayoutEffect, useRef } from 'react'
+import {
+  motion,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from 'motion/react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 import type { Property } from 'features/properties/schema'
 
@@ -199,72 +207,64 @@ function CharTitle({ text }: { text: string }) {
 }
 
 /* Keep scrolling past the last frame and the next project rises into
-   view; when it fills the viewport the router moves on. Touch and
-   reduced-motion users get the same panel as a plain link. */
+   view; when it fills the viewport the router moves on. Driven by
+   Motion's scroll progress through a spring, so the stage eases with
+   the scroll rather than tracking it one frame at a time. Touch and
+   reduced-motion users get the same panel as a plain link (no auto
+   advance), so nothing navigates by surprise mid-flick. */
 function NextProjectHandoff({ next }: { next: Property }) {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const stageRef = useRef<HTMLDivElement>(null)
   const firedRef = useRef(false)
   const armedRef = useRef(false)
   const navigate = useNavigate()
+  const reduced = useReducedMotion()
+  const [fine] = useState(() => window.matchMedia('(pointer: fine)').matches)
+
+  /* 0 when the section top reaches the viewport top, 1 when its bottom
+     meets the viewport bottom: the whole span the stage is pinned for. */
+  const { scrollYProgress } = useScroll({
+    offset: ['start start', 'end end'],
+    target: sectionRef,
+  })
+  const progress = useSpring(scrollYProgress, {
+    damping: 30,
+    mass: 0.5,
+    restDelta: 0.0005,
+    stiffness: 180,
+  })
+  const scale = useTransform(progress, [0, 1], [0.94, 1])
+  const opacity = useTransform(progress, [0, 0.6], [0.45, 1])
+  const y = useTransform(progress, [0, 1], ['5%', '0%'])
 
   useEffect(() => {
+    /* A fresh page can mount with the previous page's scroll position
+       still applied; only arm the auto-advance once the visitor has
+       genuinely been above the threshold on THIS page, or it would chain
+       straight through every project. */
     firedRef.current = false
-    /* Only arm the auto-advance once the visitor has genuinely been above
-       the threshold on THIS page; a fresh navigation can mount with the
-       previous page's scroll position still applied, which would
-       otherwise chain straight through every project. */
     armedRef.current = false
-    const reduced = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches
-    const fine = window.matchMedia('(pointer: fine)').matches
-    const section = sectionRef.current
-    const stage = stageRef.current
-    if (!section || !stage) return
-    let ticking = false
-    const update = () => {
-      ticking = false
-      const rect = section.getBoundingClientRect()
-      const vh = window.innerHeight
-      const total = rect.height - vh
-      if (total <= 0) return
-      const progress = Math.min(1, Math.max(0, -rect.top / total))
-      if (!reduced) {
-        stage.style.transform = `scale(${(0.92 + progress * 0.08).toFixed(4)})`
-        stage.style.opacity = (0.55 + progress * 0.45).toFixed(3)
-      }
-      if (progress < 0.9) armedRef.current = true
-      if (
-        progress >= 0.985 &&
-        armedRef.current &&
-        fine &&
-        !reduced &&
-        !firedRef.current
-      ) {
-        firedRef.current = true
-        void navigate({ params: { slug: next.slug }, to: '/projects/$slug' })
-      }
+  }, [next.slug])
+
+  useMotionValueEvent(scrollYProgress, 'change', (value) => {
+    if (value < 0.9) armedRef.current = true
+    if (
+      value >= 0.985 &&
+      armedRef.current &&
+      fine &&
+      !reduced &&
+      !firedRef.current
+    ) {
+      firedRef.current = true
+      void navigate({ params: { slug: next.slug }, to: '/projects/$slug' })
     }
-    const onScroll = () => {
-      if (!ticking) {
-        ticking = true
-        requestAnimationFrame(update)
-      }
-    }
-    update()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-    }
-  }, [navigate, next.slug])
+  })
 
   return (
     <div className="relative h-[170svh]" ref={sectionRef}>
-      <div className="sticky top-0 h-svh overflow-hidden">
-        <div
-          className="h-full origin-center will-change-transform"
-          ref={stageRef}
+      <div className="sticky top-0 h-dvh overflow-hidden">
+        <motion.div
+          className="h-full origin-center"
+          style={reduced ? undefined : { opacity, scale, y }}
         >
           <Link
             className="group relative block h-full"
@@ -290,7 +290,7 @@ function NextProjectHandoff({ next }: { next: Property }) {
               </span>
             </div>
           </Link>
-        </div>
+        </motion.div>
       </div>
     </div>
   )
