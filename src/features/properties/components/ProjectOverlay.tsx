@@ -121,8 +121,16 @@ export function ProjectOverlay({ property }: { property: Property }) {
             </div>
             <aside className="order-first pb-8 lg:sticky lg:top-14 lg:order-2 lg:col-span-4 lg:col-start-9 lg:flex lg:h-[calc(100svh-3.5rem)] lg:flex-col lg:pb-0">
               <div className="lg:pt-[18svh]">
-                <CharTitle text={property.displayName} />{' '}
-                <TermReveal text={`(${property.location})`} />
+                {/* Keyed on the slug so moving between projects remounts
+                    both reveals: otherwise a character that keeps its
+                    position and value from one name to the next (the
+                    opening bracket, always first) would never animate
+                    again. */}
+                <CharTitle key={property.slug} text={property.displayName} />{' '}
+                <TermReveal
+                  key={`${property.slug}-location`}
+                  text={`(${property.location})`}
+                />
               </div>
             </aside>
           </div>
