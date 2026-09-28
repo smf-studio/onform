@@ -165,10 +165,10 @@ export function ProjectShowcase() {
           it, counting up as each project passes the centre. */}
       <div className="sticky top-0 z-20 bg-background px-5 pt-3 pb-3 sm:px-7 lg:hidden">
         <div className="flex items-baseline gap-3">
-          <span className="font-display text-6xl leading-[0.85]">
+          <span className="font-display text-6xl leading-[0.85] tracking-tight">
             {String(active + 1).padStart(2, '0')}
           </span>
-          <span className="font-display text-lg text-muted-foreground italic">
+          <span className="font-display text-lg text-terracotta italic">
             {`of ${String(properties.length).padStart(2, '0')}`}
           </span>
         </div>
@@ -180,10 +180,10 @@ export function ProjectShowcase() {
           className="absolute top-16 left-7 flex items-baseline gap-4"
           ref={counterRef}
         >
-          <span className="font-display text-[clamp(6rem,12vw,10.5rem)] leading-[0.85]">
+          <span className="font-display text-[clamp(6rem,12vw,10.5rem)] leading-[0.85] tracking-tight">
             {String(active + 1).padStart(2, '0')}
           </span>
-          <span className="font-display text-2xl text-muted-foreground italic">
+          <span className="font-display text-2xl text-terracotta italic">
             {`of ${String(properties.length).padStart(2, '0')}`}
           </span>
         </div>
@@ -215,7 +215,7 @@ export function ProjectShowcase() {
             {properties.map((property, index) => (
               <Link
                 className={cn(
-                  'pointer-events-auto font-display text-3xl leading-none transition-opacity duration-700 will-change-transform xl:text-4xl',
+                  'pointer-events-auto font-display text-3xl leading-none tracking-tight transition-opacity duration-700 will-change-transform xl:text-4xl',
                   index === active
                     ? 'opacity-100'
                     : 'opacity-25 hover:opacity-60',
@@ -271,10 +271,10 @@ export function ProjectShowcase() {
             {/* Mobile caption, after the reference card: the name with
                 the italic location beside it. */}
             <div className="flex items-start justify-between gap-6 lg:hidden">
-              <span className="font-display text-2xl leading-none">
+              <span className="font-display text-2xl leading-none tracking-tight">
                 {property.displayName}
               </span>
-              <span className="mt-0.5 font-display text-base text-body-copy italic">
+              <span className="mt-0.5 font-display text-base text-terracotta italic">
                 {property.location}
               </span>
             </div>
@@ -300,7 +300,7 @@ function RollingAnnotation({
 }) {
   const reduced = useReducedMotion()
   return (
-    <div className="relative h-[1.8em] w-full font-display text-xl italic">
+    <div className="relative h-[1.8em] w-full font-display text-xl text-terracotta italic">
       <AnimatePresence initial={false}>
         <motion.span
           animate={{ opacity: 1, y: 0 }}

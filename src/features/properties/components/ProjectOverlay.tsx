@@ -77,7 +77,7 @@ export function ProjectOverlay({ property }: { property: Property }) {
           <div className="py-4 lg:hidden">
             <Link
               aria-label="Back to all projects"
-              className="font-display text-lg italic underline decoration-1 underline-offset-4 transition-opacity hover:opacity-60"
+              className="font-display text-lg italic underline decoration-terracotta decoration-1 underline-offset-4 transition-colors hover:text-terracotta"
               hash={property.slug}
               to="/"
             >
@@ -96,7 +96,7 @@ export function ProjectOverlay({ property }: { property: Property }) {
                 >
                   <Link
                     aria-label="Back to all projects"
-                    className="font-display text-lg italic underline decoration-1 underline-offset-4 transition-opacity hover:opacity-60"
+                    className="font-display text-lg italic underline decoration-terracotta decoration-1 underline-offset-4 transition-colors hover:text-terracotta"
                     hash={property.slug}
                     to="/"
                   >
@@ -140,7 +140,7 @@ function TermReveal({ text }: { text: string }) {
   return (
     <span
       aria-label={text}
-      className="inline-block align-top font-display text-lg text-body-copy italic lg:mt-3"
+      className="inline-block align-top font-display text-lg text-terracotta italic lg:mt-3"
     >
       {text.split('').map((char, charIndex) => (
         <span
@@ -160,23 +160,38 @@ function TermReveal({ text }: { text: string }) {
 }
 
 /* The title arrives one character at a time, unskewing from a slight
-   page-turn, per the reference. The full name stays intact for
-   assistive tech via the aria-label. */
+   page-turn, per the reference. Each word is kept whole so the line can
+   only break between words, never inside one. The full name stays
+   intact for assistive tech via the aria-label. */
 function CharTitle({ text }: { text: string }) {
+  const words = text.split(' ')
+  /* Character offsets per word, so the stagger runs across the whole
+     name rather than restarting at each word. */
+  const starts = words.map((_, index) =>
+    words.slice(0, index).reduce((sum, word) => sum + word.length + 1, 0),
+  )
   return (
     <h1
       aria-label={text}
-      className="mr-3 inline font-display text-[clamp(3rem,5.5vw,5.5rem)] leading-[0.95]"
+      className="mr-3 inline font-display text-[clamp(2.5rem,4.2vw,4.5rem)] leading-[0.95] tracking-tight"
       style={{ perspective: '600px' }}
     >
-      {text.split('').map((char, index) => (
-        <span
-          aria-hidden
-          className="char-in"
-          key={`${String(index)}-${char}`}
-          style={{ animationDelay: `${String(index * 30)}ms` }}
-        >
-          {char === ' ' ? ' ' : char}
+      {words.map((word, wordIndex) => (
+        <span aria-hidden key={`${String(wordIndex)}-${word}`}>
+          {wordIndex > 0 ? ' ' : null}
+          <span className="inline-block whitespace-nowrap">
+            {word.split('').map((char, index) => (
+              <span
+                className="char-in"
+                key={`${String(index)}-${char}`}
+                style={{
+                  animationDelay: `${String(((starts.at(wordIndex) ?? 0) + index) * 30)}ms`,
+                }}
+              >
+                {char}
+              </span>
+            ))}
+          </span>
         </span>
       ))}
     </h1>
@@ -267,10 +282,10 @@ function NextProjectHandoff({ next }: { next: Property }) {
               <div className="absolute inset-0 bg-foreground/25 transition-opacity duration-700 group-hover:bg-foreground/10" />
             </div>
             <div className="absolute inset-x-0 bottom-10 flex flex-col items-center gap-3 text-center">
-              <span className="text-[11px] font-medium tracking-[0.2em] text-white/90">
+              <span className="text-[11px] font-semibold tracking-[0.2em] text-white/90">
                 {`NEXT  ${next.displayName.toUpperCase()}`}
               </span>
-              <span className="font-display text-5xl leading-none text-white sm:text-7xl">
+              <span className="font-display text-5xl leading-none tracking-tight text-white sm:text-7xl">
                 {next.displayName}
               </span>
             </div>
