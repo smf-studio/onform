@@ -171,7 +171,7 @@ export function ProjectShowcase() {
             className="font-display text-6xl leading-[0.85] tracking-tight"
             value={String(active + 1).padStart(2, '0')}
           />
-          <span className="font-display text-lg text-terracotta italic tabular-nums">
+          <span className="font-display text-lg text-terracotta italic">
             {`of ${String(properties.length).padStart(2, '0')}`}
           </span>
         </div>
@@ -187,7 +187,7 @@ export function ProjectShowcase() {
             className="font-display text-[clamp(6rem,12vw,10.5rem)] leading-[0.85] tracking-tight"
             value={String(active + 1).padStart(2, '0')}
           />
-          <span className="font-display text-2xl text-terracotta italic tabular-nums">
+          <span className="font-display text-2xl text-terracotta italic">
             {`of ${String(properties.length).padStart(2, '0')}`}
           </span>
         </div>

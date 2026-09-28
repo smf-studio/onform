@@ -3,11 +3,13 @@ import { useState } from 'react'
 
 import { cn } from 'lib/utils'
 
-/* A number whose digits roll when the value changes: counting up, each
-   changed digit rises in from below while the old one leaves upward;
-   counting down, the reverse. Tabular figures keep every slot the same
-   width so nothing beside the number shifts. Reduced motion swaps the
-   digits in place. */
+/* A number whose digits roll like an odometer drum when the value
+   changes: counting up, the old digit slides out through the top while
+   the new one slides in from below, as one strip with no overlap;
+   counting down, the reverse. Each slot is a fixed 1ch wide (the width
+   of a zero, the widest figure) with the glyph centred, so the number
+   keeps its width in the face's own proportional figures and nothing
+   beside it shifts. Reduced motion swaps the digits in place. */
 export function RollingDigits({
   className,
   value,
@@ -26,12 +28,12 @@ export function RollingDigits({
   const direction = reduced ? 0 : last.direction
 
   return (
-    <span className={cn('inline-flex overflow-hidden tabular-nums', className)}>
+    <span className={cn('inline-flex overflow-hidden', className)}>
       <span className="sr-only">{value}</span>
       {value.split('').map((char, slot) => (
         <span
           aria-hidden
-          className="inline-grid"
+          className="inline-grid w-[1ch] justify-items-center"
           /* Slots are positional: the same slot keeps its element across
              values so only its glyph animates. */
           key={slot}
@@ -47,11 +49,7 @@ export function RollingDigits({
               transition={
                 reduced
                   ? { duration: 0 }
-                  : {
-                      duration: 0.6,
-                      ease: [0.23, 1, 0.32, 1],
-                      opacity: { duration: 0.3, ease: 'easeOut' },
-                    }
+                  : { duration: 0.55, ease: [0.23, 1, 0.32, 1] }
               }
               variants={variants}
             >
@@ -64,14 +62,15 @@ export function RollingDigits({
   )
 }
 
+/* A full slot height of travel each way: the leaving digit is entirely
+   out of the clipped box before the arriving one is entirely in, so the
+   two never overlap. */
 const variants = {
-  center: { opacity: 1, y: '0%' },
+  center: { y: '0%' },
   enter: (direction: number) => ({
-    opacity: 0,
-    y: direction === 0 ? '0%' : direction > 0 ? '60%' : '-60%',
+    y: direction === 0 ? '0%' : direction > 0 ? '100%' : '-100%',
   }),
   exit: (direction: number) => ({
-    opacity: 0,
-    y: direction === 0 ? '0%' : direction > 0 ? '-60%' : '60%',
+    y: direction === 0 ? '0%' : direction > 0 ? '-100%' : '100%',
   }),
 }

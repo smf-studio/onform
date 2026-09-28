@@ -159,13 +159,16 @@ The site is two sections: the hero and the gallery. Locked treatments:
 - Motion elsewhere is fades and drift only: slow crossfades, hover scale
   1.02 inside a cropped frame at about 700ms, images arriving through a
   blurred placeholder.
-- Counter digits roll on change (`RollingDigits`): counting up, the new
-  digit rises in as the old leaves upward, reversed when scrolling back.
-  Tabular figures so nothing beside the number shifts; the client's
-  no-monospace rule stands.
-- Scroll-linked motion that needs easing (the next-project handoff on the
-  project pages) runs on Motion's `useScroll` through a spring, never on
-  raw scroll events written straight to style.
+- Counter digits roll on change (`RollingDigits`) like an odometer drum:
+  the old digit slides out through the top as the new one slides in
+  from below, one strip, never overlapping; reversed when scrolling
+  back. Digits stay in Montserrat's proportional figures (the client
+  turned down tabular figures and monospace is ruled out); each digit
+  sits centred in a fixed 1ch slot so the number never changes width.
+- Scroll-linked motion (the next-project handoff on the project pages)
+  is bound directly to Motion's `useScroll` progress with no spring or
+  smoothing of its own: the stage moves exactly with the scroll, so the
+  page never feels hijacked.
 
 ## Hero shader
 

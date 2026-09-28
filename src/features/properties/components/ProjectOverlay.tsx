@@ -4,7 +4,6 @@ import {
   useMotionValueEvent,
   useReducedMotion,
   useScroll,
-  useSpring,
   useTransform,
 } from 'motion/react'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
@@ -207,11 +206,12 @@ function CharTitle({ text }: { text: string }) {
 }
 
 /* Keep scrolling past the last frame and the next project rises into
-   view; when it fills the viewport the router moves on. Driven by
-   Motion's scroll progress through a spring, so the stage eases with
-   the scroll rather than tracking it one frame at a time. Touch and
-   reduced-motion users get the same panel as a plain link (no auto
-   advance), so nothing navigates by surprise mid-flick. */
+   view; when it fills the viewport the router moves on. The stage is
+   bound directly to Motion's scroll progress, no smoothing of its own,
+   so it moves exactly with the finger or wheel and the page keeps its
+   native feel. Touch and reduced-motion users get the same panel as a
+   plain link (no auto advance), so nothing navigates by surprise
+   mid-flick. */
 function NextProjectHandoff({ next }: { next: Property }) {
   const sectionRef = useRef<HTMLDivElement>(null)
   const firedRef = useRef(false)
@@ -226,15 +226,9 @@ function NextProjectHandoff({ next }: { next: Property }) {
     offset: ['start start', 'end end'],
     target: sectionRef,
   })
-  const progress = useSpring(scrollYProgress, {
-    damping: 30,
-    mass: 0.5,
-    restDelta: 0.0005,
-    stiffness: 180,
-  })
-  const scale = useTransform(progress, [0, 1], [0.94, 1])
-  const opacity = useTransform(progress, [0, 0.6], [0.45, 1])
-  const y = useTransform(progress, [0, 1], ['5%', '0%'])
+  const scale = useTransform(scrollYProgress, [0, 1], [0.94, 1])
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [0.45, 1])
+  const y = useTransform(scrollYProgress, [0, 1], ['5%', '0%'])
 
   useEffect(() => {
     /* A fresh page can mount with the previous page's scroll position
