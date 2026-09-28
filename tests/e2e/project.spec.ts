@@ -32,6 +32,15 @@ test.describe('project overlay', () => {
     ).toBeVisible()
   })
 
+  test('header fade grows with scroll here too', async ({ page }) => {
+    await page.goto('/projects/queenscliff')
+    const strip = page.locator('[data-fade]')
+    await expect(strip).toHaveCSS('height', '0px')
+
+    await page.mouse.wheel(0, 200)
+    await expect(strip).toHaveCSS('height', '40px')
+  })
+
   test('unknown slugs show the not-found fallback', async ({ page }) => {
     await page.goto('/projects/no-such-property')
     await expect(page.getByText('Page not found')).toBeVisible()
