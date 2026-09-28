@@ -1,12 +1,5 @@
-import { Link, useNavigate } from '@tanstack/react-router'
-import {
-  motion,
-  useMotionValueEvent,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from 'motion/react'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { Link } from '@tanstack/react-router'
+import { useLayoutEffect, useRef } from 'react'
 
 import type { Property } from 'features/properties/schema'
 
@@ -23,8 +16,7 @@ const MEDIA_COUNT = 8
    above it, and a sticky right column holding only the title, revealed
    character by character, with the italic location inline after it. On
    arrival the visible frames rise together from the bottom edge of the
-   viewport. The page ends with the next project revealed by continuing
-   to scroll. */
+   viewport. The page ends with a panel linking to the next project. */
 export function ProjectOverlay({ property }: { property: Property }) {
   const index = properties.findIndex((p) => p.slug === property.slug)
   const next = properties.at((index + 1) % properties.length) ?? property
@@ -205,87 +197,33 @@ function CharTitle({ text }: { text: string }) {
   )
 }
 
-/* Keep scrolling past the last frame and the next project rises into
-   view; when it fills the viewport the router moves on. The stage is
-   bound directly to Motion's scroll progress, no smoothing of its own,
-   so it moves exactly with the finger or wheel and the page keeps its
-   native feel. Touch and reduced-motion users get the same panel as a
-   plain link (no auto advance), so nothing navigates by surprise
-   mid-flick. */
+/* The page ends on the next project: one full-viewport panel, a plain
+   link, no scroll effects and no automatic navigation. */
 function NextProjectHandoff({ next }: { next: Property }) {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const firedRef = useRef(false)
-  const armedRef = useRef(false)
-  const navigate = useNavigate()
-  const reduced = useReducedMotion()
-  const [fine] = useState(() => window.matchMedia('(pointer: fine)').matches)
-
-  /* 0 when the section top reaches the viewport top, 1 when its bottom
-     meets the viewport bottom: the whole span the stage is pinned for. */
-  const { scrollYProgress } = useScroll({
-    offset: ['start start', 'end end'],
-    target: sectionRef,
-  })
-  const scale = useTransform(scrollYProgress, [0, 1], [0.94, 1])
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [0.45, 1])
-  const y = useTransform(scrollYProgress, [0, 1], ['5%', '0%'])
-
-  useEffect(() => {
-    /* A fresh page can mount with the previous page's scroll position
-       still applied; only arm the auto-advance once the visitor has
-       genuinely been above the threshold on THIS page, or it would chain
-       straight through every project. */
-    firedRef.current = false
-    armedRef.current = false
-  }, [next.slug])
-
-  useMotionValueEvent(scrollYProgress, 'change', (value) => {
-    if (value < 0.9) armedRef.current = true
-    if (
-      value >= 0.985 &&
-      armedRef.current &&
-      fine &&
-      !reduced &&
-      !firedRef.current
-    ) {
-      firedRef.current = true
-      void navigate({ params: { slug: next.slug }, to: '/projects/$slug' })
-    }
-  })
-
   return (
-    <div className="relative h-[170svh]" ref={sectionRef}>
-      <div className="sticky top-0 h-dvh overflow-hidden">
-        <motion.div
-          className="h-full origin-center"
-          style={reduced ? undefined : { opacity, scale, y }}
-        >
-          <Link
-            className="group relative block h-full"
-            params={{ slug: next.slug }}
-            to="/projects/$slug"
-          >
-            <div className="absolute inset-3 overflow-hidden rounded-notch sm:inset-4">
-              <AssetImage
-                className="size-full"
-                fill
-                image={heroImage(next)}
-                sizes="100vw"
-                slug={next.slug}
-              />
-              <div className="absolute inset-0 bg-foreground/25 transition-opacity duration-700 group-hover:bg-foreground/10" />
-            </div>
-            <div className="absolute inset-x-0 bottom-10 flex flex-col items-center gap-3 text-center">
-              <span className="text-[11px] font-semibold tracking-[0.2em] text-white/90">
-                {`NEXT  ${next.displayName.toUpperCase()}`}
-              </span>
-              <span className="font-display text-5xl leading-none tracking-tight text-white sm:text-7xl">
-                {next.displayName}
-              </span>
-            </div>
-          </Link>
-        </motion.div>
+    <Link
+      className="group relative block h-svh"
+      params={{ slug: next.slug }}
+      to="/projects/$slug"
+    >
+      <div className="absolute inset-3 overflow-hidden rounded-notch sm:inset-4">
+        <AssetImage
+          className="size-full"
+          fill
+          image={heroImage(next)}
+          sizes="100vw"
+          slug={next.slug}
+        />
+        <div className="absolute inset-0 bg-foreground/25 transition-opacity duration-700 group-hover:bg-foreground/10" />
       </div>
-    </div>
+      <div className="absolute inset-x-0 bottom-10 flex flex-col items-center gap-3 text-center">
+        <span className="text-[11px] font-semibold tracking-[0.2em] text-white/90">
+          {`NEXT  ${next.displayName.toUpperCase()}`}
+        </span>
+        <span className="font-display text-5xl leading-none tracking-tight text-white sm:text-7xl">
+          {next.displayName}
+        </span>
+      </div>
+    </Link>
   )
 }

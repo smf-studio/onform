@@ -152,23 +152,19 @@ The site is two sections: the hero and the gallery. Locked treatments:
   blocks), plus an overlay route per project (`/projects/$slug`) above the
   page for seeing one property in its entirety: text sidebar (name,
   location, year, the paragraph) with all bank images scrolling, featured
-  first, ending in a link to the next project.
+  first, ending in a full-viewport panel linking to the next project (a plain
+  link: no scroll-driven reveal and no automatic navigation, both tried
+  and turned down by the client).
 - Hero rotation, locked: the hero slowly crossfades through one featured
   frame per property (about 6 seconds each, 900ms fade); the name and
   metadata below the image update with it. Paused for reduced motion.
 - Motion elsewhere is fades and drift only: slow crossfades, hover scale
   1.02 inside a cropped frame at about 700ms, images arriving through a
   blurred placeholder.
-- Counter digits roll on change (`RollingDigits`) like an odometer drum:
-  the old digit slides out through the top as the new one slides in
-  from below, one strip, never overlapping; reversed when scrolling
-  back. Digits stay in Montserrat's proportional figures (the client
-  turned down tabular figures and monospace is ruled out); each digit
-  sits centred in a fixed 1ch slot so the number never changes width.
-- Scroll-linked motion (the next-project handoff on the project pages)
-  is bound directly to Motion's `useScroll` progress with no spring or
-  smoothing of its own: the stage moves exactly with the scroll, so the
-  page never feels hijacked.
+- The showcase counter does not animate (a rolling-digit version was
+  tried and turned down as distracting). It keeps Montserrat's
+  proportional figures; each digit sits centred in a fixed 1ch slot so
+  the number never changes width as it counts.
 
 ## Hero shader
 

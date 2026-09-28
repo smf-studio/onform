@@ -3,15 +3,13 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
 
 import { AssetImage } from 'features/properties/components/AssetImage'
-import { RollingDigits } from 'features/properties/components/RollingDigits'
 import { properties } from 'features/properties/data'
 import { heroImage } from 'features/properties/utils'
 import { cn } from 'lib/utils'
 
 /* The projects showcase, after the Prototype Studio mechanic: one sticky
    full-viewport shell wraps the scrolling centre column of cards. The
-   shell carries the oversized counter (digits roll as the active card
-   changes, on every viewport), the metadata for the active
+   shell carries the oversized counter, the metadata for the active
    property on the left, and the full list of project names on the right;
    the active name reads at full ink while the rest sit faint, and the
    stack crawls so the active name holds the middle. Cards enter with the
@@ -167,7 +165,7 @@ export function ProjectShowcase() {
           it, counting up as each project passes the centre. */}
       <div className="sticky top-0 z-20 bg-background px-5 pt-3 pb-3 sm:px-7 lg:hidden">
         <div className="flex items-baseline gap-3">
-          <RollingDigits
+          <FixedDigits
             className="font-display text-6xl leading-[0.85] tracking-tight"
             value={String(active + 1).padStart(2, '0')}
           />
@@ -183,7 +181,7 @@ export function ProjectShowcase() {
           className="absolute top-16 left-7 flex items-baseline gap-4"
           ref={counterRef}
         >
-          <RollingDigits
+          <FixedDigits
             className="font-display text-[clamp(6rem,12vw,10.5rem)] leading-[0.85] tracking-tight"
             value={String(active + 1).padStart(2, '0')}
           />
@@ -329,5 +327,32 @@ function RollingAnnotation({
         </motion.span>
       </AnimatePresence>
     </div>
+  )
+}
+
+/* The counter's numeral with each digit centred in a slot one zero
+   wide (the widest figure), so the number keeps its width as it counts
+   and the "of 06" beside it never shifts. The figures stay
+   proportional; nothing animates. */
+function FixedDigits({
+  className,
+  value,
+}: {
+  className?: string
+  value: string
+}) {
+  return (
+    <span className={cn('inline-flex', className)}>
+      <span className="sr-only">{value}</span>
+      {value.split('').map((char, slot) => (
+        <span
+          aria-hidden
+          className="inline-block w-[1ch] text-center"
+          key={slot}
+        >
+          {char}
+        </span>
+      ))}
+    </span>
   )
 }
