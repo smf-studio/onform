@@ -53,17 +53,17 @@ test.describe('home', () => {
     expect(text).toMatch(/^[A-Za-z0-9 ]+$/)
   })
 
-  test('hero blur strip appears on scroll and leaves with the hero', async ({
+  test('header fade is absent at rest and grows with scroll', async ({
     page,
   }) => {
     const strip = page.locator('[data-fade]')
-    await expect(strip).toHaveCSS('opacity', '0')
+    await expect(strip).toHaveCSS('height', '0px')
 
     await page.mouse.wheel(0, 200)
-    await expect(strip).not.toHaveCSS('opacity', '0')
+    await expect(strip).toHaveCSS('height', '40px')
 
     await page.mouse.wheel(0, 5000)
-    await expect(strip).toHaveCSS('opacity', '0')
+    await expect(strip).toHaveCSS('height', '40px')
   })
 
   test('nav anchors scroll to projects and contact', async ({ page }) => {
