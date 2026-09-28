@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 
+import { Logo } from 'components/shared/Logo'
 import { CONTACT_EMAIL } from 'config/constants'
 import { cn } from 'lib/utils'
 
 /* The dark curtain: the footer sits sticky beneath the page, so the last
-   scroll peels the white content away to reveal it. Its content rises in
-   a staggered reveal the first time it becomes visible. */
+   scroll peels the content away to reveal it. Dark brown ground, the
+   logo lockup in its negative form (off-white wordmark, terracotta mark)
+   at a generous size. Its content rises in a staggered reveal the first
+   time it becomes visible. */
 export function SiteFooter() {
   const ref = useRef<HTMLElement>(null)
   const [revealed, setRevealed] = useState(false)
@@ -41,18 +44,18 @@ export function SiteFooter() {
         )}
       >
         <div className="flex flex-wrap items-end justify-between gap-8">
-          <span className="font-display text-[clamp(4rem,14vw,11rem)] leading-[0.9]">
-            onform
-          </span>
+          <div className="h-[clamp(3.5rem,9vw,7rem)]">
+            <Logo />
+          </div>
           <a
-            className="pb-2 text-sm underline decoration-1 underline-offset-4 transition-opacity hover:opacity-60"
+            className="pb-2 text-sm underline decoration-tan decoration-1 underline-offset-4 transition-colors hover:text-tan"
             href={`mailto:${CONTACT_EMAIL}`}
           >
             {CONTACT_EMAIL}
           </a>
         </div>
         <div className="flex flex-wrap items-baseline justify-between gap-4 pt-6">
-          <span className="text-[11px] font-medium tracking-[0.2em] opacity-70">
+          <span className="text-[11px] font-semibold tracking-[0.2em] opacity-70">
             COMPLETED HOMES IN LONDON SYDNEY AND MAURITIUS
           </span>
           <span className="text-[11px] opacity-40">

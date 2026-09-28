@@ -1,5 +1,5 @@
-import { Link, useNavigate } from '@tanstack/react-router'
-import { useEffect, useLayoutEffect, useRef } from 'react'
+import { Link } from '@tanstack/react-router'
+import { useLayoutEffect, useRef } from 'react'
 
 import type { Property } from 'features/properties/schema'
 
@@ -16,8 +16,7 @@ const MEDIA_COUNT = 8
    above it, and a sticky right column holding only the title, revealed
    character by character, with the italic location inline after it. On
    arrival the visible frames rise together from the bottom edge of the
-   viewport. The page ends with the next project revealed by continuing
-   to scroll. */
+   viewport. The page ends with a panel linking to the next project. */
 export function ProjectOverlay({ property }: { property: Property }) {
   const index = properties.findIndex((p) => p.slug === property.slug)
   const next = properties.at((index + 1) % properties.length) ?? property
@@ -77,7 +76,7 @@ export function ProjectOverlay({ property }: { property: Property }) {
           <div className="py-4 lg:hidden">
             <Link
               aria-label="Back to all projects"
-              className="font-display text-lg italic underline decoration-1 underline-offset-4 transition-opacity hover:opacity-60"
+              className="font-display text-lg italic underline decoration-terracotta decoration-1 underline-offset-4 transition-colors hover:text-terracotta"
               hash={property.slug}
               to="/"
             >
@@ -96,7 +95,7 @@ export function ProjectOverlay({ property }: { property: Property }) {
                 >
                   <Link
                     aria-label="Back to all projects"
-                    className="font-display text-lg italic underline decoration-1 underline-offset-4 transition-opacity hover:opacity-60"
+                    className="font-display text-lg italic underline decoration-terracotta decoration-1 underline-offset-4 transition-colors hover:text-terracotta"
                     hash={property.slug}
                     to="/"
                   >
@@ -122,8 +121,16 @@ export function ProjectOverlay({ property }: { property: Property }) {
             </div>
             <aside className="order-first pb-8 lg:sticky lg:top-14 lg:order-2 lg:col-span-4 lg:col-start-9 lg:flex lg:h-[calc(100svh-3.5rem)] lg:flex-col lg:pb-0">
               <div className="lg:pt-[18svh]">
-                <CharTitle text={property.displayName} />{' '}
-                <TermReveal text={`(${property.location})`} />
+                {/* Keyed on the slug so moving between projects remounts
+                    both reveals: otherwise a character that keeps its
+                    position and value from one name to the next (the
+                    opening bracket, always first) would never animate
+                    again. */}
+                <CharTitle key={property.slug} text={property.displayName} />{' '}
+                <TermReveal
+                  key={`${property.slug}-location`}
+                  text={`(${property.location})`}
+                />
               </div>
             </aside>
           </div>
@@ -140,7 +147,7 @@ function TermReveal({ text }: { text: string }) {
   return (
     <span
       aria-label={text}
-      className="inline-block align-top font-display text-lg text-body-copy italic lg:mt-3"
+      className="inline-block align-top font-display text-lg text-terracotta italic lg:mt-3"
     >
       {text.split('').map((char, charIndex) => (
         <span
@@ -160,123 +167,71 @@ function TermReveal({ text }: { text: string }) {
 }
 
 /* The title arrives one character at a time, unskewing from a slight
-   page-turn, per the reference. The full name stays intact for
-   assistive tech via the aria-label. */
+   page-turn, per the reference. Each word is kept whole so the line can
+   only break between words, never inside one. The full name stays
+   intact for assistive tech via the aria-label. */
 function CharTitle({ text }: { text: string }) {
+  const words = text.split(' ')
+  /* Character offsets per word, so the stagger runs across the whole
+     name rather than restarting at each word. */
+  const starts = words.map((_, index) =>
+    words.slice(0, index).reduce((sum, word) => sum + word.length + 1, 0),
+  )
   return (
     <h1
       aria-label={text}
-      className="mr-3 inline font-display text-[clamp(3rem,5.5vw,5.5rem)] leading-[0.95]"
+      className="mr-3 inline font-display text-[clamp(2.5rem,4.2vw,4.5rem)] leading-[0.95] tracking-tight"
       style={{ perspective: '600px' }}
     >
-      {text.split('').map((char, index) => (
-        <span
-          aria-hidden
-          className="char-in"
-          key={`${String(index)}-${char}`}
-          style={{ animationDelay: `${String(index * 30)}ms` }}
-        >
-          {char === ' ' ? ' ' : char}
+      {words.map((word, wordIndex) => (
+        <span aria-hidden key={`${String(wordIndex)}-${word}`}>
+          {wordIndex > 0 ? ' ' : null}
+          <span className="inline-block whitespace-nowrap">
+            {word.split('').map((char, index) => (
+              <span
+                className="char-in"
+                key={`${String(index)}-${char}`}
+                style={{
+                  animationDelay: `${String(((starts.at(wordIndex) ?? 0) + index) * 30)}ms`,
+                }}
+              >
+                {char}
+              </span>
+            ))}
+          </span>
         </span>
       ))}
     </h1>
   )
 }
 
-/* Keep scrolling past the last frame and the next project rises into
-   view; when it fills the viewport the router moves on. Touch and
-   reduced-motion users get the same panel as a plain link. */
+/* The page ends on the next project: one full-viewport panel, a plain
+   link, no scroll effects and no automatic navigation. */
 function NextProjectHandoff({ next }: { next: Property }) {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const stageRef = useRef<HTMLDivElement>(null)
-  const firedRef = useRef(false)
-  const armedRef = useRef(false)
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    firedRef.current = false
-    /* Only arm the auto-advance once the visitor has genuinely been above
-       the threshold on THIS page; a fresh navigation can mount with the
-       previous page's scroll position still applied, which would
-       otherwise chain straight through every project. */
-    armedRef.current = false
-    const reduced = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches
-    const fine = window.matchMedia('(pointer: fine)').matches
-    const section = sectionRef.current
-    const stage = stageRef.current
-    if (!section || !stage) return
-    let ticking = false
-    const update = () => {
-      ticking = false
-      const rect = section.getBoundingClientRect()
-      const vh = window.innerHeight
-      const total = rect.height - vh
-      if (total <= 0) return
-      const progress = Math.min(1, Math.max(0, -rect.top / total))
-      if (!reduced) {
-        stage.style.transform = `scale(${(0.92 + progress * 0.08).toFixed(4)})`
-        stage.style.opacity = (0.55 + progress * 0.45).toFixed(3)
-      }
-      if (progress < 0.9) armedRef.current = true
-      if (
-        progress >= 0.985 &&
-        armedRef.current &&
-        fine &&
-        !reduced &&
-        !firedRef.current
-      ) {
-        firedRef.current = true
-        void navigate({ params: { slug: next.slug }, to: '/projects/$slug' })
-      }
-    }
-    const onScroll = () => {
-      if (!ticking) {
-        ticking = true
-        requestAnimationFrame(update)
-      }
-    }
-    update()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-    }
-  }, [navigate, next.slug])
-
   return (
-    <div className="relative h-[170svh]" ref={sectionRef}>
-      <div className="sticky top-0 h-svh overflow-hidden">
-        <div
-          className="h-full origin-center will-change-transform"
-          ref={stageRef}
-        >
-          <Link
-            className="group relative block h-full"
-            params={{ slug: next.slug }}
-            to="/projects/$slug"
-          >
-            <div className="absolute inset-3 overflow-hidden rounded-notch sm:inset-4">
-              <AssetImage
-                className="size-full"
-                fill
-                image={heroImage(next)}
-                sizes="100vw"
-                slug={next.slug}
-              />
-              <div className="absolute inset-0 bg-foreground/25 transition-opacity duration-700 group-hover:bg-foreground/10" />
-            </div>
-            <div className="absolute inset-x-0 bottom-10 flex flex-col items-center gap-3 text-center">
-              <span className="text-[11px] font-medium tracking-[0.2em] text-white/90">
-                {`NEXT  ${next.displayName.toUpperCase()}`}
-              </span>
-              <span className="font-display text-5xl leading-none text-white sm:text-7xl">
-                {next.displayName}
-              </span>
-            </div>
-          </Link>
-        </div>
+    <Link
+      className="group relative block h-svh"
+      params={{ slug: next.slug }}
+      to="/projects/$slug"
+    >
+      <div className="absolute inset-3 overflow-hidden rounded-notch sm:inset-4">
+        <AssetImage
+          className="size-full"
+          fill
+          image={heroImage(next)}
+          sizes="100vw"
+          slug={next.slug}
+        />
+        <div className="absolute inset-0 bg-foreground/25 transition-opacity duration-700 group-hover:bg-foreground/10" />
       </div>
-    </div>
+      <div className="absolute inset-x-0 bottom-10 flex flex-col items-center gap-3 text-center">
+        <span className="text-[11px] font-semibold tracking-[0.2em] text-white/90">
+          {`NEXT  ${next.displayName.toUpperCase()}`}
+        </span>
+        <span className="font-display text-5xl leading-none tracking-tight text-white sm:text-7xl">
+          {next.displayName}
+        </span>
+      </div>
+    </Link>
   )
 }

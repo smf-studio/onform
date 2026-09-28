@@ -2,62 +2,63 @@
 @import 'tw-animate-css';
 
 /* Design tokens — see docs/DESIGN.md before changing anything here.
-   OnForm: black and white only, single light theme. The photographs are
-   the palette; the UI never carries color. */
+   OnForm brand pack (October 2025): Montserrat throughout, a warm
+   off-white ground, dark brown ink and terracotta as the one accent.
+   Hex values for the brown, tan and autumn are screen approximations of
+   the pack's CMYK builds; terracotta is taken from the vector artwork. */
 
 @font-face {
-  font-family: 'Gambetta';
+  font-family: 'Montserrat';
   font-weight: 400;
   font-style: normal;
   font-display: swap;
-  src: url('/fonts/Gambetta-Regular.woff2') format('woff2');
+  src: url('/fonts/Montserrat-Regular.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'Gambetta';
+  font-family: 'Montserrat';
   font-weight: 400;
   font-style: italic;
   font-display: swap;
-  src: url('/fonts/Gambetta-Italic.woff2') format('woff2');
+  src: url('/fonts/Montserrat-Italic.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'Gambetta';
-  font-weight: 500;
+  font-family: 'Montserrat';
+  font-weight: 600;
   font-style: normal;
   font-display: swap;
-  src: url('/fonts/Gambetta-Medium.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Instrument Sans';
-  font-weight: 400 600;
-  font-style: normal;
-  font-display: swap;
-  src: url('/fonts/InstrumentSans-Variable.woff2') format('woff2');
+  src: url('/fonts/Montserrat-SemiBold.woff2') format('woff2');
 }
 
 :root {
   /* 4px on controls; images and the notch share --radius-notch (16px) */
   --radius: 0.25rem;
   --radius-notch: 1rem;
-  --background: oklch(1 0 0); /* #FFFFFF */
-  --foreground: oklch(0.179 0.002 107); /* #111110 */
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.179 0.002 107);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.179 0.002 107);
-  --primary: oklch(0.179 0.002 107);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.966 0.002 107); /* #F4F4F2 */
-  --secondary-foreground: oklch(0.179 0.002 107);
-  --muted: oklch(0.966 0.002 107);
-  --muted-foreground: oklch(0.634 0.005 107); /* #8F8F8A */
-  --accent: oklch(0.966 0.002 107);
-  --accent-foreground: oklch(0.179 0.002 107);
+  /* Brand pack colours */
+  --dark-brown: oklch(0.325 0.013 42); /* #3a322f */
+  --terracotta: oklch(0.61 0.086 27); /* #b16f67 */
+  --tan: oklch(0.802 0.05 58); /* #d8b79f */
+  --autumn: oklch(0.622 0.085 59); /* #ad7a51 */
+  /* Semantic tokens */
+  --background: oklch(0.977 0.006 85); /* #f9f7f3 */
+  --foreground: var(--dark-brown);
+  --card: oklch(0.977 0.005 75);
+  --card-foreground: var(--dark-brown);
+  --popover: oklch(0.977 0.005 75);
+  --popover-foreground: var(--dark-brown);
+  --primary: var(--dark-brown);
+  --primary-foreground: oklch(0.977 0.005 75);
+  --secondary: oklch(0.945 0.011 77); /* #f1ece5 */
+  --secondary-foreground: var(--dark-brown);
+  --muted: oklch(0.945 0.011 70);
+  --muted-foreground: oklch(0.653 0.02 54); /* #9a8d85 */
+  --accent: var(--terracotta);
+  --accent-foreground: oklch(0.977 0.005 75);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.923 0.003 107); /* #E7E7E4 */
-  --input: oklch(0.923 0.003 107);
-  --ring: oklch(0.179 0.002 107);
-  --body-copy: oklch(0.397 0.004 107); /* #4A4A47 */
+  --border: oklch(0.907 0.013 71); /* #e6dfd7 */
+  --input: oklch(0.905 0.014 70);
+  --ring: var(--terracotta);
+  --body-copy: oklch(0.447 0.016 48); /* #5c524d */
 }
 
 @theme inline {
@@ -86,8 +87,12 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-body-copy: var(--body-copy);
-  --font-display: 'Gambetta', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+  --color-terracotta: var(--terracotta);
+  --color-tan: var(--tan);
+  /* One family, per the brand pack. --font-display is kept as a token so
+     large type can be re-pointed without touching components. */
+  --font-display: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --font-sans: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
 }
 
 @layer base {

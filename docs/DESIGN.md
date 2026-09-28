@@ -1,19 +1,23 @@
 # Design
 
-Status: DIRECTION LOCKED by the client on 18 August 2026: Gambetta display
-serif, black and white palette, MAD-style inset hero with a clean
-photograph, gallery as per-project showcase row plus editorial grid.
-Boards live in the Claude artifacts "OnForm Composition" and "OnForm
-Tokens". Remaining open items are listed at the bottom of this file.
-Sections marked "template" are inherited from the frontend template and
-still apply.
+Status: REBRANDED against the client's brand pack (OnForm LOGO ART,
+received September 2026): Montserrat throughout, the terracotta brand
+mark and lockup, a warm off-white ground with dark brown ink. The layout
+decisions locked on 18 August 2026 (inset hero, showcase rows, single
+page plus project overlays) still stand; only identity, typography and
+palette changed. Boards live in the Claude artifacts "OnForm Composition"
+and "OnForm Tokens". Remaining open items are listed at the bottom of
+this file. Sections marked "template" are inherited from the frontend
+template and still apply.
 
 ## Identity
 
 OnForm is a portfolio and showcase of completed properties. The site is
-photography-led: one serif voice for display, one sans for everything
-functional, facts instead of marketing copy. The reference register is MAD
-Architects' site (structure) crossed with The Modern House (warmth).
+photography-led: one typeface, facts instead of marketing copy, and the
+brand's terracotta as the only colour the UI carries. The reference
+register is MAD Architects' site (structure) crossed with The Modern
+House (warmth); the client's own references are Sophie Paterson
+Interiors, Cote Interiors and Bone Made (see "Reference themes").
 
 Hard rules from the client:
 
@@ -24,48 +28,100 @@ Hard rules from the client:
 - Copy is minimal. Property name, location, year, category tags, and at most
   one short paragraph per project.
 
+## Logo
+
+The designer's artwork lives outside the repo (OnForm LOGO ART zip:
+Positive, Negative and Brand Mark in .ai, .eps, .pdf, .png, .jpg). The
+vector PDFs were traced to SVG paths and inlined in
+`src/components/shared/Logo.tsx`:
+
+- `Logo` (lockup): the mark plus the "on form INTERIORS" wordmark. The
+  wordmark takes `currentColor`, so the same component renders the
+  positive form on the page and the negative form on the footer curtain.
+  The mark is always terracotta.
+- `Logo variant="mark"`: the circular brand mark alone.
+- `public/favicon.svg` is the mark with a small margin;
+  `public/apple-touch-icon.png` is the mark on the page ground at 180px
+  (iOS ignores transparency). The OG image stays a photograph.
+
+Header: lockup at 32px tall (36px from sm), left. Footer: lockup at
+clamp(3.5rem, 9vw, 7rem) tall, in the negative form. Never render the
+name as text in place of the logo; never recolour the mark.
+
 ## Typography
 
-Pairing, locked: **Gambetta** display over **Instrument Sans** for
-everything functional. Gambetta ships from Fontshare under the Indian
-Type Foundry Free Font License (free for commercial web use); soft flared
-serifs, closest free face to Canora, with a true italic. Self-host
-Regular, Italic and Medium as WOFF2 and preload Regular. Boska and
-Melodrama were the runners-up; all Google Fonts serif candidates were
-rejected as lacking flair.
+One family, per the brand pack: **Montserrat**, self-hosted from the
+Fontsource build (OFL) as WOFF2 in `public/fonts/`. Weights are the two
+the pack names, Regular (400, with its italic) and Semi-Bold (600).
+Regular is preloaded. `--font-display` and `--font-sans` both point at
+Montserrat; the display token is kept so large type could be re-pointed
+without touching components.
 
-| Role       | Face                | Treatment                                             |
-| ---------- | ------------------- | ----------------------------------------------------- |
-| Display    | Gambetta 400        | Property names, hero lines. clamp(3rem, 7vw, 6.5rem), |
-|            |                     | line-height 1.03. Never below 26px.                   |
-| Display em | Gambetta 400 italic | One or two words per line; also breaks caps lines     |
-| Body       | Instrument Sans 400 | 16px, line-height 1.6, max width 62ch                 |
-| Labels     | Instrument Sans 500 | 11 to 13px, uppercase, letter-spacing 0.14em to 0.2em |
-| Wordmark   | Gambetta 400        | lowercase "onform", locked                            |
+| Role       | Face                  | Treatment                                           |
+| ---------- | --------------------- | --------------------------------------------------- |
+| Display    | Montserrat 400        | Property names, counter. clamp sizes per component, |
+|            |                       | `tracking-tight`, line-height 0.85 to 0.95.         |
+| Display em | Montserrat 400 italic | Intro statement, locations, "of 06", annotations    |
+| Body       | Montserrat 400        | 16px, line-height 1.6, max width 62ch               |
+| Labels     | Montserrat 400        | 11px, uppercase, letter-spacing 0.16em to 0.2em     |
+| Emphasis   | Montserrat 600        | The footer strapline and the "NEXT" label only      |
 
-Signature device (from the reference teardown): uppercase sans lines
-carrying one or two lowercase italic serif words, and a "ghost marquee",
-an enormous italic serif word behind a section at about six percent
-opacity.
+Montserrat is wide: project titles keep each word whole (`CharTitle`
+wraps words in nowrap spans) and sit at clamp(2.5rem, 4.2vw, 4.5rem).
+
+Signature device, carried over: uppercase lines carrying one or two
+lowercase italic words.
 
 ## Palette
 
-Black and white, single light theme, no accent color anywhere. The
-photographs are the only color on the site. Hierarchy comes from a short
-grey ramp; interaction states are black with underlines or opacity shifts.
+The brand pack gives five CMYK colours and no screen values. Terracotta
+is taken from the RGB rendering in the vector artwork; the others are
+approximations to confirm with the designer.
 
-| Token     | Value   | Use                             |
-| --------- | ------- | ------------------------------- |
-| White     | #FFFFFF | page ground                     |
-| Dim white | #F4F4F2 | notch fills, quiet panels       |
-| Black     | #111110 | display, wordmark, links, focus |
-| Grey      | #4A4A47 | body copy                       |
-| Faint     | #8F8F8A | metadata labels                 |
-| Hairline  | #E7E7E4 | rules, borders                  |
+| Token       | Value   | Pack colour        | Use                                      |
+| ----------- | ------- | ------------------ | ---------------------------------------- |
+| Ground      | #F9F7F3 | (derived, warm)    | page ground, header, cards               |
+| Quiet panel | #F1ECE5 | (derived from Tan) | notch fills, muted surfaces              |
+| Dark brown  | #3A322F | Dark Brown         | ink: display, labels, footer curtain     |
+| Body copy   | #5C524D | (derived)          | paragraphs                               |
+| Faint       | #9A8D85 | (derived)          | inactive names, metadata                 |
+| Hairline    | #E6DFD7 | (derived)          | rules, borders                           |
+| Terracotta  | #B16F67 | Terracotta         | mark, annotations, italic metadata,      |
+|             |         |                    | hover states, focus ring, Back underline |
+| Tan         | #D8B79F | Tan                | footer link underline and hover          |
+| Autumn      | #AD7A51 | Autumn             | reserved, unused so far                  |
+
+Terracotta is an accent, not a fill: never as a background behind text
+and never on more than one element in a group. The photographs remain
+the colour of the site.
 
 Implementation maps these onto the template's semantic tokens in
-`src/styles/globals.css` (OKLCH), keeping token names. Radius: 16px on
+`src/styles/globals.css` (OKLCH), keeping token names, with the brand
+colours as `--dark-brown`, `--terracotta`, `--tan`, `--autumn` and
+`terracotta` and `tan` exposed as Tailwind colours. Radius: 16px on
 images and the notch (one shared value, `--nr`), 4px on small elements.
+
+## Reference themes
+
+What the client's three references share, and what the site takes from
+each:
+
+- All three pair large light headings with a small sans, on a warm
+  off-white ground, with a dark warm brown for text instead of black.
+  Taken: the warm ground and brown ink; Montserrat replaces the serif
+  because the pack names it.
+- Sophie Paterson: project cards as a row of three portrait frames,
+  the name in caps beneath with the city in small tracked caps; a
+  "featured in" press strip; a stone panel behind the about block.
+  Taken: caption pattern (name, then tracked location).
+- Cote Interiors: the tagline as the only copy above the fold, an
+  italic second line; the brand mark alone as a footer motif above a
+  three column footer. Taken: mark-first footer, italic emphasis.
+- Bone Made: one statement in large type with two italic words, a
+  studio paragraph in a narrow column beside a portrait, a horizontal
+  scroll of project frames, and the founders' story near the end.
+  Taken: italic emphasis inside a statement; the studio story is
+  pending the client's copy and a portrait.
 
 ## Layout principles
 
@@ -99,13 +155,19 @@ The site is two sections: the hero and the gallery. Locked treatments:
   blocks), plus an overlay route per project (`/projects/$slug`) above the
   page for seeing one property in its entirety: text sidebar (name,
   location, year, the paragraph) with all bank images scrolling, featured
-  first, ending in a link to the next project.
+  first, ending in a full-viewport panel linking to the next project (a plain
+  link: no scroll-driven reveal and no automatic navigation, both tried
+  and turned down by the client).
 - Hero rotation, locked: the hero slowly crossfades through one featured
   frame per property (about 6 seconds each, 900ms fade); the name and
   metadata below the image update with it. Paused for reduced motion.
 - Motion elsewhere is fades and drift only: slow crossfades, hover scale
   1.02 inside a cropped frame at about 700ms, images arriving through a
   blurred placeholder.
+- The showcase counter does not animate (a rolling-digit version was
+  tried and turned down as distracting). It keeps Montserrat's
+  proportional figures; each digit sits centred in a fixed 1ch slot so
+  the number never changes width as it counts.
 
 ## Hero shader
 
@@ -168,3 +230,9 @@ Projects anchor nav with a Contact footer. Still pending:
 1. Contact email address for the footer.
 2. Hero shader final go once the real page performs.
 3. Sign-off on the six drafted property paragraphs.
+4. Screen (hex) values for Dark Brown, Tan and Autumn from the designer;
+   the tokens carry approximations until then.
+5. The intro statement and a studio paragraph, plus a portrait, if the
+   site is to carry a Bone Made style founders' block.
+6. Image curation: some frames should be moments rather than rooms, with
+   a line of commentary each (client to select).

@@ -6,8 +6,8 @@ one-time Workers Builds connection in the Cloudflare dashboard.
 
 ## Phase 1, foundation
 
-- Self-host Instrument Serif (regular + italic) and Instrument Sans
-  (400 + 500) as WOFF2; preload the display serif.
+- Self-host the brand typeface as WOFF2 and preload the regular weight
+  (Montserrat since the September 2026 rebrand; see docs/DESIGN.md).
 - Retheme `src/styles/globals.css` to the OnForm palette and radius; single
   light theme; remove the `.dark` block, `ThemeToggle` and `themeAtom`.
 - Replace the template's example `contacts` feature per
