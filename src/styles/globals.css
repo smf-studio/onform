@@ -147,6 +147,14 @@
     transform: none;
   }
 }
+@keyframes header-fade-grow {
+  from {
+    height: 0;
+  }
+  to {
+    height: 2.5rem;
+  }
+}
 @layer components {
   /* Prototype-style media entrance: long travel, expo-out settle. A
      desktop mechanic only; on mobile the reference lets cards simply
@@ -178,9 +186,7 @@
   /* The Fade component: a gradient from --background with a backdrop
      blur, masked so both dissolve toward the far side. Solid up to
      --stop, gone at the far edge — content underneath melts into the
-     background instead of hitting a hard line. The home page pins one
-     under the sticky header so the hero photograph's cut-off boundary
-     reads as a blur, not a cut. */
+     background instead of hitting a hard line. */
   .fade {
     position: absolute;
     pointer-events: none;
@@ -202,6 +208,25 @@
   .fade[data-side='right'] {
     background: linear-gradient(to left, var(--background), transparent);
     mask-image: linear-gradient(to left, black var(--stop, 25%), transparent);
+  }
+  /* The header fade (SiteHeader): a Fade hung under the sticky header's
+     bottom edge, nothing at rest so the hero photograph starts clean, and
+     grown to its full band over the first 24px of scroll by a scroll-driven
+     animation on the window's scroll position — no JavaScript, and it runs
+     on every page. Lifted from Ruminate's scroll fade (its index.css,
+     `.scroll-fade`). Timed on the root scroller explicitly, rather than
+     `nearest`, so an ancestor gaining `overflow: hidden` cannot silently
+     retarget it. Browsers without scroll timelines get no band at all:
+     a fixed one would soften the hero's edge before any scroll. */
+  .header-fade {
+    height: 0;
+  }
+  @supports (animation-timeline: scroll()) {
+    .header-fade {
+      animation: header-fade-grow linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 24px;
+    }
   }
   .hero-unveil {
     animation: hero-unveil 1.1s cubic-bezier(0.65, 0, 0.35, 1) both;

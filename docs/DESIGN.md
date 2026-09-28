@@ -131,11 +131,14 @@ The site is two sections: the hero and the gallery. Locked treatments:
   left, nav right), photograph inset with a white gutter and 16px rounded
   corners. The photograph stays CLEAN, no overlay of any kind; the
   property name and metadata sit below the image on white. One scroll-time
-  exception to "clean": a gradient-plus-blur `Fade` (pinned under the
-  sticky header by `HeroScrollBlur`), invisible at rest, that fades in
-  with scroll so the photograph's cut-off boundary dissolves into the
-  white chrome rather than ending in a hard line, and fades out once the
-  hero has passed.
+  exception to "clean": the header fade, a gradient-plus-blur `Fade` hung
+  under the sticky header's bottom edge in `SiteHeader`. It has no height
+  at rest, so the photograph starts clean, and a CSS scroll-driven
+  animation (`.header-fade`, globals.css) grows it to a 2.5rem band over
+  the first 24px of scroll. It stays for the rest of the page and on
+  every page, so anything scrolling under the header dissolves into the
+  white chrome instead of ending in a hard line. This is Ruminate's scroll
+  fade, carried over; browsers without scroll timelines show no band.
 - Gallery: one block per property, combining the two chosen treatments.
   Each block opens with a showcase row (large frame with the property
   name carved into a bottom-left notch, metadata and one short paragraph
